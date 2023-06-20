@@ -1,4 +1,5 @@
 // api/markers.js
+import { NextApiRequest, NextApiResponse } from 'next'
 
 import ServerlessMySQL from 'serverless-mysql'
 
@@ -11,7 +12,7 @@ export const db = ServerlessMySQL({
     },
 })
 
-export default async function handler(req, res) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     try {
         if (req.method === 'GET') {
             const markers = await db.query('SELECT * FROM markers')

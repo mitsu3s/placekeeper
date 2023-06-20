@@ -8,6 +8,9 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 
 // delete L.Icon.Default.prototype._getIconUrl
 
+const latitude = 34.95679345064951
+const longitude = 137.159425710543
+
 L.Icon.Default.mergeOptions({
     iconUrl: markerIcon.src,
     iconRetinaUrl: markerIcon2x.src,
@@ -19,9 +22,7 @@ interface MapProps {
 }
 
 const Map: React.FC<MapProps> = ({ onMarkerPositionUpdate }) => {
-    const [markerPosition, setMarkerPosition] = useState<[number, number]>([
-        34.95679345064951, 137.159425710543,
-    ])
+    const [markerPosition, setMarkerPosition] = useState<[number, number]>([latitude, longitude])
 
     const handleClick = (e: any) => {
         const newPosition: [number, number] = [e.latlng.lat, e.latlng.lng]
@@ -41,7 +42,7 @@ const Map: React.FC<MapProps> = ({ onMarkerPositionUpdate }) => {
         return markerPosition === null ? null : (
             <Marker position={markerPosition}>
                 <Popup>
-                    Tokyo Mid Town. <br /> Easily customizable.
+                    Marker Content. <br /> Description etc...
                 </Popup>
             </Marker>
         )
@@ -49,7 +50,7 @@ const Map: React.FC<MapProps> = ({ onMarkerPositionUpdate }) => {
 
     return (
         <MapContainer
-            center={[34.95679345064951, 137.159425710543]}
+            center={[latitude, longitude]}
             zoom={15}
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
