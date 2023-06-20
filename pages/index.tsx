@@ -1,9 +1,8 @@
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 
-// const FormValidationSchema = Yup.object().shape({})
+const FormValidationSchema = () => {}
 
 function MapPage() {
     const [formMarkerPosition, setFormMarkerPosition] = useState<[number, number] | null>(null)
@@ -25,6 +24,7 @@ function MapPage() {
         <div className="bg-white flex flex-col items-center justify-center h-screen">
             <Map onMarkerPositionUpdate={handleMarkerPositionUpdate} />
 
+            {/* フォームを表示 */}
             {formMarkerPosition && (
                 <div className="mt-4 text-black">
                     <label htmlFor="latitude">Latitude:</label>
