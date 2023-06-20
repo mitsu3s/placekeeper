@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 
 const FormValidationSchema = () => {}
 
-function MapPage() {
+const MapPage = () => {
     const [formMarkerPosition, setFormMarkerPosition] = useState<[number, number] | null>(null)
 
     const Map = React.useMemo(
