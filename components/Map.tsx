@@ -26,7 +26,7 @@ const Map: React.FC<MapProps> = ({ onMarkerPositionUpdate }) => {
 
     const handleClick = (e: L.LeafletMouseEvent) => {
         const newPosition: [number, number] = [e.latlng.lat, e.latlng.lng]
-        console.log('Clicked position:', newPosition)
+        // console.log('Clicked position:', newPosition)
         setMarkerPosition(newPosition)
     }
 
