@@ -1,8 +1,5 @@
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-
-const FormValidationSchema = () => {}
 
 const MapPage = () => {
     const [formMarkerPosition, setFormMarkerPosition] = useState<[number, number] | null>(null)
