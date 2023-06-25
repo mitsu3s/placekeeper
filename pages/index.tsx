@@ -27,11 +27,13 @@ const MapPage = () => {
         setFormMarkerPosition(newPosition)
     }
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (values: FormValues) => {
+        console.log(values)
         const latitude = formMarkerPosition ? formMarkerPosition[0] : 0
         const longitude = formMarkerPosition ? formMarkerPosition[1] : 0
 
         const updatedValues = {
+            ...values,
             latitude,
             longitude,
         }
