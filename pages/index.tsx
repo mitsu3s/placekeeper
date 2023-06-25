@@ -42,7 +42,52 @@ const MapPage = () => {
                     initialValues={initialValues}
                     validationSchema={FormValidationSchema}
                     onSubmit={handleSubmit}
-                ></Formik>
+                >
+                    <Form>
+                        <div className="mt-4 text-black">
+                            <label htmlFor="latitude" className="text-black">
+                                Latitude:
+                            </label>
+                            <Field
+                                id="latitude"
+                                type="text"
+                                value={formMarkerPosition[0]}
+                                className="text-black"
+                                readOnly
+                            />
+                            <ErrorMessage
+                                name="latitude"
+                                component="div"
+                                className="text-red-500"
+                            />
+                        </div>
+                        <div className=" text-black">
+                            <label htmlFor="longitude" className="text-black">
+                                Longitude:
+                            </label>
+                            <Field
+                                id="longitude"
+                                type="text"
+                                value={formMarkerPosition[1]}
+                                className="text-black"
+                                readOnly
+                            />
+                            <ErrorMessage
+                                name="longitude"
+                                component="div"
+                                className="text-red-500"
+                            />
+                        </div>
+                        <div>
+                            <button
+                                type="submit"
+                                className="bg-slate-300 text-black mt-4 px-4 rounded"
+                            >
+                                Submit
+                            </button>
+                        </div>
+                    </Form>
+                </Formik>
             )}
         </div>
     )
