@@ -1,5 +1,10 @@
 import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import axios from 'axios'
+import * as Yup from 'yup'
+
+const FormValidationSchema = Yup.object().shape({})
 
 const MapPage = () => {
     const [formMarkerPosition, setFormMarkerPosition] = useState<[number, number] | null>(null)
@@ -17,18 +22,27 @@ const MapPage = () => {
         setFormMarkerPosition(newPosition)
     }
 
+    const handleSubmit = async () => {}
+
+    const initialValues = {}
+
     return (
         <div className="bg-white flex flex-col items-center justify-center h-screen">
             <Map onMarkerPositionUpdate={handleMarkerPositionUpdate} />
 
             {formMarkerPosition && (
-                <div className="mt-4 text-black">
-                    <label htmlFor="latitude">Latitude:</label>
-                    <input id="latitude" type="text" value={formMarkerPosition[0]} readOnly />
-                    <br />
-                    <label htmlFor="longitude">Longitude:</label>
-                    <input id="longitude" type="text" value={formMarkerPosition[1]} readOnly />
-                </div>
+                // <div className="mt-4 text-black">
+                //     <label htmlFor="latitude">Latitude:</label>
+                //     <input id="latitude" type="text" value={formMarkerPosition[0]} readOnly />
+                //     <br />
+                //     <label htmlFor="longitude">Longitude:</label>
+                //     <input id="longitude" type="text" value={formMarkerPosition[1]} readOnly />
+                // </div>
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={FormValidationSchema}
+                    onSubmit={handleSubmit}
+                ></Formik>
             )}
         </div>
     )
