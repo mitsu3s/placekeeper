@@ -1,4 +1,3 @@
-// api/markers.js
 import { NextApiRequest, NextApiResponse } from 'next'
 
 import ServerlessMySQL from 'serverless-mysql'
