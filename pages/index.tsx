@@ -4,6 +4,11 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import * as Yup from 'yup'
 
+interface FormValues {
+    latitude: number
+    longitude: number
+}
+
 const FormValidationSchema = Yup.object().shape({})
 
 const MapPage = () => {
@@ -22,22 +27,37 @@ const MapPage = () => {
         setFormMarkerPosition(newPosition)
     }
 
-    const handleSubmit = async () => {}
+    const handleSubmit = async () => {
+        const latitude = formMarkerPosition ? formMarkerPosition[0] : 0
+        const longitude = formMarkerPosition ? formMarkerPosition[1] : 0
 
-    const initialValues = {}
+        const updatedValues = {
+            latitude,
+            longitude,
+        }
+
+        console.log('Before send', updatedValues)
+        try {
+            const response = await axios.post('/api/send', updatedValues)
+            console.log(response)
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    const initialValues = React.useMemo(
+        () => ({
+            latitude: formMarkerPosition ? formMarkerPosition[0] : 0,
+            longitude: formMarkerPosition ? formMarkerPosition[1] : 0,
+        }),
+        [formMarkerPosition]
+    )
 
     return (
         <div className="bg-white flex flex-col items-center justify-center h-screen">
             <Map onMarkerPositionUpdate={handleMarkerPositionUpdate} />
 
             {formMarkerPosition && (
-                // <div className="mt-4 text-black">
-                //     <label htmlFor="latitude">Latitude:</label>
-                //     <input id="latitude" type="text" value={formMarkerPosition[0]} readOnly />
-                //     <br />
-                //     <label htmlFor="longitude">Longitude:</label>
-                //     <input id="longitude" type="text" value={formMarkerPosition[1]} readOnly />
-                // </div>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={FormValidationSchema}
@@ -51,6 +71,7 @@ const MapPage = () => {
                             <Field
                                 id="latitude"
                                 type="text"
+                                name="latitude"
                                 value={formMarkerPosition[0]}
                                 className="text-black"
                                 readOnly
@@ -68,6 +89,7 @@ const MapPage = () => {
                             <Field
                                 id="longitude"
                                 type="text"
+                                name="longitude"
                                 value={formMarkerPosition[1]}
                                 className="text-black"
                                 readOnly
