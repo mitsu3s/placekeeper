@@ -39,6 +39,8 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ## References
 
+Leaflet
+
 ```
 https://dev.classmethod.jp/articles/tried-react-leaflet-with-nextjs/
 ```
