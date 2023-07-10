@@ -3,6 +3,11 @@ import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import * as Yup from 'yup'
+import { GetServerSideProps, NextPage } from 'next'
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 interface FormValues {
     latitude: number
@@ -14,6 +19,17 @@ const FormValidationSchema = Yup.object().shape({
     buildingName: Yup.string().required('Building Name is required'),
     description: Yup.string().required('Description is required'),
 })
+
+export const getServerSideProps = async () => {
+    const buildings = await prisma.building.findMany()
+    console.log(buildings)
+
+    return {
+        props: {
+            buildings,
+        },
+    }
+}
 
 const MapPage = () => {
     const [formMarkerPosition, setFormMarkerPosition] = useState<[number, number] | null>(null)
@@ -32,7 +48,6 @@ const MapPage = () => {
     }
 
     const handleSubmit = async (values: FormValues) => {
-        console.log(values)
         const latitude = formMarkerPosition ? formMarkerPosition[0] : 0
         const longitude = formMarkerPosition ? formMarkerPosition[1] : 0
 
@@ -56,6 +71,7 @@ const MapPage = () => {
             latitude: formMarkerPosition ? formMarkerPosition[0] : 0,
             longitude: formMarkerPosition ? formMarkerPosition[1] : 0,
             buildingName: '',
+            description: '',
         }),
         [formMarkerPosition]
     )
@@ -119,6 +135,22 @@ const MapPage = () => {
                             />
                             <ErrorMessage
                                 name="buildingName"
+                                component="div"
+                                className="text-red-500"
+                            />
+                        </div>
+                        <div className="mt-4 text-black">
+                            <label htmlFor="description" className="text-black">
+                                Description:
+                            </label>
+                            <Field
+                                id="description"
+                                type="text"
+                                name="description"
+                                className="text-black"
+                            />
+                            <ErrorMessage
+                                name="description"
                                 component="div"
                                 className="text-red-500"
                             />

@@ -26,7 +26,6 @@ const Map: React.FC<MapProps> = ({ onMarkerPositionUpdate }) => {
 
     const handleClick = (e: L.LeafletMouseEvent) => {
         const newPosition: [number, number] = [e.latlng.lat, e.latlng.lng]
-        // console.log('Clicked position:', newPosition)
         setMarkerPosition(newPosition)
     }
 
@@ -41,9 +40,7 @@ const Map: React.FC<MapProps> = ({ onMarkerPositionUpdate }) => {
 
         return markerPosition === null ? null : (
             <Marker position={markerPosition}>
-                <Popup>
-                    Marker Content. <br /> Description etc...
-                </Popup>
+                <Popup>description</Popup>
             </Marker>
         )
     }
