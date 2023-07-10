@@ -12,6 +12,7 @@ interface FormValues {
 
 const FormValidationSchema = Yup.object().shape({
     buildingName: Yup.string().required('Building Name is required'),
+    description: Yup.string().required('Description is required'),
 })
 
 const MapPage = () => {
