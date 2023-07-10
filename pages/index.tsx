@@ -15,12 +15,6 @@ interface FormValues {
     buildingName: string
 }
 
-interface BuildingProps {
-    latitude: number
-    longitude: number
-    buildingName: string
-}
-
 const FormValidationSchema = Yup.object().shape({
     buildingName: Yup.string().required('Building Name is required'),
 })
@@ -53,7 +47,6 @@ const MapPage = () => {
     }
 
     const handleSubmit = async (values: FormValues) => {
-        console.log(values)
         const latitude = formMarkerPosition ? formMarkerPosition[0] : 0
         const longitude = formMarkerPosition ? formMarkerPosition[1] : 0
 
@@ -77,6 +70,7 @@ const MapPage = () => {
             latitude: formMarkerPosition ? formMarkerPosition[0] : 0,
             longitude: formMarkerPosition ? formMarkerPosition[1] : 0,
             buildingName: '',
+            description: '',
         }),
         [formMarkerPosition]
     )
@@ -140,6 +134,22 @@ const MapPage = () => {
                             />
                             <ErrorMessage
                                 name="buildingName"
+                                component="div"
+                                className="text-red-500"
+                            />
+                        </div>
+                        <div className="mt-4 text-black">
+                            <label htmlFor="description" className="text-black">
+                                Description:
+                            </label>
+                            <Field
+                                id="description"
+                                type="text"
+                                name="description"
+                                className="text-black"
+                            />
+                            <ErrorMessage
+                                name="description"
                                 component="div"
                                 className="text-red-500"
                             />
