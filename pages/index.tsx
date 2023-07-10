@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import * as Yup from 'yup'
-import { GetServerSideProps, NextPage } from 'next'
 
 import { PrismaClient } from '@prisma/client'
 
