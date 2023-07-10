@@ -11,8 +11,8 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 })
 
-const defaultLatitude = 34.95679345064951
-const defaultLongitude = 137.159425710543
+const defaultLatitude = 34.95475940197166
+const defaultLongitude = 137.15245841041596
 
 const DefaultMap = ({ buildings }: any) => {
     return (
