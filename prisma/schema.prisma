@@ -13,6 +13,7 @@ datasource db {
 model Building {
   id        Int      @id @default(autoincrement())
   name      String
+  description String
   latitude  Float
   longitude Float
   // createdAt DateTime @default(now())
