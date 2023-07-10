@@ -3,8 +3,19 @@ import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import * as Yup from 'yup'
+import { GetServerSideProps, NextPage } from 'next'
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 interface FormValues {
+    latitude: number
+    longitude: number
+    buildingName: string
+}
+
+interface BuildingProps {
     latitude: number
     longitude: number
     buildingName: string
@@ -13,6 +24,17 @@ interface FormValues {
 const FormValidationSchema = Yup.object().shape({
     buildingName: Yup.string().required('Building Name is required'),
 })
+
+export const getServerSideProps = async () => {
+    const buildings = await prisma.building.findMany()
+    console.log(buildings)
+
+    return {
+        props: {
+            buildings,
+        },
+    }
+}
 
 const MapPage = () => {
     const [formMarkerPosition, setFormMarkerPosition] = useState<[number, number] | null>(null)
