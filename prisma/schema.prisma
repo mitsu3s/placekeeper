@@ -16,6 +16,4 @@ model Building {
   description String
   latitude  Float
   longitude Float
-  // createdAt DateTime @default(now())
-  // updatedAt DateTime @updatedAt
 }
