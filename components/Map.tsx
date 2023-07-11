@@ -24,12 +24,10 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     const [beforeCenter, setBeforeCenter] = useState<[number, number]>([0, 0])
 
     useEffect(() => {
-        console.log('useEffect')
         setBeforeCenter(center)
     }, [center])
 
     const ChangeMapCenter = ({ center }: any) => {
-        console.log('ChangeMapCenter')
         if (beforeCenter != center) {
             const map = useMap()
             map.setView(center, 15)
