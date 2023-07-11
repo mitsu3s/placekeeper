@@ -22,13 +22,14 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     ])
 
     useEffect(() => {
-        console.log('center', center)
+        console.log('useEffect')
         setCenterPosition(center)
     }, [center])
 
     const ChangeMapCenter = ({ center }: any) => {
+        console.log('ChangeMapCenter')
         const map = useMap()
-        map.panTo(center)
+        map.setView(center, 15)
         return null
     }
 
