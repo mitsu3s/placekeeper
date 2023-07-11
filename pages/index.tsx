@@ -55,6 +55,10 @@ const MapPage = ({ places }: { places: Place[] }) => {
         setSelectedPosition([lat, lng])
     }
 
+    const handlePlaceClick = (latitude: number, longitude: number) => {
+        console.log(latitude, longitude)
+    }
+
     const handleSubmit = async (values: any) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
@@ -77,7 +81,13 @@ const MapPage = ({ places }: { places: Place[] }) => {
                         <h2 className="text-black my-4">Place List</h2>
                         <ul>
                             {places.map((place, index) => (
-                                <li key={index} className="text-black">
+                                <li
+                                    key={index}
+                                    className="text-black"
+                                    onClick={() =>
+                                        handlePlaceClick(place.latitude, place.longitude)
+                                    }
+                                >
                                     {place.name}: {place.description}
                                 </li>
                             ))}
