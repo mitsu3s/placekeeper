@@ -1,10 +1,10 @@
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, useMapEvents, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
-import React, { useState, useEffect } from 'react'
+import { useRef, useState, useEffect } from 'react'
 
 L.Icon.Default.mergeOptions({
     iconUrl: markerIcon.src,
@@ -15,6 +15,12 @@ L.Icon.Default.mergeOptions({
 const centerLatitude = 34.95475940197166
 const centerLongitude = 137.15245841041596
 
+function ChangeMapCenter({ center }: any) {
+    const map = useMap()
+    map.panTo(center)
+    return null
+}
+
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
         centerLatitude,
@@ -22,7 +28,7 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     ])
 
     useEffect(() => {
-        console.log(center)
+        console.log('center', center)
         setCenterPosition(center)
     }, [center])
 
@@ -58,6 +64,7 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
             ))}
             {selectedPosition && <Marker position={selectedPosition}></Marker>}
             <MapClickHandler />
+            <ChangeMapCenter center={centerPosition} />
         </MapContainer>
     )
 }
