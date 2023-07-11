@@ -1,9 +1,10 @@
-import dynamic from 'next/dynamic'
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import * as Yup from 'yup'
 import { PrismaClient } from '@prisma/client'
+import { useRouter } from 'next/router'
+import dynamic from 'next/dynamic'
 
 const prisma = new PrismaClient()
 
@@ -23,6 +24,7 @@ export const getServerSideProps = async () => {
 }
 
 const MapPage = ({ places }: any) => {
+    const router = useRouter()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
 
     const Map = React.useMemo(
@@ -52,6 +54,7 @@ const MapPage = ({ places }: any) => {
         try {
             const response = await axios.post('/api/place', values)
             console.log(response)
+            router.reload()
         } catch (error) {
             console.log(error)
         }
