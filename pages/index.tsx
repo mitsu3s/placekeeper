@@ -32,10 +32,17 @@ export const getServerSideProps = async () => {
     }
 }
 
+const centerLatitude = 34.95475940197166
+const centerLongitude = 137.15245841041596
+
 const MapPage = ({ places }: { places: Place[] }) => {
     const router = useRouter()
     const [hash, setHash] = useHash()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
+    const [centerPosition, setCenterPosition] = useState<[number, number]>([
+        centerLatitude,
+        centerLongitude,
+    ])
 
     const Map = React.useMemo(
         () =>
@@ -58,8 +65,9 @@ const MapPage = ({ places }: { places: Place[] }) => {
     }
 
     const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
-        console.log(lat, lng)
+        setCenterPosition([lat, lng])
         setHash(formatPlaceNameForHash(placeName))
+        // router.reload()
     }
 
     const handleSubmit = async (values: any) => {
@@ -81,7 +89,12 @@ const MapPage = ({ places }: { places: Place[] }) => {
 
     return (
         <div className="bg-white flex flex-col items-center justify-center h-screen">
-            <Map places={places} selectedPosition={selectedPosition} onMapClick={handleMapClick} />
+            <Map
+                places={places}
+                selectedPosition={selectedPosition}
+                onMapClick={handleMapClick}
+                center={centerPosition}
+            />
             <div className="flex">
                 <div className="w-1/2 pr-4">
                     <div>

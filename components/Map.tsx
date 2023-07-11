@@ -4,6 +4,7 @@ import L from 'leaflet'
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
+import React, { useState, useEffect } from 'react'
 
 L.Icon.Default.mergeOptions({
     iconUrl: markerIcon.src,
@@ -14,7 +15,17 @@ L.Icon.Default.mergeOptions({
 const centerLatitude = 34.95475940197166
 const centerLongitude = 137.15245841041596
 
-const Map = ({ places, selectedPosition, onMapClick }: any) => {
+const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
+    const [centerPosition, setCenterPosition] = useState<[number, number]>([
+        centerLatitude,
+        centerLongitude,
+    ])
+    // console.log(center)
+
+    useEffect(() => {
+        setCenterPosition(center)
+    }, [center])
+
     const MapClickHandler = () => {
         useMapEvents({
             click: (event) => {
@@ -29,7 +40,7 @@ const Map = ({ places, selectedPosition, onMapClick }: any) => {
 
     return (
         <MapContainer
-            center={[centerLatitude, centerLongitude]}
+            center={centerPosition}
             zoom={15}
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
