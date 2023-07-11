@@ -20,9 +20,9 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
         centerLatitude,
         centerLongitude,
     ])
-    // console.log(center)
 
     useEffect(() => {
+        console.log(center)
         setCenterPosition(center)
     }, [center])
 
