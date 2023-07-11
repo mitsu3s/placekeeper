@@ -8,7 +8,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const { latitude, longitude, buildingName, description } = req.body
         console.log(latitude, longitude, buildingName)
         try {
-            const addBuilding = await prisma.building.create({
+            const addBuilding = await prisma.place.create({
                 data: {
                     latitude: latitude,
                     longitude: longitude,

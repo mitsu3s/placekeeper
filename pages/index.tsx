@@ -20,7 +20,7 @@ const FormValidationSchema = Yup.object().shape({
 })
 
 export const getServerSideProps = async () => {
-    const buildings = await prisma.building.findMany()
+    const buildings = await prisma.place.findMany()
     console.log(buildings)
 
     return {
@@ -30,8 +30,9 @@ export const getServerSideProps = async () => {
     }
 }
 
-const MapPage = () => {
+const MapPage = ({ buildings }: any) => {
     const [formMarkerPosition, setFormMarkerPosition] = useState<[number, number] | null>(null)
+    const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
 
     const Map = React.useMemo(
         () =>
@@ -41,6 +42,10 @@ const MapPage = () => {
             }),
         []
     )
+
+    const handleMapClick = (lat: number, lng: number) => {
+        setSelectedPosition([lat, lng])
+    }
 
     const handleMarkerPositionUpdate = (newPosition: [number, number]) => {
         setFormMarkerPosition(newPosition)
@@ -77,9 +82,7 @@ const MapPage = () => {
 
     return (
         <div className="bg-white flex flex-col items-center justify-center h-screen">
-            <Map onMarkerPositionUpdate={handleMarkerPositionUpdate} />
-
-            {formMarkerPosition && (
+            <Map places={buildings} selectedPosition={selectedPosition} onMapClick={handleMapClick}>
                 <Formik
                     initialValues={initialValues}
                     validationSchema={FormValidationSchema}
@@ -91,10 +94,9 @@ const MapPage = () => {
                                 Latitude:
                             </label>
                             <Field
-                                id="latitude"
                                 type="text"
                                 name="latitude"
-                                value={formMarkerPosition[0]}
+                                value={selectedPosition ? selectedPosition[0] : ''}
                                 className="text-black"
                                 readOnly
                             />
@@ -109,10 +111,9 @@ const MapPage = () => {
                                 Longitude:
                             </label>
                             <Field
-                                id="longitude"
                                 type="text"
                                 name="longitude"
-                                value={formMarkerPosition[1]}
+                                value={selectedPosition ? selectedPosition[1] : ''}
                                 className="text-black"
                                 readOnly
                             />
@@ -123,30 +124,30 @@ const MapPage = () => {
                             />
                         </div>
                         <div className="mt-4 text-black">
-                            <label htmlFor="buildingName" className="text-black">
-                                Building Name:
+                            <label htmlFor="placeName" className="text-black">
+                                Place Name:
                             </label>
                             <Field
-                                id="buildingName"
                                 type="text"
-                                name="buildingName"
+                                name="placeName"
                                 className="text-black"
+                                placeholder="Place Name"
                             />
                             <ErrorMessage
-                                name="buildingName"
+                                name="placeName"
                                 component="div"
                                 className="text-red-500"
                             />
                         </div>
-                        <div className="mt-4 text-black">
+                        <div className="mt-2 text-black">
                             <label htmlFor="description" className="text-black">
                                 Description:
                             </label>
                             <Field
-                                id="description"
                                 type="text"
                                 name="description"
                                 className="text-black"
+                                placeholder="Description"
                             />
                             <ErrorMessage
                                 name="description"
@@ -157,14 +158,14 @@ const MapPage = () => {
                         <div>
                             <button
                                 type="submit"
-                                className="bg-slate-300 text-black mt-4 px-4 rounded"
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
                             >
                                 Submit
                             </button>
                         </div>
                     </Form>
                 </Formik>
-            )}
+            </Map>
         </div>
     )
 }
