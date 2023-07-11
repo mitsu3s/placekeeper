@@ -38,10 +38,10 @@ const Map = ({ places, selectedPosition, onMapClick }: any) => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {places.map((building: any) => (
-                <Marker key={building.id} position={[building.latitude, building.longitude]}>
+            {places.map((place: any) => (
+                <Marker key={place.id} position={[place.latitude, place.longitude]}>
                     <Popup>
-                        {building.name} <br /> {building.description}
+                        {place.name} <br /> {place.description}
                     </Popup>
                 </Marker>
             ))}
