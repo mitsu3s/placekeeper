@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import { PrismaClient } from '@prisma/client'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import { useHash } from '@/libs/useHash'
 
 const prisma = new PrismaClient()
 
@@ -31,9 +32,17 @@ export const getServerSideProps = async () => {
     }
 }
 
+const centerLatitude = 34.95475940197166
+const centerLongitude = 137.15245841041596
+
 const MapPage = ({ places }: { places: Place[] }) => {
     const router = useRouter()
+    const [hash, setHash] = useHash()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
+    const [centerPosition, setCenterPosition] = useState<[number, number]>([
+        centerLatitude,
+        centerLongitude,
+    ])
 
     const Map = React.useMemo(
         () =>
@@ -55,6 +64,11 @@ const MapPage = ({ places }: { places: Place[] }) => {
         setSelectedPosition([lat, lng])
     }
 
+    const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
+        setCenterPosition([lat, lng])
+        setHash(formatPlaceNameForHash(placeName))
+    }
+
     const handleSubmit = async (values: any) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
@@ -68,9 +82,18 @@ const MapPage = ({ places }: { places: Place[] }) => {
         }
     }
 
+    const formatPlaceNameForHash = (placeName: string) => {
+        return placeName.replace(/\s/g, '_')
+    }
+
     return (
         <div className="bg-white flex flex-col items-center justify-center h-screen">
-            <Map places={places} selectedPosition={selectedPosition} onMapClick={handleMapClick} />
+            <Map
+                places={places}
+                selectedPosition={selectedPosition}
+                onMapClick={handleMapClick}
+                center={centerPosition}
+            />
             <div className="flex">
                 <div className="w-1/2 pr-4">
                     <div>
@@ -78,7 +101,20 @@ const MapPage = ({ places }: { places: Place[] }) => {
                         <ul>
                             {places.map((place, index) => (
                                 <li key={index} className="text-black">
-                                    {place.name}: {place.description}
+                                    <a
+                                        href={`/#${formatPlaceNameForHash(place.name)}`}
+                                        onClick={(event) => {
+                                            event.preventDefault()
+                                            handlePlaceClick(
+                                                place.name,
+                                                place.latitude,
+                                                place.longitude
+                                            )
+                                        }}
+                                    >
+                                        {place.name}
+                                    </a>
+                                    : {place.description}
                                 </li>
                             ))}
                         </ul>
