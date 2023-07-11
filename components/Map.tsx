@@ -30,7 +30,7 @@ const Map = ({ places, selectedPosition, onMapClick }: any) => {
     return (
         <MapContainer
             center={[defaultLatitude, defaultLongitude]}
-            zoom={14}
+            zoom={15}
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
         >
