@@ -8,6 +8,14 @@ import dynamic from 'next/dynamic'
 
 const prisma = new PrismaClient()
 
+interface Place {
+    id: number
+    latitude: number
+    longitude: number
+    name: string
+    description: string
+}
+
 const FormValidationSchema = Yup.object().shape({
     placeName: Yup.string().required('Place Name is required'),
     description: Yup.string().required('Description is required'),
@@ -23,7 +31,7 @@ export const getServerSideProps = async () => {
     }
 }
 
-const MapPage = ({ places }: any) => {
+const MapPage = ({ places }: { places: Place[] }) => {
     const router = useRouter()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
 
