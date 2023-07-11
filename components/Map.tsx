@@ -11,8 +11,8 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 })
 
-const defaultLatitude = 34.95475940197166
-const defaultLongitude = 137.15245841041596
+const centerLatitude = 34.95475940197166
+const centerLongitude = 137.15245841041596
 
 const Map = ({ places, selectedPosition, onMapClick }: any) => {
     const MapClickHandler = () => {
@@ -29,7 +29,7 @@ const Map = ({ places, selectedPosition, onMapClick }: any) => {
 
     return (
         <MapContainer
-            center={[defaultLatitude, defaultLongitude]}
+            center={[centerLatitude, centerLongitude]}
             zoom={15}
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
