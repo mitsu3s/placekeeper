@@ -21,15 +21,19 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
         centerLongitude,
     ])
 
+    const [beforeCenter, setBeforeCenter] = useState<[number, number]>([0, 0])
+
     useEffect(() => {
         console.log('useEffect')
-        setCenterPosition(center)
+        setBeforeCenter(center)
     }, [center])
 
     const ChangeMapCenter = ({ center }: any) => {
         console.log('ChangeMapCenter')
-        const map = useMap()
-        map.setView(center, 15)
+        if (beforeCenter != center) {
+            const map = useMap()
+            map.setView(center, 15)
+        }
         return null
     }
 
@@ -65,7 +69,7 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
             ))}
             {selectedPosition && <Marker position={selectedPosition}></Marker>}
             <MapClickHandler />
-            <ChangeMapCenter center={centerPosition} />
+            <ChangeMapCenter center={center} />
         </MapContainer>
     )
 }
