@@ -5,6 +5,7 @@ import * as Yup from 'yup'
 import { PrismaClient } from '@prisma/client'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
+import { useHash } from '@/libs/useHash'
 
 const prisma = new PrismaClient()
 
@@ -33,6 +34,7 @@ export const getServerSideProps = async () => {
 
 const MapPage = ({ places }: { places: Place[] }) => {
     const router = useRouter()
+    const [hash, setHash] = useHash()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
 
     const Map = React.useMemo(
@@ -55,8 +57,9 @@ const MapPage = ({ places }: { places: Place[] }) => {
         setSelectedPosition([lat, lng])
     }
 
-    const handlePlaceClick = (latitude: number, longitude: number) => {
-        console.log(latitude, longitude)
+    const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
+        console.log(lat, lng)
+        setHash(formatPlaceNameForHash(placeName))
     }
 
     const handleSubmit = async (values: any) => {
@@ -72,6 +75,10 @@ const MapPage = ({ places }: { places: Place[] }) => {
         }
     }
 
+    const formatPlaceNameForHash = (placeName: string) => {
+        return placeName.replace(/\s/g, '_')
+    }
+
     return (
         <div className="bg-white flex flex-col items-center justify-center h-screen">
             <Map places={places} selectedPosition={selectedPosition} onMapClick={handleMapClick} />
@@ -81,14 +88,21 @@ const MapPage = ({ places }: { places: Place[] }) => {
                         <h2 className="text-black my-4">Place List</h2>
                         <ul>
                             {places.map((place, index) => (
-                                <li
-                                    key={index}
-                                    className="text-black"
-                                    onClick={() =>
-                                        handlePlaceClick(place.latitude, place.longitude)
-                                    }
-                                >
-                                    {place.name}: {place.description}
+                                <li key={index} className="text-black">
+                                    <a
+                                        href={`/#${formatPlaceNameForHash(place.name)}`}
+                                        onClick={(event) => {
+                                            event.preventDefault()
+                                            handlePlaceClick(
+                                                place.name,
+                                                place.latitude,
+                                                place.longitude
+                                            )
+                                        }}
+                                    >
+                                        {place.name}
+                                    </a>
+                                    : {place.description}
                                 </li>
                             ))}
                         </ul>
