@@ -15,12 +15,6 @@ L.Icon.Default.mergeOptions({
 const centerLatitude = 34.95475940197166
 const centerLongitude = 137.15245841041596
 
-function ChangeMapCenter({ center }: any) {
-    const map = useMap()
-    map.panTo(center)
-    return null
-}
-
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
         centerLatitude,
@@ -31,6 +25,12 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
         console.log('center', center)
         setCenterPosition(center)
     }, [center])
+
+    const ChangeMapCenter = ({ center }: any) => {
+        const map = useMap()
+        map.panTo(center)
+        return null
+    }
 
     const MapClickHandler = () => {
         useMapEvents({
