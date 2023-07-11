@@ -10,10 +10,10 @@ datasource db {
   url      = "mysql://root:Mi18sqlBo@localhost:3306/placekeeper"
 }
 
-model Building {
-  id        Int      @id @default(autoincrement())
-  name      String
+model Place {
+  id          Int      @id @default(autoincrement())
+  name        String
   description String
-  latitude  Float
-  longitude Float
+  latitude    Float
+  longitude   Float
 }

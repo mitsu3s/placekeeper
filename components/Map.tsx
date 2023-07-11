@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
@@ -6,48 +5,31 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 
-// delete L.Icon.Default.prototype._getIconUrl
-
-const latitude = 34.95679345064951
-const longitude = 137.159425710543
-
 L.Icon.Default.mergeOptions({
     iconUrl: markerIcon.src,
     iconRetinaUrl: markerIcon2x.src,
     shadowUrl: markerShadow.src,
 })
 
-interface MapProps {
-    onMarkerPositionUpdate: (newPosition: [number, number]) => void
-}
+const centerLatitude = 34.95475940197166
+const centerLongitude = 137.15245841041596
 
-const Map: React.FC<MapProps> = ({ onMarkerPositionUpdate }) => {
-    const [markerPosition, setMarkerPosition] = useState<[number, number]>([latitude, longitude])
-
-    const handleClick = (e: L.LeafletMouseEvent) => {
-        const newPosition: [number, number] = [e.latlng.lat, e.latlng.lng]
-        setMarkerPosition(newPosition)
-    }
-
-    useEffect(() => {
-        onMarkerPositionUpdate(markerPosition)
-    }, [markerPosition, onMarkerPositionUpdate])
-
-    const LocationMarker = () => {
+const Map = ({ places, selectedPosition, onMapClick }: any) => {
+    const MapClickHandler = () => {
         useMapEvents({
-            click: handleClick,
+            click: (event) => {
+                const { lat, lng } = event.latlng || {}
+                if (lat && lng) {
+                    onMapClick(lat, lng)
+                }
+            },
         })
-
-        return markerPosition === null ? null : (
-            <Marker position={markerPosition}>
-                <Popup>description</Popup>
-            </Marker>
-        )
+        return null
     }
 
     return (
         <MapContainer
-            center={[latitude, longitude]}
+            center={[centerLatitude, centerLongitude]}
             zoom={15}
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
@@ -56,7 +38,15 @@ const Map: React.FC<MapProps> = ({ onMarkerPositionUpdate }) => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            <LocationMarker />
+            {places.map((place: any) => (
+                <Marker key={place.id} position={[place.latitude, place.longitude]}>
+                    <Popup>
+                        {place.name} <br /> {place.description}
+                    </Popup>
+                </Marker>
+            ))}
+            {selectedPosition && <Marker position={selectedPosition}></Marker>}
+            <MapClickHandler />
         </MapContainer>
     )
 }
