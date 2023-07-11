@@ -67,7 +67,6 @@ const MapPage = ({ places }: { places: Place[] }) => {
     const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
         setCenterPosition([lat, lng])
         setHash(formatPlaceNameForHash(placeName))
-        // router.reload()
     }
 
     const handleSubmit = async (values: any) => {
