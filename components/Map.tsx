@@ -20,7 +20,6 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     // const [beforeCenter, setBeforeCenter] = useState<[number, number]>([0, 0])
 
     useEffect(() => {
-        console.log('center', center)
         setCenterPosition(center)
     }, [center])
 
