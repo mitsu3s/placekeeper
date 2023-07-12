@@ -12,23 +12,20 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 })
 
-const centerLatitude = 34.95475940197166
-const centerLongitude = 137.15245841041596
+// const centerLatitude = 34.95475940197166
+// const centerLongitude = 137.15245841041596
 
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
-    const [centerPosition, setCenterPosition] = useState<[number, number]>([
-        centerLatitude,
-        centerLongitude,
-    ])
-
-    const [beforeCenter, setBeforeCenter] = useState<[number, number]>([0, 0])
+    const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
+    // const [beforeCenter, setBeforeCenter] = useState<[number, number]>([0, 0])
 
     useEffect(() => {
-        setBeforeCenter(center)
+        console.log('center', center)
+        setCenterPosition(center)
     }, [center])
 
     const ChangeMapCenter = ({ center }: any) => {
-        if (beforeCenter != center) {
+        if (centerPosition != center) {
             const map = useMap()
             map.setView(center, 15)
         }
