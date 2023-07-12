@@ -19,7 +19,7 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
         setCenterPosition(center)
     }, [center])
 
-    const ChangeMapCenter = ({ center }: any) => {
+    const ChangeMapCenter = ({ center }: { center: [number, number] }) => {
         if (centerPosition != center) {
             const map = useMap()
             map.setView(center, 15)
