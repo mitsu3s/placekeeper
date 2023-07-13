@@ -32,7 +32,7 @@ const locationIcon = new L.Icon({
     iconRetinaUrl: location.src,
     iconAnchor: [12, 42],
     popupAnchor: [8, -40],
-    iconSize: [25, 55],
+    iconSize: [35, 60],
 })
 
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
@@ -78,8 +78,8 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
                     key={place.id}
                     position={[place.latitude, place.longitude]}
                     // icon={colorMarker('red')}
-                    icon={iconLib}
-                    // icon={locationIcon}
+                    // icon={iconLib}
+                    icon={locationIcon}
                 >
                     <Popup>
                         {place.name} <br /> {place.description}
