@@ -7,7 +7,6 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { useState, useEffect } from 'react'
 import { iconLib } from '@/libs/Icon'
 import location from '@/public/icons/location.svg'
-import sub from '@/public/icons/marker.svg'
 
 L.Icon.Default.mergeOptions({
     iconUrl: markerIcon.src,
@@ -15,31 +14,25 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 })
 
-const colorMarker = (color: string) => {
-    return new L.Icon({
-        iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
-        shadowUrl: markerShadow.src,
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        popupAnchor: [1, -34],
-        shadowSize: [41, 41],
-    })
-}
+// デフォルトマーカーの色違い
+// const colorMarker = (color: string) => {
+//     return new L.Icon({
+//         iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
+//         shadowUrl: markerShadow.src,
+//         iconSize: [25, 41],
+//         iconAnchor: [12, 41],
+//         popupAnchor: [1, -34],
+//         shadowSize: [41, 41],
+//     })
+// }
 
+// カスタムマーカー直接書く
 const locationIcon = new L.Icon({
     iconUrl: location.src,
     iconRetinaUrl: location.src,
     iconAnchor: [12, 42],
     popupAnchor: [8, -40],
     iconSize: [25, 55],
-})
-
-const subIcon = new L.Icon({
-    iconUrl: sub.src,
-    iconRetinaUrl: sub.src,
-    iconAnchor: [12, 42],
-    popupAnchor: [8, -40],
-    iconSize: [40, 70],
 })
 
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
@@ -85,11 +78,8 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
                     key={place.id}
                     position={[place.latitude, place.longitude]}
                     // icon={colorMarker('red')}
-                    // icon={svgIcon}
-                    // icon={new subIcon()}
                     icon={iconLib}
                     // icon={locationIcon}
-                    // icon={subIcon}
                 >
                     <Popup>
                         {place.name} <br /> {place.description}

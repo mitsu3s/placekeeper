@@ -1,5 +1,5 @@
 import L from 'leaflet'
-import marker from '@/public/icons/marker.svg'
+import marker from '@/public/icons/sub_location.svg'
 
 const iconLib = new L.Icon({
     iconUrl: marker.src,
