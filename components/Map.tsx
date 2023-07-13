@@ -30,7 +30,7 @@ L.Icon.Default.mergeOptions({
 const locationIcon = new L.Icon({
     iconUrl: location.src,
     iconRetinaUrl: location.src,
-    iconAnchor: [12, 42],
+    iconAnchor: [17, 49],
     popupAnchor: [8, -40],
     iconSize: [35, 60],
 })
