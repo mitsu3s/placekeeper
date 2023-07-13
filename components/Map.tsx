@@ -12,6 +12,23 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 })
 
+const customMarker = (type: string) => {
+    if (type === 'blue') {
+        return L.icon({
+            iconUrl:
+                'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|abcdef&chf=a,s,ee00FFFF',
+            // iconSize: [35, 35],
+            className: 'marker',
+        })
+    }
+    return L.icon({
+        iconUrl:
+            'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF',
+        // iconSize: [35, 35],
+        className: 'marker',
+    })
+}
+
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
 
@@ -51,7 +68,11 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {places.map((place: any) => (
-                <Marker key={place.id} position={[place.latitude, place.longitude]}>
+                <Marker
+                    key={place.id}
+                    position={[place.latitude, place.longitude]}
+                    icon={customMarker('blue')}
+                >
                     <Popup>
                         {place.name} <br /> {place.description}
                     </Popup>
