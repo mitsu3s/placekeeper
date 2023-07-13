@@ -95,7 +95,7 @@ const MapPage = ({ places }: { places: Place[] }) => {
                 center={centerPosition}
             />
             <div className="flex">
-                <div className="w-1/2 pr-4">
+                <div className="pr-4">
                     <div>
                         <h2 className="text-black my-4">Place List</h2>
                         <ul>
@@ -120,7 +120,7 @@ const MapPage = ({ places }: { places: Place[] }) => {
                         </ul>
                     </div>
                 </div>
-                <div className="w-1/2 pl-4">
+                <div className="pl-4">
                     <Formik
                         initialValues={initialValues}
                         validationSchema={FormValidationSchema}

@@ -5,11 +5,34 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { useState, useEffect } from 'react'
+import { iconLib } from '@/libs/Icon'
+import location from '@/public/icons/location.svg'
 
 L.Icon.Default.mergeOptions({
     iconUrl: markerIcon.src,
     iconRetinaUrl: markerIcon2x.src,
     shadowUrl: markerShadow.src,
+})
+
+// デフォルトマーカーの色違い
+// const colorMarker = (color: string) => {
+//     return new L.Icon({
+//         iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
+//         shadowUrl: markerShadow.src,
+//         iconSize: [25, 41],
+//         iconAnchor: [12, 41],
+//         popupAnchor: [1, -34],
+//         shadowSize: [41, 41],
+//     })
+// }
+
+// カスタムマーカー直接書く
+const locationIcon = new L.Icon({
+    iconUrl: location.src,
+    iconRetinaUrl: location.src,
+    iconAnchor: [12, 42],
+    popupAnchor: [8, -40],
+    iconSize: [35, 60],
 })
 
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
@@ -51,7 +74,13 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             {places.map((place: any) => (
-                <Marker key={place.id} position={[place.latitude, place.longitude]}>
+                <Marker
+                    key={place.id}
+                    position={[place.latitude, place.longitude]}
+                    // icon={colorMarker('red')}
+                    // icon={iconLib}
+                    icon={locationIcon}
+                >
                     <Popup>
                         {place.name} <br /> {place.description}
                     </Popup>
