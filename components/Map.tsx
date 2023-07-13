@@ -12,15 +12,16 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 })
 
-const greenIcon = new L.Icon({
-    iconUrl:
-        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-    shadowUrl: markerShadow.src,
-    iconSize: [25, 41],
-    iconAnchor: [12, 41],
-    popupAnchor: [1, -34],
-    shadowSize: [41, 41],
-})
+const colorMarker = (color: string) => {
+    return new L.Icon({
+        iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
+        shadowUrl: markerShadow.src,
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41],
+    })
+}
 
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
@@ -64,7 +65,7 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
                 <Marker
                     key={place.id}
                     position={[place.latitude, place.longitude]}
-                    icon={greenIcon}
+                    icon={colorMarker('red')}
                 >
                     <Popup>
                         {place.name} <br /> {place.description}
