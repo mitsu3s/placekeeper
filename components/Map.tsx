@@ -12,22 +12,15 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 })
 
-const customMarker = (type: string) => {
-    if (type === 'blue') {
-        return L.icon({
-            iconUrl:
-                'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|abcdef&chf=a,s,ee00FFFF',
-            // iconSize: [35, 35],
-            className: 'marker',
-        })
-    }
-    return L.icon({
-        iconUrl:
-            'https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF',
-        // iconSize: [35, 35],
-        className: 'marker',
-    })
-}
+const greenIcon = new L.Icon({
+    iconUrl:
+        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+    shadowUrl: markerShadow.src,
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41],
+})
 
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
@@ -71,7 +64,7 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
                 <Marker
                     key={place.id}
                     position={[place.latitude, place.longitude]}
-                    icon={customMarker('blue')}
+                    icon={greenIcon}
                 >
                     <Popup>
                         {place.name} <br /> {place.description}
