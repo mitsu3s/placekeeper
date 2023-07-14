@@ -13,9 +13,6 @@ const Home = () => {
                             <Link href="/placemap" className="flex px-6 py-2">
                                 Home
                             </Link>
-                            {/* <a href="/placemap" className="flex px-6 py-2">
-                                Home
-                            </a> */}
                             <a href="#" className="flex px-6 py-2">
                                 Watch
                             </a>
