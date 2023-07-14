@@ -13,7 +13,7 @@ const AuthTest = () => {
                 Signed in as {session.user?.email} <br />
                 <button
                     type="button"
-                    onClick={() => signOut({ callbackUrl: 'http://localhost:3000' })}
+                    onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })}
                 >
                     Sign out
                 </button>
@@ -25,7 +25,9 @@ const AuthTest = () => {
             Not signed in <br />
             <button
                 type="button"
-                onClick={() => signIn(undefined, { callbackUrl: 'http://localhost:3000/auth' })}
+                onClick={() =>
+                    signIn(undefined, { callbackUrl: process.env.NEXT_PUBLIC_URL + '/auth' })
+                }
             >
                 Sign in
             </button>
