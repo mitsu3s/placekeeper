@@ -73,19 +73,20 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
-            {places.map((place: any) => (
-                <Marker
-                    key={place.id}
-                    position={[place.latitude, place.longitude]}
-                    // icon={colorMarker('red')}
-                    // icon={iconLib}
-                    icon={locationIcon}
-                >
-                    <Popup>
-                        {place.name} <br /> {place.description}
-                    </Popup>
-                </Marker>
-            ))}
+            {places &&
+                places.length > 0 &&
+                places.map((place: any) => (
+                    <Marker
+                        key={place.id}
+                        position={[place.latitude, place.longitude]}
+                        icon={locationIcon}
+                    >
+                        <Popup>
+                            {place.name} <br /> {place.description}
+                        </Popup>
+                    </Marker>
+                ))}
+
             {selectedPosition && <Marker position={selectedPosition}></Marker>}
             <MapClickHandler />
             <ChangeMapCenter center={center} />

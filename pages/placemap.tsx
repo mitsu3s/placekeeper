@@ -6,6 +6,8 @@ import { PrismaClient } from '@prisma/client'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { useHash } from '@/libs/useHash'
+import { useSession, signIn, signOut, getSession } from 'next-auth/react'
+import { GetServerSidePropsContext } from 'next'
 
 const prisma = new PrismaClient()
 
@@ -22,7 +24,15 @@ const FormValidationSchema = Yup.object().shape({
     description: Yup.string().required('Description is required'),
 })
 
-export const getServerSideProps = async () => {
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+    const session = await getSession(context)
+
+    if (!session) {
+        return {
+            props: {},
+        }
+    }
+
     const places = await prisma.place.findMany()
 
     return {
@@ -98,26 +108,28 @@ const MapPage = ({ places }: { places: Place[] }) => {
                 <div className="pr-4">
                     <div>
                         <h2 className="text-black my-4">Place List</h2>
-                        <ul>
-                            {places.map((place, index) => (
-                                <li key={index} className="text-black">
-                                    <a
-                                        href={`/#${formatPlaceNameForHash(place.name)}`}
-                                        onClick={(event) => {
-                                            event.preventDefault()
-                                            handlePlaceClick(
-                                                place.name,
-                                                place.latitude,
-                                                place.longitude
-                                            )
-                                        }}
-                                    >
-                                        {place.name}
-                                    </a>
-                                    : {place.description}
-                                </li>
-                            ))}
-                        </ul>
+                        {places && places.length > 0 && (
+                            <ul>
+                                {places.map((place, index) => (
+                                    <li key={index} className="text-black">
+                                        <a
+                                            href={`/#${formatPlaceNameForHash(place.name)}`}
+                                            onClick={(event) => {
+                                                event.preventDefault()
+                                                handlePlaceClick(
+                                                    place.name,
+                                                    place.latitude,
+                                                    place.longitude
+                                                )
+                                            }}
+                                        >
+                                            {place.name}
+                                        </a>
+                                        : {place.description}
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
                     </div>
                 </div>
                 <div className="pl-4">
