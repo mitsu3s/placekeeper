@@ -13,9 +13,9 @@ const Home = () => {
                             <Link href="/placemap" className="flex px-6 py-2">
                                 Home
                             </Link>
-                            <a href="#" className="flex px-6 py-2">
-                                Watch
-                            </a>
+                            <Link href="/auth" className="flex px-6 py-2">
+                                Auth
+                            </Link>
                             <a href="#" className="flex px-6 py-2">
                                 Product
                             </a>
