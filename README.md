@@ -18,7 +18,8 @@ https://github.com/pointhi/leaflet-color-markers
 
 ## Attention
 
-/components/Routing.tsx の型指定
+Type specification for /components/Routing.tsx
+May cause errors due to insufficient validation.
 
 ```
 interface RoutingControlOptions extends ItineraryOptions {
