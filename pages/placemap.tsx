@@ -46,6 +46,7 @@ const centerLatitude = 34.95475940197166
 const centerLongitude = 137.15245841041596
 
 const MapPage = ({ places }: { places: Place[] }) => {
+    const { data: session, status } = useSession()
     const router = useRouter()
     const [hash, setHash] = useHash()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
@@ -84,9 +85,12 @@ const MapPage = ({ places }: { places: Place[] }) => {
         values.longitude = selectedPosition ? selectedPosition[1] : ''
 
         try {
-            const response = await axios.post('/api/place', values)
-            console.log(response)
-            router.reload()
+            if (session) {
+                values.userId = session.user.id
+                const response = await axios.post('/api/place', values)
+                console.log(response)
+                router.reload()
+            }
         } catch (error) {
             console.log(error)
         }
