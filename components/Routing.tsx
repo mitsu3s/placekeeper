@@ -10,17 +10,21 @@ const createRoutineMachineLayer = (props: any) => {
             L.latLng(35.71498168439901, 139.79663181249592),
             L.latLng(35.71020351730888, 139.81066512955994),
         ],
-        // lineOptions: {
-        //     styles: [
-        //         {
-        //             color: 'blue',
-        //             opacity: 0.6,
-        //             weight: 4,
-        //         },
-        //     ],
-        //     extendToWaypoints: false,
-        //     missingRouteTolerance: 1,
-        // },
+        lineOptions: {
+            styles: [
+                {
+                    color: 'blue',
+                    opacity: 0.6,
+                    weight: 4,
+                },
+            ],
+            extendToWaypoints: true,
+            missingRouteTolerance: 1,
+        },
+        addWaypoints: false,
+        fitSelectedRoutes: false,
+        showAlternatives: false,
+        draggableWaypoints: false,
     })
     return instance
 }
