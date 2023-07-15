@@ -9,14 +9,12 @@ const Home = () => {
     const [showToast, setShowToast] = useState(false)
     const { push, asPath } = useRouter()
 
+    console.log('session ' + session)
+
     const handleLinkClick = () => {
         if (!session) {
             setShowToast(true)
         }
-    }
-
-    const handleSignin = () => {
-        push(`/auth/signin?callbackUrl=${asPath}`)
     }
 
     const getLink = () => {
