@@ -1,8 +1,17 @@
 import Link from 'next/link'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import React, { useState } from 'react'
+import ToastMessage from '@/components/Toast'
 
 const Home = () => {
     const { data: session, status } = useSession()
+    const [showToast, setShowToast] = useState(false)
+
+    const handleLinkClick = () => {
+        if (!session) {
+            setShowToast(true)
+        }
+    }
 
     const getLink = () => {
         return session ? '/placemap' : '#'
@@ -18,9 +27,14 @@ const Home = () => {
                     >
                         Place Keeper
                     </Link>
+                    {showToast && <ToastMessage setShowToast={setShowToast} />}
                     <div className="flex items-center">
                         <nav className="items-center hidden text-lg text-gray-800 uppercase font-sen dark:text-white lg:flex">
-                            <Link href={getLink()} className="flex px-6 py-2">
+                            <Link
+                                href={getLink()}
+                                onClick={handleLinkClick}
+                                className="flex px-6 py-2"
+                            >
                                 Map
                             </Link>
                             <button
