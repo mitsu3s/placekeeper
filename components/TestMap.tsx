@@ -16,6 +16,10 @@ const centerLatitude = 34.95475940197166
 const centerLongitude = 137.15245841041596
 
 const TestMap = () => {
+    const waypoints = [
+        { lat: 34.95592012311801, lng: 137.13709831237796 },
+        { lat: 34.95191028946883, lng: 137.1674823760987 },
+    ]
     return (
         <MapContainer
             center={[centerLatitude, centerLongitude]}
@@ -32,7 +36,8 @@ const TestMap = () => {
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
             </Marker>
-            <RoutingMachine />
+            {/* <RoutingMachine /> */}
+            <RoutingMachine waypoints={waypoints} />
         </MapContainer>
     )
 }
