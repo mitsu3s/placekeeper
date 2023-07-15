@@ -90,9 +90,12 @@ const MapPage = ({ places }: { places: Place[] }) => {
                 const response = await axios.post('/api/place', values)
                 console.log(response)
                 router.reload()
+            } else {
+                router.push('/')
             }
         } catch (error) {
             console.log(error)
+            router.push('/')
         }
     }
 
