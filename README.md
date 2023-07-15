@@ -15,3 +15,13 @@ Marker Color
 ```
 https://github.com/pointhi/leaflet-color-markers
 ```
+
+## Attention
+
+/components/Routing.tsx の型指定
+
+```
+interface RoutingControlOptions extends ItineraryOptions {
+    + draggableWaypoints?: boolean | undefined;
+}
+```
