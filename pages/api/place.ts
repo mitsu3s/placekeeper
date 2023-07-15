@@ -5,8 +5,7 @@ const prisma = new PrismaClient()
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
-        const { latitude, longitude, placeName, description } = req.body
-        console.log(latitude, longitude, placeName)
+        const { latitude, longitude, placeName, description, userId } = req.body
         try {
             const addPlace = await prisma.place.create({
                 data: {
@@ -14,6 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     longitude: longitude,
                     name: placeName,
                     description: description,
+                    userId: userId,
                 },
             })
 
