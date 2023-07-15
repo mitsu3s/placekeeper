@@ -13,7 +13,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({ setShowToast }) => {
                 role="alert"
             >
                 <div className="flex p-4">
-                    Hello, world! This is a toast message.
+                    You are not signed in.
                     <div className="ml-auto">
                         <button
                             type="button"
