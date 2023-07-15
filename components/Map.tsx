@@ -71,7 +71,7 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     return (
         <MapContainer
             center={centerPosition}
-            zoom={15}
+            zoom={14}
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
         >
