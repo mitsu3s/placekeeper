@@ -1,30 +1,39 @@
 import Link from 'next/link'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
 const Home = () => {
+    const { data: session, status } = useSession()
+
+    const getLink = () => {
+        return session ? '/placemap' : '#'
+    }
+
     return (
         <div className="bg-slate-100 h-screen">
             <header className="z-30 flex items-center w-full h-24 sm:h-32 bg-indigo-500">
                 <div className="container flex items-center justify-between px-6 mx-auto">
-                    <div className="text-3xl font-black text-gray-800 uppercase dark:text-white">
+                    <Link
+                        href="/"
+                        className="text-3xl font-black text-gray-800 uppercase dark:text-white"
+                    >
                         Place Keeper
-                    </div>
+                    </Link>
                     <div className="flex items-center">
                         <nav className="items-center hidden text-lg text-gray-800 uppercase font-sen dark:text-white lg:flex">
-                            <Link href="/placemap" className="flex px-6 py-2">
-                                Home
+                            <Link href={getLink()} className="flex px-6 py-2">
+                                Map
                             </Link>
-                            <Link href="/auth" className="flex px-6 py-2">
-                                Auth
-                            </Link>
-                            <a href="#" className="flex px-6 py-2">
-                                Product
-                            </a>
-                            <a href="#" className="flex px-6 py-2">
-                                Contact
-                            </a>
-                            <a href="#" className="flex px-6 py-2">
-                                Carrer
-                            </a>
+                            <button
+                                type="button"
+                                className="flex px-6 py-2"
+                                onClick={() =>
+                                    signIn(undefined, {
+                                        callbackUrl: process.env.NEXT_PUBLIC_URL + '/placemap',
+                                    })
+                                }
+                            >
+                                SIGN IN
+                            </button>
                         </nav>
                         <button className="flex flex-col ml-4 lg:hidden">
                             <span className="w-6 h-1 mb-1 bg-gray-800 dark:bg-white"></span>
