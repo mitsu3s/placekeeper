@@ -133,7 +133,6 @@ const MapPage = ({ places }: { places: Place[] }) => {
                                         >
                                             {place.name}
                                         </a>
-                                        : {place.description}
                                     </li>
                                 ))}
                             </ul>
