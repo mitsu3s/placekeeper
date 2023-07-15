@@ -105,6 +105,7 @@ const MapPage = ({ places }: { places: Place[] }) => {
 
     return (
         <div className="bg-white flex flex-col items-center justify-center">
+            <div className="mt-2 bg-white"></div>
             <Map
                 places={places}
                 selectedPosition={selectedPosition}
