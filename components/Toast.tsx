@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from '@/styles/toast.module.css'
 
 interface ToastMessageProps {
     setShowToast: React.Dispatch<React.SetStateAction<boolean>>
@@ -6,7 +7,7 @@ interface ToastMessageProps {
 
 const ToastMessage: React.FC<ToastMessageProps> = ({ setShowToast }) => {
     return (
-        <div>
+        <div className={styles.toastContainer}>
             <div
                 className="max-w-xs bg-red-100 border border-red-200 text-sm text-red-500 rounded-md shadow-md"
                 role="alert"
