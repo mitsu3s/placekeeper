@@ -20,6 +20,9 @@ export default NextAuth({
         }),
     ],
     secret: process.env.SECRET,
+    pages: {
+        signIn: '/auth/signin',
+    },
     callbacks: {
         async session({ session, user }) {
             // Send properties to the client, like an access_token and user id from a provider.

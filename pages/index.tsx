@@ -1,16 +1,22 @@
 import Link from 'next/link'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import ToastMessage from '@/components/Toast'
 
 const Home = () => {
     const { data: session, status } = useSession()
     const [showToast, setShowToast] = useState(false)
+    const { push, asPath } = useRouter()
 
     const handleLinkClick = () => {
         if (!session) {
             setShowToast(true)
         }
+    }
+
+    const handleSignin = () => {
+        push(`/auth/signin?callbackUrl=${asPath}`)
     }
 
     const getLink = () => {
@@ -37,17 +43,9 @@ const Home = () => {
                             >
                                 Map
                             </Link>
-                            <button
-                                type="button"
-                                className="flex px-6 py-2"
-                                onClick={() =>
-                                    signIn(undefined, {
-                                        callbackUrl: process.env.NEXT_PUBLIC_URL + '/placemap',
-                                    })
-                                }
-                            >
-                                SIGN IN
-                            </button>
+                            <Link href="/auth/signin" className="flex px-6 py-2">
+                                Sign In
+                            </Link>
                         </nav>
                         <button className="flex flex-col ml-4 lg:hidden">
                             <span className="w-6 h-1 mb-1 bg-gray-800 dark:bg-white"></span>
