@@ -7,6 +7,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { useState, useEffect } from 'react'
 import { iconLib } from '@/libs/Icon'
 import location from '@/public/icons/location.svg'
+import RoutingMachine from './Routing'
 
 L.Icon.Default.mergeOptions({
     iconUrl: markerIcon.src,
@@ -90,6 +91,7 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
             {selectedPosition && <Marker position={selectedPosition}></Marker>}
             <MapClickHandler />
             <ChangeMapCenter center={center} />
+            {/* <RoutingMachine /> */}
         </MapContainer>
     )
 }
