@@ -4,6 +4,8 @@ import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
+import { customSendVerificationRequest } from '@/pages/api/auth/email'
+
 export default NextAuth({
     adapter: PrismaAdapter(prisma),
     providers: [
@@ -17,6 +19,13 @@ export default NextAuth({
                 },
             },
             from: process.env.EMAIL_FROM,
+            sendVerificationRequest({ identifier: email, url, provider: { server, from } }) {
+                return customSendVerificationRequest({
+                    identifier: email,
+                    url,
+                    provider: { server, from },
+                })
+            },
         }),
     ],
     secret: process.env.SECRET,

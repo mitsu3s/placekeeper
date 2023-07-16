@@ -35,6 +35,7 @@
     "devDependencies": {
         "@types/leaflet": "^1.9.3",
         "@types/leaflet-routing-machine": "^3.2.4",
+        "@types/nodemailer": "^6.4.8",
         "nodemailer": "^6.9.3",
         "prisma": "^5.0.0"
     }
