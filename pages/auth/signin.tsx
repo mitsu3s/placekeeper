@@ -10,6 +10,17 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
         setEmail(event.target.value)
     }
 
+    const handleSignIn = async () => {
+        if (!isSigningIn) {
+            setIsSigningIn(true)
+            await signIn('email', {
+                email,
+                callbackUrl: process.env.NEXT_PUBLIC_URL + '/placemap',
+            })
+            setIsSigningIn(false)
+        }
+    }
+
     return (
         <div className="bg-white flex flex-col items-center justify-center h-screen">
             <form method="post" action="/api/auth/signin/email">
@@ -27,7 +38,16 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
                 </label>
                 <br />
                 <br />
-                <button type="submit" className="text-black">
+                <button
+                    type="submit"
+                    className="text-black"
+                    onClick={() =>
+                        signIn('email', {
+                            email,
+                            callbackUrl: process.env.NEXT_PUBLIC_URL + '/placemap',
+                        })
+                    }
+                >
                     Sign in with Email
                 </button>
             </form>
@@ -38,7 +58,7 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
             >
                 Sign out
             </button>
-            <button
+            {/* <button
                 className="text-black"
                 onClick={() =>
                     signIn('email', {
@@ -48,7 +68,7 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
                 }
             >
                 Sign in Email
-            </button>
+            </button> */}
         </div>
     )
 }
