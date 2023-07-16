@@ -114,17 +114,17 @@ const MapPage = ({ places, shareId }: any) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
 
-        try {
-            if (session) {
+        if (session) {
+            try {
                 values.userId = session.user.id
                 const res = await axios.post('/api/place', values)
                 console.log(res)
                 router.reload()
-            } else {
+            } catch (error) {
+                console.log(error)
                 router.push('/')
             }
-        } catch (error) {
-            console.log(error)
+        } else {
             router.push('/')
         }
     }
