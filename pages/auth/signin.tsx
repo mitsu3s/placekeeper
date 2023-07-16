@@ -35,6 +35,14 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
             <button className="text-black" onClick={() => signOut()}>
                 Sign out
             </button>
+            <button
+                className="text-black"
+                onClick={() =>
+                    signIn('email', { email, callbackUrl: 'http://localhost:3000/placemap' })
+                }
+            >
+                Sign in Email
+            </button>
         </div>
     )
 }
