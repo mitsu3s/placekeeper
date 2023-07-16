@@ -14,11 +14,12 @@ import PlaceTable from '@/components/PlaceTable'
 const prisma = new PrismaClient()
 
 interface Place {
-    id: number
+    id: string
     latitude: number
     longitude: number
     name: string
     description: string
+    userId: string
 }
 
 const FormValidationSchema = Yup.object().shape({
