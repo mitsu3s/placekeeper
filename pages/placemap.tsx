@@ -82,11 +82,24 @@ const MapPage = ({ places }: { places: Place[] }) => {
     const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
         setCenterPosition([lat, lng])
         setHash(formatPlaceNameForHash(placeName))
+        console.log(shareCode)
     }
 
-    const handleGenerateShareCode = () => {
-        const newShareCode = generateShareCode(10)
-        setShareCode(newShareCode)
+    const handleGenerateShareCode = async () => {
+        if (session) {
+            try {
+                const newShareCode = generateShareCode(10)
+                setShareCode(newShareCode)
+                console.log(newShareCode)
+                console.log(shareCode)
+                const res = await axios.post('/api/share', {
+                    shareCode: newShareCode,
+                    userId: session.user.id,
+                })
+            } catch (error) {}
+        } else {
+            router.push('/')
+        }
     }
 
     const handleSubmit = async (values: any) => {
@@ -96,8 +109,8 @@ const MapPage = ({ places }: { places: Place[] }) => {
         try {
             if (session) {
                 values.userId = session.user.id
-                const response = await axios.post('/api/place', values)
-                console.log(response)
+                const res = await axios.post('/api/place', values)
+                console.log(res)
                 router.reload()
             } else {
                 router.push('/')
@@ -132,18 +145,14 @@ const MapPage = ({ places }: { places: Place[] }) => {
             <div>
                 {shareCode && (
                     <div className="text-black mt-4">
-                        <p>共有コード:</p>
-                        <a href={shareCode} target="_blank" rel="noopener noreferrer">
-                            {shareCode}
-                        </a>
+                        <p>共有コード: {shareCode}</p>
                     </div>
                 )}
                 <button
                     onClick={handleGenerateShareCode}
                     className="bg-slate-300 text-black mt-4 px-4 rounded"
-                    disabled={!!shareCode}
                 >
-                    {shareCode ? 'Save Share Code' : 'Generate Share Code'}
+                    Generate Share Code
                 </button>
             </div>
             <div className="flex">
