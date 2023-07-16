@@ -37,10 +37,18 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     }
 
     const places = await prisma.place.findMany()
+    const share = await prisma.share.findUnique({
+        where: {
+            userId: session.user.id,
+        },
+    })
+
+    const shareCode = share?.shareId || ''
 
     return {
         props: {
             places,
+            shareId: shareCode,
         },
     }
 }
@@ -48,7 +56,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 const centerLatitude = 34.95475940197166
 const centerLongitude = 137.15245841041596
 
-const MapPage = ({ places }: { places: Place[] }) => {
+const MapPage = ({ places, shareId }: any) => {
     const { data: session, status } = useSession()
     const router = useRouter()
     const [hash, setHash] = useHash()
@@ -57,7 +65,7 @@ const MapPage = ({ places }: { places: Place[] }) => {
         centerLatitude,
         centerLongitude,
     ])
-    const [shareCode, setShareCode] = useState('')
+    const [shareCode, setShareCode] = useState(shareId)
 
     const Map = React.useMemo(
         () =>
@@ -82,7 +90,6 @@ const MapPage = ({ places }: { places: Place[] }) => {
     const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
         setCenterPosition([lat, lng])
         setHash(formatPlaceNameForHash(placeName))
-        console.log(shareCode)
     }
 
     const handleGenerateShareCode = async () => {
@@ -149,12 +156,14 @@ const MapPage = ({ places }: { places: Place[] }) => {
                         <p>共有コード: {shareCode}</p>
                     </div>
                 )}
-                <button
-                    onClick={handleGenerateShareCode}
-                    className="bg-slate-300 text-black mt-4 px-4 rounded"
-                >
-                    Generate Share Code
-                </button>
+                {!shareCode && (
+                    <button
+                        onClick={handleGenerateShareCode}
+                        className="bg-slate-300 text-black mt-4 px-4 rounded"
+                    >
+                        Generate Share Code
+                    </button>
+                )}
             </div>
             <div className="flex">
                 <div className="pl-4">
