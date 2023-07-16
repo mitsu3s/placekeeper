@@ -5,22 +5,21 @@ import { signIn, signOut } from 'next-auth/react'
 
 const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [email, setEmail] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleInputChange = (event: any) => {
         setEmail(event.target.value)
     }
-
     const handleSignIn = async () => {
-        if (!isSigningIn) {
-            setIsSigningIn(true)
+        if (!isLoading) {
+            setIsLoading(true)
             await signIn('email', {
                 email,
                 callbackUrl: process.env.NEXT_PUBLIC_URL + '/placemap',
             })
-            setIsSigningIn(false)
+            setIsLoading(false)
         }
     }
-
     return (
         <div className="bg-white flex flex-col items-center justify-center h-screen">
             <form method="post" action="/api/auth/signin/email">
@@ -39,16 +38,12 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
                 <br />
                 <br />
                 <button
-                    type="submit"
+                    type="button"
+                    onClick={handleSignIn}
+                    disabled={isLoading}
                     className="text-black"
-                    onClick={() =>
-                        signIn('email', {
-                            email,
-                            callbackUrl: process.env.NEXT_PUBLIC_URL + '/placemap',
-                        })
-                    }
                 >
-                    Sign in with Email
+                    {isLoading ? 'Loading...' : 'Sign in with Email'}
                 </button>
             </form>
             <br />
