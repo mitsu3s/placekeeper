@@ -5,11 +5,14 @@ import { useRouter } from 'next/router'
 import ToastMessage from '@/components/Toast'
 
 const Home = () => {
+    const router = useRouter()
     const { data: session, status } = useSession()
     const [showToast, setShowToast] = useState(false)
-    const { push, asPath } = useRouter()
+    const [shareCode, setShareCode] = useState('')
 
-    console.log('session ' + session)
+    const handleShowShareMap = () => {
+        router.push('/share?shareCode=${shareCode}')
+    }
 
     const handleLinkClick = () => {
         if (!session) {
@@ -112,13 +115,29 @@ const Home = () => {
                             with Tailwind CSS, HTML &amp; Next.js.
                         </p>
 
-                        <a
+                        <p
                             className="mx-auto mt-8 text-sm font-semibold text-blue-600 hover:text-neutral-600"
                             title="read more"
                         >
                             {' '}
-                            Read more about the offer »{' '}
-                        </a>
+                            Have a Share Code? »{' '}
+                        </p>
+                        <div>
+                            <input
+                                type="text"
+                                className="w- px-4 py-2 mt-2 text-base text-gray-700 placeholder-gray-600 bg-slate-100 border rounded-lg focus:shadow-outline"
+                                placeholder="Share Code"
+                                value={shareCode}
+                                onChange={(e) => setShareCode(e.target.value)}
+                            />
+                            <button
+                                onClick={handleShowShareMap}
+                                className="bg-slate-300 text-black ml-4 px-4 rounded"
+                                disabled={!shareCode}
+                            >
+                                Show
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
