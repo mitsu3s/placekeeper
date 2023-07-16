@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic'
 import { useHash } from '@/libs/useHash'
 import { useSession, signIn, signOut, getSession } from 'next-auth/react'
 import { GetServerSidePropsContext } from 'next'
+import generateShareCode from '@/utils/shareCodeGenerator'
 
 const prisma = new PrismaClient()
 
@@ -54,6 +55,7 @@ const MapPage = ({ places }: { places: Place[] }) => {
         centerLatitude,
         centerLongitude,
     ])
+    const [shareCode, setShareCode] = useState('')
 
     const Map = React.useMemo(
         () =>
@@ -78,6 +80,11 @@ const MapPage = ({ places }: { places: Place[] }) => {
     const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
         setCenterPosition([lat, lng])
         setHash(formatPlaceNameForHash(placeName))
+    }
+
+    const handleGenerateShareCode = () => {
+        const newShareCode = generateShareCode(10)
+        setShareCode(newShareCode)
     }
 
     const handleSubmit = async (values: any) => {
@@ -219,6 +226,23 @@ const MapPage = ({ places }: { places: Place[] }) => {
                     center={centerPosition}
                     className="z-100"
                 />
+            </div>
+            <div>
+                {shareCode && (
+                    <div className="text-black mt-4">
+                        <p>共有コード:</p>
+                        <a href={shareCode} target="_blank" rel="noopener noreferrer">
+                            {shareCode}
+                        </a>
+                    </div>
+                )}
+                <button
+                    onClick={handleGenerateShareCode}
+                    className="bg-slate-300 text-black mt-4 px-4 rounded"
+                    disabled={!!shareCode}
+                >
+                    {shareCode ? 'Save Share Code' : 'Generate Share Code'}
+                </button>
             </div>
             <div className="flex">
                 <div className="pl-4">
