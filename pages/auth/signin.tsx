@@ -32,13 +32,19 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
                 </button>
             </form>
             <br />
-            <button className="text-black" onClick={() => signOut()}>
+            <button
+                className="text-black"
+                onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })}
+            >
                 Sign out
             </button>
             <button
                 className="text-black"
                 onClick={() =>
-                    signIn('email', { email, callbackUrl: 'http://localhost:3000/placemap' })
+                    signIn('email', {
+                        email,
+                        callbackUrl: process.env.NEXT_PUBLIC_URL + '/placemap',
+                    })
                 }
             >
                 Sign in Email
