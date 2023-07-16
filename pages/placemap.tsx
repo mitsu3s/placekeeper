@@ -90,13 +90,14 @@ const MapPage = ({ places }: { places: Place[] }) => {
             try {
                 const newShareCode = generateShareCode(10)
                 setShareCode(newShareCode)
-                console.log(newShareCode)
-                console.log(shareCode)
                 const res = await axios.post('/api/share', {
                     shareCode: newShareCode,
                     userId: session.user.id,
                 })
-            } catch (error) {}
+                console.log(res)
+            } catch (error) {
+                console.log(error)
+            }
         } else {
             router.push('/')
         }
