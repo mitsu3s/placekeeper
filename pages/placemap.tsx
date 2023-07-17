@@ -36,7 +36,11 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         }
     }
 
-    const places = await prisma.place.findMany()
+    const places = await prisma.place.findMany({
+        where: {
+            userId: session.user.id,
+        },
+    })
     const share = await prisma.share.findUnique({
         where: {
             userId: session.user.id,

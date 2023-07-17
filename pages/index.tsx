@@ -11,7 +11,7 @@ const Home = () => {
     const [shareCode, setShareCode] = useState('')
 
     const handleShowShareMap = () => {
-        router.push('/share?shareCode=${shareCode}')
+        router.push(`/sharemap?sharecode=${shareCode}`)
     }
 
     const handleLinkClick = () => {
