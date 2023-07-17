@@ -2,10 +2,8 @@ import React, { useState } from 'react'
 
 const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) => {
     const [selectedPlaceIds, setSelectedPlaceIds] = useState<string[]>([])
-
-    const handleClick = () => {
-        console.log(selectedPlaceIds)
-    }
+    const [searchTerm, setSearchTerm] = useState<string>('')
+    const [filteredPlaces, setFilteredPlaces] = useState<any[]>(places)
 
     const handleCheckboxChange = (placeId: string) => {
         if (selectedPlaceIds.includes(placeId)) {
@@ -16,6 +14,15 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
             }
         }
     }
+
+    const handleSearchButtonClick = () => {
+        const filteredResults = places.filter((place: any) => {
+            return place.name.toLowerCase().includes(searchTerm.toLowerCase())
+        })
+        setFilteredPlaces(filteredResults)
+        setSelectedPlaceIds([])
+    }
+
     return (
         <div className="flex flex-col">
             <div className="-m-1.5 overflow-x-auto mx-4">
@@ -32,6 +39,8 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                     id="hs-table-search"
                                     className="p-3 pl-10 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 text-black"
                                     placeholder="Search htmlFor items"
+                                    value={searchTerm}
+                                    onChange={(e) => setSearchTerm(e.target.value)}
                                 />
                                 <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
                                     <svg
@@ -46,6 +55,12 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                     </svg>
                                 </div>
                             </div>
+                            <button
+                                className="bg-slate-300 text-black px-4 rounded"
+                                onClick={handleSearchButtonClick}
+                            >
+                                Search
+                            </button>
                         </div>
                         <div className="overflow-hidden">
                             <table className="min-w-full divide-y divide-gray-200 ">
@@ -71,7 +86,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                 <tbody className="divide-y divide-gray-200 ">
                                     {places &&
                                         places.length > 0 &&
-                                        places.map((place: any, index: any) => (
+                                        filteredPlaces.map((place: any, index: any) => (
                                             <tr key={index}>
                                                 <td className="py-3 pl-4">
                                                     <div className="flex items-center h-5">
