@@ -55,7 +55,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                     {places &&
                                         places.length > 0 &&
                                         places.map((place: any, index: any) => (
-                                            <tr key={index}>
+                                            <tr key={place.id}>
                                                 <td className="py-3 pl-4">
                                                     <div className="flex items-center h-5">
                                                         {places.length > 1 && (
@@ -66,7 +66,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                                             />
                                                         )}
                                                         <label
-                                                            htmlFor="hs-table-search-checkbox-1"
+                                                            htmlFor={`hs-table-search-checkbox-${index}`}
                                                             className="sr-only"
                                                         >
                                                             Checkbox
