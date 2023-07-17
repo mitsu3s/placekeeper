@@ -58,11 +58,13 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                             <tr key={index}>
                                                 <td className="py-3 pl-4">
                                                     <div className="flex items-center h-5">
-                                                        <input
-                                                            id={`hs-table-search-checkbox-${index}`}
-                                                            type="checkbox"
-                                                            className="border-gray-200 rounded text-blue-600 focus:ring-blue-500"
-                                                        />
+                                                        {places.length > 1 && (
+                                                            <input
+                                                                id={`hs-table-search-checkbox-${index}`}
+                                                                type="checkbox"
+                                                                className="border-gray-200 rounded text-blue-600 focus:ring-blue-500"
+                                                            />
+                                                        )}
                                                         <label
                                                             htmlFor="hs-table-search-checkbox-1"
                                                             className="sr-only"
