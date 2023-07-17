@@ -1,11 +1,18 @@
 import Link from 'next/link'
 import { useSession, signIn, signOut } from 'next-auth/react'
 import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import ToastMessage from '@/components/Toast'
 
 const Home = () => {
+    const router = useRouter()
     const { data: session, status } = useSession()
     const [showToast, setShowToast] = useState(false)
+    const [shareCode, setShareCode] = useState('')
+
+    const handleShowShareMap = () => {
+        router.push(`/sharemap?sharecode=${shareCode}`)
+    }
 
     const handleLinkClick = () => {
         if (!session) {
@@ -37,17 +44,9 @@ const Home = () => {
                             >
                                 Map
                             </Link>
-                            <button
-                                type="button"
-                                className="flex px-6 py-2"
-                                onClick={() =>
-                                    signIn(undefined, {
-                                        callbackUrl: process.env.NEXT_PUBLIC_URL + '/placemap',
-                                    })
-                                }
-                            >
-                                SIGN IN
-                            </button>
+                            <Link href="/auth/signin" className="flex px-6 py-2">
+                                Sign In
+                            </Link>
                         </nav>
                         <button className="flex flex-col ml-4 lg:hidden">
                             <span className="w-6 h-1 mb-1 bg-gray-800 dark:bg-white"></span>
@@ -116,13 +115,29 @@ const Home = () => {
                             with Tailwind CSS, HTML &amp; Next.js.
                         </p>
 
-                        <a
+                        <p
                             className="mx-auto mt-8 text-sm font-semibold text-blue-600 hover:text-neutral-600"
                             title="read more"
                         >
                             {' '}
-                            Read more about the offer »{' '}
-                        </a>
+                            Have a Share Code? »{' '}
+                        </p>
+                        <div>
+                            <input
+                                type="text"
+                                className="w- px-4 py-2 mt-2 text-base text-gray-700 placeholder-gray-600 bg-slate-100 border rounded-lg focus:shadow-outline"
+                                placeholder="Share Code"
+                                value={shareCode}
+                                onChange={(e) => setShareCode(e.target.value)}
+                            />
+                            <button
+                                onClick={handleShowShareMap}
+                                className="bg-slate-300 text-black ml-4 px-4 rounded"
+                                disabled={!shareCode}
+                            >
+                                Show
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>

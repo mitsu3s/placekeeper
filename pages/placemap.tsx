@@ -8,15 +8,18 @@ import dynamic from 'next/dynamic'
 import { useHash } from '@/libs/useHash'
 import { useSession, signIn, signOut, getSession } from 'next-auth/react'
 import { GetServerSidePropsContext } from 'next'
+import generateShareCode from '@/utils/shareCodeGenerator'
+import PlaceTable from '@/components/PlaceTable'
 
 const prisma = new PrismaClient()
 
 interface Place {
-    id: number
+    id: string
     latitude: number
     longitude: number
     name: string
     description: string
+    userId: string
 }
 
 const FormValidationSchema = Yup.object().shape({
@@ -33,11 +36,23 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         }
     }
 
-    const places = await prisma.place.findMany()
+    const places = await prisma.place.findMany({
+        where: {
+            userId: session.user.id,
+        },
+    })
+    const share = await prisma.share.findUnique({
+        where: {
+            userId: session.user.id,
+        },
+    })
+
+    const shareCode = share?.shareId || ''
 
     return {
         props: {
             places,
+            shareId: shareCode,
         },
     }
 }
@@ -45,7 +60,7 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 const centerLatitude = 34.95475940197166
 const centerLongitude = 137.15245841041596
 
-const MapPage = ({ places }: { places: Place[] }) => {
+const MapPage = ({ places, shareId }: any) => {
     const { data: session, status } = useSession()
     const router = useRouter()
     const [hash, setHash] = useHash()
@@ -54,6 +69,7 @@ const MapPage = ({ places }: { places: Place[] }) => {
         centerLatitude,
         centerLongitude,
     ])
+    const [shareCode, setShareCode] = useState(shareId)
 
     const Map = React.useMemo(
         () =>
@@ -80,21 +96,39 @@ const MapPage = ({ places }: { places: Place[] }) => {
         setHash(formatPlaceNameForHash(placeName))
     }
 
+    const handleGenerateShareCode = async () => {
+        if (session) {
+            try {
+                const newShareCode = generateShareCode(10)
+                setShareCode(newShareCode)
+                const res = await axios.post('/api/share', {
+                    shareCode: newShareCode,
+                    userId: session.user.id,
+                })
+                console.log(res)
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            router.push('/')
+        }
+    }
+
     const handleSubmit = async (values: any) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
 
-        try {
-            if (session) {
+        if (session) {
+            try {
                 values.userId = session.user.id
-                const response = await axios.post('/api/place', values)
-                console.log(response)
+                const res = await axios.post('/api/place', values)
+                console.log(res)
                 router.reload()
-            } else {
+            } catch (error) {
+                console.log(error)
                 router.push('/')
             }
-        } catch (error) {
-            console.log(error)
+        } else {
             router.push('/')
         }
     }
@@ -104,41 +138,38 @@ const MapPage = ({ places }: { places: Place[] }) => {
     }
 
     return (
-        <div className="bg-white flex flex-col items-center justify-center h-screen">
-            <Map
-                places={places}
-                selectedPosition={selectedPosition}
-                onMapClick={handleMapClick}
-                center={centerPosition}
-            />
-            <div className="flex">
-                <div className="pr-4">
-                    <div>
-                        <h2 className="text-black my-4">Place List</h2>
-                        {places && places.length > 0 && (
-                            <ul>
-                                {places.map((place, index) => (
-                                    <li key={index} className="text-black">
-                                        <a
-                                            href={`/#${formatPlaceNameForHash(place.name)}`}
-                                            onClick={(event) => {
-                                                event.preventDefault()
-                                                handlePlaceClick(
-                                                    place.name,
-                                                    place.latitude,
-                                                    place.longitude
-                                                )
-                                            }}
-                                        >
-                                            {place.name}
-                                        </a>
-                                        : {place.description}
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+        <div className="bg-white flex flex-col items-center justify-center">
+            <div className="my-2"></div>
+            <div className="w-full flex justify-start">
+                <PlaceTable
+                    places={places}
+                    formatPlaceNameForHash={formatPlaceNameForHash}
+                    handlePlaceClick={handlePlaceClick}
+                />
+                <Map
+                    places={places}
+                    selectedPosition={selectedPosition}
+                    onMapClick={handleMapClick}
+                    center={centerPosition}
+                    className="z-100"
+                />
+            </div>
+            <div>
+                {shareCode && (
+                    <div className="text-black mt-4">
+                        <p>共有コード: {shareCode}</p>
                     </div>
-                </div>
+                )}
+                {!shareCode && (
+                    <button
+                        onClick={handleGenerateShareCode}
+                        className="bg-slate-300 text-black mt-4 px-4 rounded"
+                    >
+                        Generate Share Code
+                    </button>
+                )}
+            </div>
+            <div className="flex">
                 <div className="pl-4">
                     <Formik
                         initialValues={initialValues}
