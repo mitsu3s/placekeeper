@@ -1,4 +1,21 @@
+import React, { useState } from 'react'
+
 const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) => {
+    const [selectedPlaceIds, setSelectedPlaceIds] = useState<string[]>([])
+
+    const handleClick = () => {
+        console.log(selectedPlaceIds)
+    }
+
+    const handleCheckboxChange = (placeId: string) => {
+        if (selectedPlaceIds.includes(placeId)) {
+            setSelectedPlaceIds(selectedPlaceIds.filter((id) => id !== placeId))
+        } else {
+            if (selectedPlaceIds.length < 2) {
+                setSelectedPlaceIds([...selectedPlaceIds, placeId])
+            }
+        }
+    }
     return (
         <div className="flex flex-col">
             <div className="-m-1.5 overflow-x-auto mx-4">
@@ -55,7 +72,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                     {places &&
                                         places.length > 0 &&
                                         places.map((place: any, index: any) => (
-                                            <tr key={place.id}>
+                                            <tr key={index}>
                                                 <td className="py-3 pl-4">
                                                     <div className="flex items-center h-5">
                                                         {places.length > 1 && (
@@ -63,6 +80,12 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                                                 id={`hs-table-search-checkbox-${index}`}
                                                                 type="checkbox"
                                                                 className="border-gray-200 rounded text-blue-600 focus:ring-blue-500"
+                                                                checked={selectedPlaceIds.includes(
+                                                                    place.id
+                                                                )}
+                                                                onChange={() =>
+                                                                    handleCheckboxChange(place.id)
+                                                                }
                                                             />
                                                         )}
                                                         <label
