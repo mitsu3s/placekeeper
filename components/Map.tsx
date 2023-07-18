@@ -43,6 +43,7 @@ const locationIcon = new L.Icon({
 
 const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
+    const waypoints: string | any[] = []
 
     useEffect(() => {
         setCenterPosition(center)
@@ -96,7 +97,6 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
             {selectedPosition && <Marker position={selectedPosition}></Marker>}
             <MapClickHandler />
             <ChangeMapCenter center={center} />
-            {/* <RoutingMachine /> */}
         </MapContainer>
     )
 }

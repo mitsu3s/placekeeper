@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) => {
+const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWaypoints }: any) => {
     const [selectedPlaceIds, setSelectedPlaceIds] = useState<string[]>([])
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [filteredPlaces, setFilteredPlaces] = useState<any[]>(places)
