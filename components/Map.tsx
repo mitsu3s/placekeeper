@@ -32,6 +32,11 @@ L.Icon.Default.mergeOptions({
 //     })
 // }
 
+interface Waypoint {
+    latitude: string
+    longitude: string
+}
+
 // カスタムマーカー直接書く
 const locationIcon = new L.Icon({
     iconUrl: location.src,
@@ -43,7 +48,7 @@ const locationIcon = new L.Icon({
 
 const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
-    const [selectedWaypoints, setselectedWaypoints] = useState<string[]>([])
+    const [selectedWaypoints, setselectedWaypoints] = useState<Waypoint[]>([])
 
     useEffect(() => {
         if (selectedWaypoints != waypoints) {
