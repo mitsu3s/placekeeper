@@ -68,6 +68,8 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
         return null
     }
 
+    const routingComponent = waypoints.length > 1 ? <RoutingMachine waypoints={waypoints} /> : null
+
     return (
         <MapContainer
             center={centerPosition}
