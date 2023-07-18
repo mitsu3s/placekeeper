@@ -36,7 +36,6 @@ const TestMap = () => {
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
             </Marker>
-            {/* <RoutingMachine /> */}
             <RoutingMachine waypoints={waypoints} />
         </MapContainer>
     )
