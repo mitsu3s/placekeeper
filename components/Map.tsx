@@ -4,20 +4,20 @@ import L from 'leaflet'
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { iconLib } from '@/libs/Icon'
 import location from '@/public/icons/location.svg'
 import RoutingMachine from './Routing'
 
 L.Icon.Default.mergeOptions({
-    iconUrl: markerIcon.src,
-    iconRetinaUrl: markerIcon2x.src,
+    // iconUrl: markerIcon.src,
+    // iconRetinaUrl: markerIcon2x.src,
     shadowUrl: markerShadow.src,
-    // iconUrl: location.src,
-    // iconRetinaUrl: location.src,
-    // iconAnchor: [17, 49],
-    // popupAnchor: [8, -40],
-    // iconSize: [35, 60],
+    iconUrl: location.src,
+    iconRetinaUrl: location.src,
+    iconAnchor: [17, 49],
+    popupAnchor: [8, -40],
+    iconSize: [35, 60],
 })
 
 // デフォルトマーカーの色違い
@@ -43,6 +43,13 @@ const locationIcon = new L.Icon({
 
 const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
+    const [selectedWaypoints, setselectedWaypoints] = useState<string[]>([])
+
+    useEffect(() => {
+        if (selectedWaypoints != waypoints) {
+            setselectedWaypoints(waypoints)
+        }
+    }, [waypoints])
 
     useEffect(() => {
         setCenterPosition(center)
@@ -68,7 +75,8 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
         return null
     }
 
-    const routingComponent = waypoints.length > 1 ? <RoutingMachine waypoints={waypoints} /> : null
+    const routingComponent =
+        selectedWaypoints.length > 1 ? <RoutingMachine waypoints={selectedWaypoints} /> : null
 
     return (
         <MapContainer
@@ -98,6 +106,7 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
             {selectedPosition && <Marker position={selectedPosition}></Marker>}
             <MapClickHandler />
             <ChangeMapCenter center={center} />
+            {routingComponent}
         </MapContainer>
     )
 }
