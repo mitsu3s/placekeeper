@@ -5,6 +5,10 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [filteredPlaces, setFilteredPlaces] = useState<any[]>(places)
 
+    const handleClick = () => {
+        console.log(selectedPlaceIds)
+    }
+
     const handleCheckboxChange = (placeId: string) => {
         if (selectedPlaceIds.includes(placeId)) {
             setSelectedPlaceIds(selectedPlaceIds.filter((id) => id !== placeId))
@@ -20,7 +24,6 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
             return place.name.toLowerCase().includes(searchTerm.toLowerCase())
         })
         setFilteredPlaces(filteredResults)
-        setSelectedPlaceIds([])
     }
 
     return (
@@ -144,6 +147,9 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                     </div>
                 </div>
             </div>
+            <button className="bg-slate-300 text-black px-4 rounded" onClick={handleClick}>
+                Check
+            </button>
         </div>
     )
 }
