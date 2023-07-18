@@ -16,10 +16,13 @@ const centerLatitude = 34.95475940197166
 const centerLongitude = 137.15245841041596
 
 const TestMap = () => {
-    const waypoints = [
+    const waypoints: string | any[] = [
         { lat: 34.95592012311801, lng: 137.13709831237796 },
         { lat: 34.95191028946883, lng: 137.1674823760987 },
+        // { lat: 34.92550045571998, lng: 137.1573825180531 },
     ]
+    const routingComponent = waypoints.length > 0 ? <RoutingMachine waypoints={waypoints} /> : null
+
     return (
         <MapContainer
             center={[centerLatitude, centerLongitude]}
@@ -36,7 +39,8 @@ const TestMap = () => {
                     A pretty CSS3 popup. <br /> Easily customizable.
                 </Popup>
             </Marker>
-            <RoutingMachine waypoints={waypoints} />
+            {/* <RoutingMachine waypoints={waypoints} /> */}
+            {routingComponent}
         </MapContainer>
     )
 }

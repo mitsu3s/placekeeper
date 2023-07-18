@@ -1,4 +1,6 @@
 .leaflet-routing-alternatives-container {
-    color: black;
-    background-color: azure;
+    --tw-text-opacity: 1;
+    color: rgba(0, 0, 0, var(--tw-text-opacity));
+    --tw-bg-opacity: 1;
+    background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
 }
