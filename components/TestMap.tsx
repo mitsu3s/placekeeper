@@ -20,6 +20,7 @@ const TestMap = () => {
         { lat: 34.95592012311801, lng: 137.13709831237796 },
         { lat: 34.95191028946883, lng: 137.1674823760987 },
     ]
+
     const routingComponent = waypoints.length > 0 ? <RoutingMachine waypoints={waypoints} /> : null
 
     return (

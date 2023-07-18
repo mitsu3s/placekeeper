@@ -74,7 +74,7 @@ const MapPage = ({ places, shareId }: any) => {
 
     const updateWaypoints = (selectedIds: string[]) => {
         setWaypoints(selectedIds)
-        console.log(waypoints)
+        // console.log(waypoints)
     }
 
     const Map = React.useMemo(
@@ -158,6 +158,7 @@ const MapPage = ({ places, shareId }: any) => {
                     selectedPosition={selectedPosition}
                     onMapClick={handleMapClick}
                     center={centerPosition}
+                    waypoints={waypoints}
                     className="z-100"
                 />
             </div>

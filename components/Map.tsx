@@ -41,12 +41,12 @@ const locationIcon = new L.Icon({
     iconSize: [35, 60],
 })
 
-const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
+const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
-    const waypoints: string | any[] = []
 
     useEffect(() => {
         setCenterPosition(center)
+        console.log(waypoints)
     }, [center])
 
     const ChangeMapCenter = ({ center }: { center: [number, number] }) => {
