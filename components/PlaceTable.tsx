@@ -1,21 +1,32 @@
 import React, { useState } from 'react'
 
 const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWaypoints }: any) => {
-    const [selectedPlaceIds, setSelectedPlaceIds] = useState<string[]>([])
+    const [selectedPlaces, setSelectedPlaces] = useState<any[]>([])
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [filteredPlaces, setFilteredPlaces] = useState<any[]>(places)
 
     const handleClick = () => {
-        // console.log(selectedPlaceIds)
-        updateWaypoints(selectedPlaceIds)
+        // updateWaypoints(selectedPlaces)
+        console.log(selectedPlaces)
     }
 
-    const handleCheckboxChange = (placeId: string) => {
-        if (selectedPlaceIds.includes(placeId)) {
-            setSelectedPlaceIds(selectedPlaceIds.filter((id) => id !== placeId))
+    const handleCheckboxChange = (place: any) => {
+        const isSelected = selectedPlaces.some(
+            (p: any) => p.latitude === place.latitude && p.longitude === place.longitude
+        )
+
+        if (isSelected) {
+            setSelectedPlaces(
+                selectedPlaces.filter(
+                    (p: any) => !(p.latitude === place.latitude && p.longitude === place.longitude)
+                )
+            )
         } else {
-            if (selectedPlaceIds.length < 2) {
-                setSelectedPlaceIds([...selectedPlaceIds, placeId])
+            if (selectedPlaces.length < 2) {
+                setSelectedPlaces([
+                    ...selectedPlaces,
+                    { latitude: place.latitude, longitude: place.longitude },
+                ])
             }
         }
     }
@@ -99,11 +110,15 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                                                 id={`hs-table-search-checkbox-${index}`}
                                                                 type="checkbox"
                                                                 className="border-gray-200 rounded text-blue-600 focus:ring-blue-500"
-                                                                checked={selectedPlaceIds.includes(
-                                                                    place.id
+                                                                checked={selectedPlaces.some(
+                                                                    (p: any) =>
+                                                                        p.latitude ===
+                                                                            place.latitude &&
+                                                                        p.longitude ===
+                                                                            place.longitude
                                                                 )}
                                                                 onChange={() =>
-                                                                    handleCheckboxChange(place.id)
+                                                                    handleCheckboxChange(place)
                                                                 }
                                                             />
                                                         )}

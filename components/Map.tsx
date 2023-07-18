@@ -46,7 +46,6 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
 
     useEffect(() => {
         setCenterPosition(center)
-        console.log(waypoints)
     }, [center])
 
     const ChangeMapCenter = ({ center }: { center: [number, number] }) => {
