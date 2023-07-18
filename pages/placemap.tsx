@@ -74,6 +74,7 @@ const MapPage = ({ places, shareId }: any) => {
 
     const updateWaypoints = (selectedIds: string[]) => {
         setWaypoints(selectedIds)
+        console.log(waypoints)
     }
 
     const Map = React.useMemo(
