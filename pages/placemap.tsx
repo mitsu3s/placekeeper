@@ -72,9 +72,12 @@ const MapPage = ({ places, shareId }: any) => {
     const [shareCode, setShareCode] = useState(shareId)
     const [waypoints, setWaypoints] = useState<string[]>([])
 
-    const updateWaypoints = (selectedIds: string[]) => {
-        setWaypoints(selectedIds)
-        // console.log(waypoints)
+    const updateWaypoints = (selectedPlaces: any) => {
+        const selectedWaypoints = selectedPlaces.map((place: any) => ({
+            latitude: place.latitude,
+            longitude: place.longitude,
+        }))
+        setWaypoints(selectedWaypoints)
     }
 
     const Map = React.useMemo(
@@ -151,7 +154,7 @@ const MapPage = ({ places, shareId }: any) => {
                     places={places}
                     formatPlaceNameForHash={formatPlaceNameForHash}
                     handlePlaceClick={handlePlaceClick}
-                    // updateWaypoints={updateWaypoints}
+                    updateWaypoints={updateWaypoints}
                 />
                 <Map
                     places={places}

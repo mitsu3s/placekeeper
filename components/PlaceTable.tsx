@@ -6,8 +6,8 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
     const [filteredPlaces, setFilteredPlaces] = useState<any[]>(places)
 
     const handleClick = () => {
-        // updateWaypoints(selectedPlaces)
-        console.log(selectedPlaces)
+        updateWaypoints(selectedPlaces)
+        // console.log(selectedPlaces)
     }
 
     const handleCheckboxChange = (place: any) => {
