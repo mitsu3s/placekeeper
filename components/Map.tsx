@@ -51,7 +51,24 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
     const [selectedWaypoints, setselectedWaypoints] = useState<Waypoint[]>([])
 
     useEffect(() => {
-        if (selectedWaypoints != waypoints) {
+        if (selectedWaypoints.length > 0) {
+            if (selectedWaypoints.length == waypoints.length) {
+                let isSame = true
+                for (let i = 0; i < waypoints.length; i++) {
+                    if (
+                        waypoints[i].latitude != selectedWaypoints[i].latitude ||
+                        waypoints[i].longitude != selectedWaypoints[i].longitude
+                    ) {
+                        isSame = false
+                    }
+                }
+                if (!isSame) {
+                    setselectedWaypoints(waypoints)
+                }
+            } else {
+                setselectedWaypoints(waypoints)
+            }
+        } else {
             setselectedWaypoints(waypoints)
         }
     }, [waypoints])
