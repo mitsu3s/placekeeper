@@ -65,7 +65,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
 
     return (
         <div className="flex flex-col">
-            <div className="-m-1.5 overflow-x-auto mx-4">
+            <div className="-m-1.5 overflow-x-auto ml-3 mr-4">
                 <div className="p-1.5 min-w-full inline-block align-middle">
                     <div className="border rounded-lg divide-y divide-gray-200">
                         <div className="py-3 px-4">
