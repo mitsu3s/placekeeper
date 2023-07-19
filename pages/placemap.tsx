@@ -110,7 +110,7 @@ const MapPage = ({ places, shareId }: any) => {
             try {
                 const newShareCode = generateShareCode(10)
                 setShareCode(newShareCode)
-                const res = await axios.post('/api/share', {
+                const res = await axios.post('/api/share/create', {
                     shareCode: newShareCode,
                     userId: session.user.id,
                 })
@@ -130,7 +130,7 @@ const MapPage = ({ places, shareId }: any) => {
         if (session) {
             try {
                 values.userId = session.user.id
-                const res = await axios.post('/api/place', values)
+                const res = await axios.post('/api/place/create', values)
                 console.log(res)
                 router.reload()
             } catch (error) {
