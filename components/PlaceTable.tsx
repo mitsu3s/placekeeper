@@ -113,16 +113,14 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                         </th>
                                         <th
                                             scope="col"
-                                            className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                                            className="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase"
                                         >
                                             Place Name
                                         </th>
                                         <th
                                             scope="col"
                                             className="pr-3 py-3 text-right text-xs font-medium text-gray-500 uppercase"
-                                        >
-                                            {/* Action */}
-                                        </th>
+                                        ></th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-gray-200 ">
@@ -157,7 +155,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                                         </label>
                                                     </div>
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
+                                                <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                                     <a
                                                         href={`/#${formatPlaceNameForHash(
                                                             place.name
