@@ -1,13 +1,34 @@
 import React, { useState } from 'react'
+import { useSession, signIn, signOut, getSession } from 'next-auth/react'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 
 const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWaypoints }: any) => {
     const [selectedPlaces, setSelectedPlaces] = useState<any[]>([])
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [filteredPlaces, setFilteredPlaces] = useState<any[]>(places)
+    const { data: session, status } = useSession()
+    const router = useRouter()
 
     const handleClick = () => {
         updateWaypoints(selectedPlaces)
         // console.log(selectedPlaces)
+    }
+
+    const handleDelete = (placeId: any) => {
+        if (session) {
+            try {
+                console.log(placeId)
+                const res = axios.post('/api/place/delete', { placeId: placeId })
+                console.log(res)
+                router.reload()
+            } catch (error) {
+                console.log(error)
+                router.push('/')
+            }
+        } else {
+            router.push('/')
+        }
     }
 
     const handleCheckboxChange = (place: any) => {
@@ -150,7 +171,8 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                                     <a
                                                         className="text-blue-500 hover:text-blue-700"
-                                                        href="#"
+                                                        // href="#"
+                                                        onClick={() => handleDelete(place.id)}
                                                     >
                                                         Delete
                                                     </a>

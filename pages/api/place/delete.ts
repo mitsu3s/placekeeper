@@ -6,6 +6,7 @@ const prisma = new PrismaClient()
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'POST') {
         const { placeId } = req.body
+        // console.log(req.body)
         try {
             const place = await prisma.place.delete({
                 where: {
