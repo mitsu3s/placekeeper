@@ -56,7 +56,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
         }
     }
 
-    const handleSearchButtonClick = () => {
+    const handleSearchIconClick = () => {
         const filteredResults = places.filter((place: any) => {
             return place.name.toLowerCase().includes(searchTerm.toLowerCase())
         })
@@ -78,13 +78,16 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                     name="hs-table-search"
                                     id="hs-table-search"
                                     className="p-3 pl-10 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 text-black"
-                                    placeholder="Search htmlFor items"
+                                    placeholder="Search Place"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />
-                                <div className="absolute inset-y-0 left-0 flex items-center pointer-events-none pl-4">
+                                <div
+                                    className="absolute inset-y-0 left-0 flex items-center pl-4"
+                                    onClick={handleSearchIconClick}
+                                >
                                     <svg
-                                        className="h-3.5 w-3.5 text-gray-400"
+                                        className="h-3.5 w-3.5 text-gray-700"
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="16"
                                         height="16"
@@ -95,12 +98,6 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                     </svg>
                                 </div>
                             </div>
-                            <button
-                                className="bg-slate-300 text-black px-4 rounded"
-                                onClick={handleSearchButtonClick}
-                            >
-                                Search
-                            </button>
                         </div>
                         <div className="overflow-hidden">
                             <table className="min-w-full divide-y divide-gray-200 ">
