@@ -1,16 +1,57 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useSession, signIn, signOut, getSession } from 'next-auth/react'
+import axios from 'axios'
+import { useRouter } from 'next/router'
 
-const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) => {
-    const [selectedPlaceIds, setSelectedPlaceIds] = useState<string[]>([])
+const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWaypoints }: any) => {
+    const [selectedPlaces, setSelectedPlaces] = useState<any[]>([])
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [filteredPlaces, setFilteredPlaces] = useState<any[]>(places)
+    const { data: session, status } = useSession()
+    const router = useRouter()
 
-    const handleCheckboxChange = (placeId: string) => {
-        if (selectedPlaceIds.includes(placeId)) {
-            setSelectedPlaceIds(selectedPlaceIds.filter((id) => id !== placeId))
+    const handleClick = () => {
+        // updateWaypoints(selectedPlaces)
+        // console.log(selectedPlaces)
+    }
+
+    useEffect(() => {
+        updateWaypoints(selectedPlaces)
+    }, [selectedPlaces])
+
+    const handleDelete = (placeId: any) => {
+        if (session) {
+            try {
+                console.log(placeId)
+                const res = axios.post('/api/place/delete', { placeId: placeId })
+                console.log(res)
+                router.reload()
+            } catch (error) {
+                console.log(error)
+                router.push('/')
+            }
         } else {
-            if (selectedPlaceIds.length < 2) {
-                setSelectedPlaceIds([...selectedPlaceIds, placeId])
+            router.push('/')
+        }
+    }
+
+    const handleCheckboxChange = (place: any) => {
+        const isSelected = selectedPlaces.some(
+            (p: any) => p.latitude === place.latitude && p.longitude === place.longitude
+        )
+
+        if (isSelected) {
+            setSelectedPlaces(
+                selectedPlaces.filter(
+                    (p: any) => !(p.latitude === place.latitude && p.longitude === place.longitude)
+                )
+            )
+        } else {
+            if (selectedPlaces.length < 2) {
+                setSelectedPlaces([
+                    ...selectedPlaces,
+                    { latitude: place.latitude, longitude: place.longitude },
+                ])
             }
         }
     }
@@ -20,7 +61,6 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
             return place.name.toLowerCase().includes(searchTerm.toLowerCase())
         })
         setFilteredPlaces(filteredResults)
-        setSelectedPlaceIds([])
     }
 
     return (
@@ -77,9 +117,9 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                         </th>
                                         <th
                                             scope="col"
-                                            className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase"
+                                            className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase"
                                         >
-                                            Action
+                                            {/* Action */}
                                         </th>
                                     </tr>
                                 </thead>
@@ -95,11 +135,15 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                                                 id={`hs-table-search-checkbox-${index}`}
                                                                 type="checkbox"
                                                                 className="border-gray-200 rounded text-blue-600 focus:ring-blue-500"
-                                                                checked={selectedPlaceIds.includes(
-                                                                    place.id
+                                                                checked={selectedPlaces.some(
+                                                                    (p: any) =>
+                                                                        p.latitude ===
+                                                                            place.latitude &&
+                                                                        p.longitude ===
+                                                                            place.longitude
                                                                 )}
                                                                 onChange={() =>
-                                                                    handleCheckboxChange(place.id)
+                                                                    handleCheckboxChange(place)
                                                                 }
                                                             />
                                                         )}
@@ -128,12 +172,26 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                                                         {place.name}
                                                     </a>
                                                 </td>
-                                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                <td className="px-4 py-3 items-center">
                                                     <a
-                                                        className="text-blue-500 hover:text-blue-700"
-                                                        href="#"
+                                                        className="text-black hover:text-blue-700"
+                                                        // href="#"
+                                                        onClick={() => handleDelete(place.id)}
                                                     >
-                                                        Delete
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            strokeWidth={1.5}
+                                                            stroke="currentColor"
+                                                            className="w-5 h-5"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
+                                                            />
+                                                        </svg>
                                                     </a>
                                                 </td>
                                             </tr>
@@ -144,6 +202,9 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick }: any) =
                     </div>
                 </div>
             </div>
+            {/* <button className="bg-slate-300 text-black px-4 mx-6 rounded" onClick={handleClick}>
+                Routing
+            </button> */}
         </div>
     )
 }

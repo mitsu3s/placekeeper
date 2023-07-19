@@ -9,9 +9,6 @@ const prisma = new PrismaClient()
 
 export const getServerSideProps = async (context: any) => {
     const { sharecode } = context.query
-
-    console.log(sharecode)
-
     if (!sharecode) {
         return {
             redirect: {

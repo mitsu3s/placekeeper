@@ -4,20 +4,20 @@ import L from 'leaflet'
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import { iconLib } from '@/libs/Icon'
 import location from '@/public/icons/location.svg'
 import RoutingMachine from './Routing'
 
 L.Icon.Default.mergeOptions({
-    iconUrl: markerIcon.src,
-    iconRetinaUrl: markerIcon2x.src,
+    // iconUrl: markerIcon.src,
+    // iconRetinaUrl: markerIcon2x.src,
     shadowUrl: markerShadow.src,
-    // iconUrl: location.src,
-    // iconRetinaUrl: location.src,
-    // iconAnchor: [17, 49],
-    // popupAnchor: [8, -40],
-    // iconSize: [35, 60],
+    iconUrl: location.src,
+    iconRetinaUrl: location.src,
+    iconAnchor: [17, 49],
+    popupAnchor: [8, -40],
+    iconSize: [35, 60],
 })
 
 // デフォルトマーカーの色違い
@@ -32,6 +32,11 @@ L.Icon.Default.mergeOptions({
 //     })
 // }
 
+interface Waypoint {
+    latitude: string
+    longitude: string
+}
+
 // カスタムマーカー直接書く
 const locationIcon = new L.Icon({
     iconUrl: location.src,
@@ -41,8 +46,32 @@ const locationIcon = new L.Icon({
     iconSize: [35, 60],
 })
 
-const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
+const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
+    const [selectedWaypoints, setselectedWaypoints] = useState<Waypoint[]>([])
+
+    useEffect(() => {
+        if (selectedWaypoints.length > 0) {
+            if (selectedWaypoints.length == waypoints.length) {
+                let isSame = true
+                for (let i = 0; i < waypoints.length; i++) {
+                    if (
+                        waypoints[i].latitude != selectedWaypoints[i].latitude ||
+                        waypoints[i].longitude != selectedWaypoints[i].longitude
+                    ) {
+                        isSame = false
+                    }
+                }
+                if (!isSame) {
+                    setselectedWaypoints(waypoints)
+                }
+            } else {
+                setselectedWaypoints(waypoints)
+            }
+        } else {
+            setselectedWaypoints(waypoints)
+        }
+    }, [waypoints])
 
     useEffect(() => {
         setCenterPosition(center)
@@ -67,6 +96,9 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
         })
         return null
     }
+
+    const routingComponent =
+        selectedWaypoints.length > 1 ? <RoutingMachine waypoints={selectedWaypoints} /> : null
 
     return (
         <MapContainer
@@ -96,7 +128,7 @@ const Map = ({ places, selectedPosition, onMapClick, center }: any) => {
             {selectedPosition && <Marker position={selectedPosition}></Marker>}
             <MapClickHandler />
             <ChangeMapCenter center={center} />
-            {/* <RoutingMachine /> */}
+            {routingComponent}
         </MapContainer>
     )
 }

@@ -21,7 +21,7 @@ const Home = () => {
     }
 
     const getLink = () => {
-        return session ? '/placemap' : '#'
+        return session ? '/placemap' : ''
     }
 
     return (
@@ -125,7 +125,7 @@ const Home = () => {
                         <div>
                             <input
                                 type="text"
-                                className="w- px-4 py-2 mt-2 text-base text-gray-700 placeholder-gray-600 bg-slate-100 border rounded-lg focus:shadow-outline"
+                                className="px-4 py-2 mt-2 text-base text-gray-700 placeholder-gray-600 bg-slate-100 border rounded-lg focus:shadow-outline"
                                 placeholder="Share Code"
                                 value={shareCode}
                                 onChange={(e) => setShareCode(e.target.value)}

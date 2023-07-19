@@ -70,6 +70,15 @@ const MapPage = ({ places, shareId }: any) => {
         centerLongitude,
     ])
     const [shareCode, setShareCode] = useState(shareId)
+    const [waypoints, setWaypoints] = useState<string[]>([])
+
+    const updateWaypoints = (selectedPlaces: any) => {
+        const selectedWaypoints = selectedPlaces.map((place: any) => ({
+            latitude: place.latitude,
+            longitude: place.longitude,
+        }))
+        setWaypoints(selectedWaypoints)
+    }
 
     const Map = React.useMemo(
         () =>
@@ -101,7 +110,7 @@ const MapPage = ({ places, shareId }: any) => {
             try {
                 const newShareCode = generateShareCode(10)
                 setShareCode(newShareCode)
-                const res = await axios.post('/api/share', {
+                const res = await axios.post('/api/share/create', {
                     shareCode: newShareCode,
                     userId: session.user.id,
                 })
@@ -114,14 +123,14 @@ const MapPage = ({ places, shareId }: any) => {
         }
     }
 
-    const handleSubmit = async (values: any) => {
+    const handleCreate = async (values: any) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
 
         if (session) {
             try {
                 values.userId = session.user.id
-                const res = await axios.post('/api/place', values)
+                const res = await axios.post('/api/place/create', values)
                 console.log(res)
                 router.reload()
             } catch (error) {
@@ -145,12 +154,14 @@ const MapPage = ({ places, shareId }: any) => {
                     places={places}
                     formatPlaceNameForHash={formatPlaceNameForHash}
                     handlePlaceClick={handlePlaceClick}
+                    updateWaypoints={updateWaypoints}
                 />
                 <Map
                     places={places}
                     selectedPosition={selectedPosition}
                     onMapClick={handleMapClick}
                     center={centerPosition}
+                    waypoints={waypoints}
                     className="z-100"
                 />
             </div>
@@ -174,7 +185,7 @@ const MapPage = ({ places, shareId }: any) => {
                     <Formik
                         initialValues={initialValues}
                         validationSchema={FormValidationSchema}
-                        onSubmit={handleSubmit}
+                        onSubmit={handleCreate}
                     >
                         <Form className="mt-4">
                             <div className="text-black">
