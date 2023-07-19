@@ -103,8 +103,13 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                             <table className="min-w-full divide-y divide-gray-200 ">
                                 <thead className="bg-gray-50">
                                     <tr>
-                                        <th scope="col" className="py-3 px-4 pr-0">
-                                            <div className="flex items-center h-5"></div>
+                                        <th
+                                            scope="col"
+                                            className="pl-2 py-3 text-left text-xs font-medium text-gray-500 uppercase"
+                                        >
+                                            Routing
+                                            <br />
+                                            Point
                                         </th>
                                         <th
                                             scope="col"
@@ -114,7 +119,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                         </th>
                                         <th
                                             scope="col"
-                                            className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase"
+                                            className="pr-3 py-3 text-right text-xs font-medium text-gray-500 uppercase"
                                         >
                                             {/* Action */}
                                         </th>
@@ -169,7 +174,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                                         {place.name}
                                                     </a>
                                                 </td>
-                                                <td className="px-4 py-3 items-center">
+                                                <td className="pr-3 py-3 items-center">
                                                     <a
                                                         className="text-black hover:text-blue-700"
                                                         // href="#"
