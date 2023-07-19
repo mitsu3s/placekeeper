@@ -149,7 +149,7 @@ const MapPage = ({ places, shareId }: any) => {
     return (
         <div className="bg-white flex flex-col items-center justify-center">
             <div className="my-2"></div>
-            <div className="w-full flex justify-start">
+            <div className="w-full flex justify-start px-1">
                 <PlaceTable
                     places={places}
                     formatPlaceNameForHash={formatPlaceNameForHash}
