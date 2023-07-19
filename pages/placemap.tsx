@@ -123,7 +123,7 @@ const MapPage = ({ places, shareId }: any) => {
         }
     }
 
-    const handleSubmit = async (values: any) => {
+    const handleCreate = async (values: any) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
 
@@ -185,7 +185,7 @@ const MapPage = ({ places, shareId }: any) => {
                     <Formik
                         initialValues={initialValues}
                         validationSchema={FormValidationSchema}
-                        onSubmit={handleSubmit}
+                        onSubmit={handleCreate}
                     >
                         <Form className="mt-4">
                             <div className="text-black">
