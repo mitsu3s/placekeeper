@@ -198,8 +198,8 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                     </div>
                 </div>
             </div>
-            <button className="bg-slate-300 text-black px-4 rounded" onClick={handleClick}>
-                Check
+            <button className="bg-slate-300 text-black px-4 mx-6 rounded" onClick={handleClick}>
+                Routing
             </button>
         </div>
     )
