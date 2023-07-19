@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSession, signIn, signOut, getSession } from 'next-auth/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -11,9 +11,13 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
     const router = useRouter()
 
     const handleClick = () => {
-        updateWaypoints(selectedPlaces)
+        // updateWaypoints(selectedPlaces)
         // console.log(selectedPlaces)
     }
+
+    useEffect(() => {
+        updateWaypoints(selectedPlaces)
+    }, [selectedPlaces])
 
     const handleDelete = (placeId: any) => {
         if (session) {
@@ -198,9 +202,9 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                     </div>
                 </div>
             </div>
-            <button className="bg-slate-300 text-black px-4 mx-6 rounded" onClick={handleClick}>
+            {/* <button className="bg-slate-300 text-black px-4 mx-6 rounded" onClick={handleClick}>
                 Routing
-            </button>
+            </button> */}
         </div>
     )
 }
