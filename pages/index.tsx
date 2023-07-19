@@ -21,7 +21,7 @@ const Home = () => {
     }
 
     const getLink = () => {
-        return session ? '/placemap' : '#'
+        return session ? '/placemap' : ''
     }
 
     return (
