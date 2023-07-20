@@ -86,7 +86,7 @@ const Home = () => {
                 </div>
             </header>
             <section>
-                <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-24">
+                <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-20">
                     <div className="flex flex-col w-full mb-12 text-center">
                         <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mx-auto mb-5 rounded-full"></div>
                         <h1 className="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl">
@@ -112,14 +112,14 @@ const Home = () => {
                         <div>
                             <input
                                 type="text"
-                                className="px-4 py-2 mt-2 text-base text-gray-700 placeholder-gray-600 bg-slate-100 border rounded-lg focus:shadow-outline"
+                                className="px-4 py-2 mt-2 text-base text-gray-700 placeholder-gray-400 bg-slate-200 border rounded-md outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
                                 placeholder="Share Code"
                                 value={shareCode}
                                 onChange={(e) => setShareCode(e.target.value)}
                             />
                             <button
                                 onClick={handleShowShareMap}
-                                className="bg-slate-300 text-gray-800 ml-4 px-4 py-1 rounded"
+                                className="text-white bg-indigo-500 ml-4 px-4 py-1 rounded"
                                 disabled={!shareCode}
                             >
                                 Let's Show
