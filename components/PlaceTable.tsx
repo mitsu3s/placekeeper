@@ -82,7 +82,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                     onClick={handleSearchIconClick}
                                 >
                                     <svg
-                                        className="h-3.5 w-3.5 text-gray-700"
+                                        className="h-3.5 w-3.5 text-black"
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="16"
                                         height="16"
