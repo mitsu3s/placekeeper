@@ -158,9 +158,22 @@ const MapPage = ({ places, shareId }: any) => {
                         Place Keeper
                     </Link>
                     <div className="flex items-center">
-                        <nav className="text-md items-center md:text-lg uppercase font-sen text-white lg:flex">
+                        <nav className="text-md items-center md:text-lg font-sen text-white lg:flex">
+                            {shareCode && (
+                                <div className="text-white pr-6 lg:py-2">
+                                    ShareCode: {shareCode}
+                                </div>
+                            )}
+                            {!shareCode && (
+                                <button
+                                    onClick={handleGenerateShareCode}
+                                    className="text-white pr-6 lg:py-2"
+                                >
+                                    Generate Share Code
+                                </button>
+                            )}
                             <button
-                                className="flex px-6 py-2"
+                                className="px-6 py-2"
                                 onClick={() =>
                                     signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })
                                 }
@@ -186,27 +199,7 @@ const MapPage = ({ places, shareId }: any) => {
                     waypoints={waypoints}
                 />
             </div>
-            <div>
-                <button
-                    className="text-black"
-                    onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })}
-                >
-                    Sign out
-                </button>
-                {shareCode && (
-                    <div className="text-black mt-4">
-                        <p>共有コード: {shareCode}</p>
-                    </div>
-                )}
-                {!shareCode && (
-                    <button
-                        onClick={handleGenerateShareCode}
-                        className="bg-slate-300 text-black mt-4 px-4 rounded"
-                    >
-                        Generate Share Code
-                    </button>
-                )}
-            </div>
+            <div></div>
             <div className="flex">
                 <div className="pl-4">
                     <Formik
