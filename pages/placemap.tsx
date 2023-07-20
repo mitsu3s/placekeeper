@@ -206,16 +206,16 @@ const MapPage = ({ places, shareId }: any) => {
                     onSubmit={handleCreate}
                 >
                     <Form className="flex">
-                        <div className="">
+                        <div className="flex flex-col">
                             <label htmlFor="latitude" className="text-gray-400">
-                                Latitude:
+                                Latitude:{' '}
                             </label>
                             <Field
                                 type="text"
                                 id="latitude"
                                 name="latitude"
                                 value={selectedPosition ? selectedPosition[0] : ''}
-                                className="text-gray-400"
+                                className="text-gray-400 w-32"
                                 readOnly
                             />
                             <ErrorMessage
@@ -223,8 +223,6 @@ const MapPage = ({ places, shareId }: any) => {
                                 component="div"
                                 className="text-red-500"
                             />
-                        </div>
-                        <div>
                             <label htmlFor="longitude" className="text-gray-400">
                                 Longitude:
                             </label>
@@ -233,7 +231,7 @@ const MapPage = ({ places, shareId }: any) => {
                                 id="longitude"
                                 name="longitude"
                                 value={selectedPosition ? selectedPosition[1] : ''}
-                                className="text-gray-400"
+                                className="text-gray-400 w-32"
                                 readOnly
                             />
                             <ErrorMessage
@@ -242,15 +240,15 @@ const MapPage = ({ places, shareId }: any) => {
                                 className="text-red-500"
                             />
                         </div>
-                        <div className="text-black">
+                        <div className="text-black ml-6">
                             <label htmlFor="placeName" className="text-black">
-                                Place Name:
+                                Place Name:{' '}
                             </label>
                             <Field
                                 type="text"
                                 id="placeName"
                                 name="placeName"
-                                className="text-black"
+                                className="text-black w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
                                 autoComplete="off"
                             />
                             <ErrorMessage
@@ -259,15 +257,15 @@ const MapPage = ({ places, shareId }: any) => {
                                 className="text-red-500"
                             />
                         </div>
-                        <div className="text-black">
+                        <div className="text-black ml-2">
                             <label htmlFor="description" className="text-black">
-                                Description:
+                                Description:{' '}
                             </label>
                             <Field
                                 type="text"
                                 id="description"
                                 name="description"
-                                className="text-black"
+                                className="text-black w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
                                 autoComplete="off"
                             />
                             <ErrorMessage
@@ -277,8 +275,11 @@ const MapPage = ({ places, shareId }: any) => {
                             />
                         </div>
                         <div>
-                            <button type="submit" className="bg-slate-300 text-black px-4 rounded">
-                                Submit
+                            <button
+                                type="submit"
+                                className="bg-slate-300 text-black ml-2 px-4 rounded"
+                            >
+                                Create
                             </button>
                         </div>
                     </Form>
