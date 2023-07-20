@@ -80,7 +80,7 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
     const ChangeMapCenter = ({ center }: { center: [number, number] }) => {
         if (centerPosition != center) {
             const map = useMap()
-            map.setView(center, 15)
+            map.setView(center, 14)
         }
         return null
     }
@@ -103,7 +103,7 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
     return (
         <MapContainer
             center={centerPosition}
-            zoom={13}
+            zoom={14}
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
         >
