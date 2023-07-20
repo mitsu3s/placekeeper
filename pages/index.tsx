@@ -28,15 +28,12 @@ const Home = () => {
         <div className="bg-slate-100 h-screen">
             <header className="z-30 flex items-center w-full h-24 sm:h-32 bg-indigo-500">
                 <div className="container flex items-center justify-between px-6 mx-auto">
-                    <Link
-                        href="/"
-                        className="text-3xl font-black text-gray-800 uppercase dark:text-white"
-                    >
+                    <Link href="/" className="text-3xl font-black uppercase text-white">
                         Place Keeper
                     </Link>
                     {showToast && <ToastMessage setShowToast={setShowToast} />}
                     <div className="flex items-center">
-                        <nav className="items-center hidden text-lg text-gray-800 uppercase font-sen dark:text-white lg:flex">
+                        <nav className="items-center hidden text-lg uppercase font-sen text-white lg:flex">
                             <Link
                                 href={getLink()}
                                 onClick={handleLinkClick}
@@ -49,9 +46,9 @@ const Home = () => {
                             </Link>
                         </nav>
                         <button className="flex flex-col ml-4 lg:hidden">
-                            <span className="w-6 h-1 mb-1 bg-gray-800 dark:bg-white"></span>
-                            <span className="w-6 h-1 mb-1 bg-gray-800 dark:bg-white"></span>
-                            <span className="w-6 h-1 mb-1 bg-gray-800 dark:bg-white"></span>
+                            <span className="w-6 h-1 mb-1 bg-white"></span>
+                            <span className="w-6 h-1 mb-1 bg-white"></span>
+                            <span className="w-6 h-1 mb-1 bg-white"></span>
                         </button>
                     </div>
                 </div>
