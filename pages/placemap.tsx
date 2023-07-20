@@ -215,7 +215,7 @@ const MapPage = ({ places, shareId }: any) => {
                                 id="latitude"
                                 name="latitude"
                                 value={selectedPosition ? selectedPosition[0] : ''}
-                                className="text-gray-400 w-32"
+                                className="text-gray-400 w-32 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
                                 readOnly
                             />
                             <ErrorMessage
@@ -231,7 +231,7 @@ const MapPage = ({ places, shareId }: any) => {
                                 id="longitude"
                                 name="longitude"
                                 value={selectedPosition ? selectedPosition[1] : ''}
-                                className="text-gray-400 w-32"
+                                className="text-gray-400 w-32 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
                                 readOnly
                             />
                             <ErrorMessage
