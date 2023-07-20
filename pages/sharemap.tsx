@@ -73,6 +73,16 @@ const ShareMapPage = ({ places }: any) => {
         []
     )
 
+    const [waypoints, setWaypoints] = useState<string[]>([])
+
+    const updateWaypoints = (selectedPlaces: any) => {
+        const selectedWaypoints = selectedPlaces.map((place: any) => ({
+            latitude: place.latitude,
+            longitude: place.longitude,
+        }))
+        setWaypoints(selectedWaypoints)
+    }
+
     const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
         setCenterPosition([lat, lng])
         setHash(formatPlaceNameForHash(placeName))
@@ -89,6 +99,7 @@ const ShareMapPage = ({ places }: any) => {
                     places={places}
                     formatPlaceNameForHash={formatPlaceNameForHash}
                     handlePlaceClick={handlePlaceClick}
+                    updateWaypoints={updateWaypoints}
                 />
                 <ShareMap places={places} center={centerPosition} />
             </div>

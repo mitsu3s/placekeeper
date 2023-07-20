@@ -10,11 +10,6 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
     const { data: session, status } = useSession()
     const router = useRouter()
 
-    const handleClick = () => {
-        // updateWaypoints(selectedPlaces)
-        // console.log(selectedPlaces)
-    }
-
     useEffect(() => {
         updateWaypoints(selectedPlaces)
     }, [selectedPlaces])

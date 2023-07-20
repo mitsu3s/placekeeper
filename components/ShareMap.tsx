@@ -14,6 +14,11 @@ L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
 })
 
+interface Waypoint {
+    latitude: string
+    longitude: string
+}
+
 const locationIcon = new L.Icon({
     iconUrl: location.src,
     iconRetinaUrl: location.src,
@@ -22,8 +27,9 @@ const locationIcon = new L.Icon({
     iconSize: [35, 60],
 })
 
-const Map = ({ places, center }: any) => {
+const Map = ({ places, center, selectedPosition, waypoints }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
+    const [selectedWaypoints, setselectedWaypoints] = useState<Waypoint[]>([])
 
     useEffect(() => {
         setCenterPosition(center)
