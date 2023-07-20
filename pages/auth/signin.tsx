@@ -1,21 +1,28 @@
-import type { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import { getCsrfToken } from 'next-auth/react'
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
 
-const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-    const [email, setEmail] = useState('')
+const SigninSchema = Yup.object().shape({
+    email: Yup.string().email('Invalid email address').required('Required'),
+})
+
+interface FormValues {
+    email: string
+}
+
+const Test = () => {
     const [isLoading, setIsLoading] = useState(false)
 
-    const handleInputChange = (event: any) => {
-        setEmail(event.target.value)
+    const initialValues = {
+        email: '',
     }
 
-    const handleSignIn = async () => {
+    const handleSignIn = async (values: FormValues) => {
         if (!isLoading) {
             setIsLoading(true)
             await signIn('email', {
-                email,
+                email: values.email,
                 callbackUrl: process.env.NEXT_PUBLIC_URL + '/placemap',
             })
             setIsLoading(false)
@@ -29,58 +36,57 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
                     <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 md:text-3xl">
                         Sign in to Place Keeper
                     </h2>
-                    <form
-                        method="post"
-                        action="/api/auth/signin/email"
-                        className="mx-auto max-w-lg rounded-lg border"
+                    <Formik
+                        initialValues={initialValues}
+                        validationSchema={SigninSchema}
+                        onSubmit={handleSignIn}
                     >
-                        <div className="flex flex-col gap-4 p-4 md:p-8">
-                            <div>
-                                <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-                                <label
-                                    htmlFor="email"
-                                    className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
+                        <Form className="mx-auto max-w-lg rounded-lg border">
+                            <div className="flex flex-col gap-4 p-4 md:p-8">
+                                <div>
+                                    <label
+                                        htmlFor="email"
+                                        className="mb-2 inline-block text-sm text-gray-800 sm:text-base"
+                                    >
+                                        Email
+                                    </label>
+                                    <Field
+                                        id="email"
+                                        type="email"
+                                        name="email"
+                                        className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
+                                    />
+
+                                    <ErrorMessage
+                                        name="email"
+                                        component="div"
+                                        className="text-red-500"
+                                    />
+                                </div>
+                                <button
+                                    type="submit"
+                                    className={`block rounded-lg px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base
+                                        ${
+                                            isLoading
+                                                ? 'bg-gray-400 cursor-not-allowed'
+                                                : 'bg-gray-800 hover:bg-gray-700 focus-visible:ring active:bg-gray-600'
+                                        }`}
+                                    disabled={isLoading}
                                 >
-                                    Email
-                                </label>
-                                <input
-                                    id="email"
-                                    name="email"
-                                    value={email}
-                                    className="w-full rounded border bg-gray-50 px-3 py-2 text-gray-800 outline-none ring-indigo-300 transition duration-100 focus:ring"
-                                    onChange={handleInputChange}
-                                />
+                                    {isLoading ? 'Loading...' : 'Sign in'}
+                                </button>
                             </div>
-                            <button
-                                className={`block rounded-lg px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base
-                                ${
-                                    isLoading
-                                        ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-gray-800 hover:bg-gray-700 focus-visible:ring active:bg-gray-600'
-                                }`}
-                                onClick={handleSignIn}
-                                disabled={isLoading}
-                            >
-                                {isLoading ? 'Loading...' : 'Sign in'}
-                            </button>
-                        </div>
-                        <div className="flex items-center justify-center bg-gray-100 p-4">
-                            <p className="text-center text-sm text-gray-500">
-                                New registration is also available here{' '}
-                            </p>
-                        </div>
-                    </form>
+                            <div className="flex items-center justify-center bg-gray-100 p-4">
+                                <p className="text-center text-sm text-gray-500">
+                                    New registration is also available here{' '}
+                                </p>
+                            </div>
+                        </Form>
+                    </Formik>
                 </div>
             </div>
         </div>
     )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-    const csrfToken = await getCsrfToken(context)
-    return {
-        props: { csrfToken },
-    }
-}
-
-export default SignIn
+export default Test
