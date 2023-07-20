@@ -215,7 +215,7 @@ const MapPage = ({ places, shareId }: any) => {
                                 id="latitude"
                                 name="latitude"
                                 value={selectedPosition ? selectedPosition[0] : ''}
-                                className="text-gray-400 w-32 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
+                                className="text-gray-400 w-32 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
                                 readOnly
                             />
                             <ErrorMessage
@@ -231,7 +231,7 @@ const MapPage = ({ places, shareId }: any) => {
                                 id="longitude"
                                 name="longitude"
                                 value={selectedPosition ? selectedPosition[1] : ''}
-                                className="text-gray-400 w-32 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
+                                className="text-gray-400 w-32 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
                                 readOnly
                             />
                             <ErrorMessage
@@ -248,7 +248,7 @@ const MapPage = ({ places, shareId }: any) => {
                                 type="text"
                                 id="placeName"
                                 name="placeName"
-                                className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
+                                className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
                                 autoComplete="off"
                             />
                             <ErrorMessage
@@ -265,7 +265,7 @@ const MapPage = ({ places, shareId }: any) => {
                                 type="text"
                                 id="description"
                                 name="description"
-                                className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
+                                className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
                                 autoComplete="off"
                             />
                             <ErrorMessage
@@ -277,7 +277,7 @@ const MapPage = ({ places, shareId }: any) => {
                         <div>
                             <button
                                 type="submit"
-                                className="bg-slate-300 text-gray-800 ml-2 px-4 rounded"
+                                className="bg-indigo-500 text-white ml-2 px-4 rounded"
                             >
                                 Create
                             </button>
