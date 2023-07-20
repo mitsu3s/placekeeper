@@ -66,8 +66,8 @@ const MapPage = ({ places, shareId }: any) => {
     const [hash, setHash] = useHash()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
-        centerLatitude,
-        centerLongitude,
+        places.length > 0 ? places[0].latitude : centerLatitude,
+        places.length > 0 ? places[0].longitude : centerLongitude,
     ])
     const [shareCode, setShareCode] = useState(shareId)
     const [waypoints, setWaypoints] = useState<string[]>([])
