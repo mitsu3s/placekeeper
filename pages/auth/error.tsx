@@ -15,7 +15,7 @@ const Error = () => {
                     </p>
                     <Link
                         href="/auth/signin"
-                        className="pt-4 text-black border-b-2 border-indigo-500"
+                        className="pt-4 text-gray-800 border-b-2 border-indigo-500"
                     >
                         Sign In
                     </Link>

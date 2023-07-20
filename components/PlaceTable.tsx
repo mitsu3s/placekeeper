@@ -72,7 +72,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                     type="text"
                                     name="hs-table-search"
                                     id="hs-table-search"
-                                    className="p-3 pl-10 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 text-black"
+                                    className="p-3 pl-10 block w-full border border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 text-gray-800"
                                     placeholder="Search Place"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -169,7 +169,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                                                 </td>
                                                 <td className="pr-3 py-3 items-center">
                                                     <a
-                                                        className="text-black hover:text-blue-700"
+                                                        className="text-gray-800 hover:text-blue-700"
                                                         // href="#"
                                                         onClick={() => handleDelete(place.id)}
                                                     >
@@ -197,7 +197,7 @@ const PlaceTable = ({ places, formatPlaceNameForHash, handlePlaceClick, updateWa
                     </div>
                 </div>
             </div>
-            {/* <button className="bg-slate-300 text-black px-4 mx-6 rounded" onClick={handleClick}>
+            {/* <button className="bg-slate-300 text-gray-800 px-4 mx-6 rounded" onClick={handleClick}>
                 Routing
             </button> */}
         </div>

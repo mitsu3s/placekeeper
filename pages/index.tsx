@@ -119,7 +119,7 @@ const Home = () => {
                             />
                             <button
                                 onClick={handleShowShareMap}
-                                className="bg-slate-300 text-black ml-4 px-4 py-1 rounded"
+                                className="bg-slate-300 text-gray-800 ml-4 px-4 py-1 rounded"
                                 disabled={!shareCode}
                             >
                                 Let's Show

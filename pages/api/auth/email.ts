@@ -26,11 +26,11 @@ function html(params: { url: string; host: string; theme: Theme }) {
 
     const escapedHost = host.replace(/\./g, '&#8203;.')
 
-    const brandColor = '#cbd5e1'
+    const brandColor = '#6366f1'
     const color = {
         background: '#f9f9f9',
-        text: '#000000',
-        mainBackground: '#fff',
+        text: '#1F2937',
+        mainBackground: '#ffffff',
         buttonBackground: brandColor,
         buttonBorder: brandColor,
         buttonText: '#fff',

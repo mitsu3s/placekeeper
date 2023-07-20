@@ -240,15 +240,15 @@ const MapPage = ({ places, shareId }: any) => {
                                 className="text-red-500"
                             />
                         </div>
-                        <div className="text-black ml-6">
-                            <label htmlFor="placeName" className="text-black">
+                        <div className="text-gray-800 ml-6">
+                            <label htmlFor="placeName" className="text-gray-800">
                                 Place Name:{' '}
                             </label>
                             <Field
                                 type="text"
                                 id="placeName"
                                 name="placeName"
-                                className="text-black w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
+                                className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
                                 autoComplete="off"
                             />
                             <ErrorMessage
@@ -257,15 +257,15 @@ const MapPage = ({ places, shareId }: any) => {
                                 className="text-red-500"
                             />
                         </div>
-                        <div className="text-black ml-2">
-                            <label htmlFor="description" className="text-black">
+                        <div className="text-gray-800 ml-2">
+                            <label htmlFor="description" className="text-gray-800">
                                 Description:{' '}
                             </label>
                             <Field
                                 type="text"
                                 id="description"
                                 name="description"
-                                className="text-black w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
+                                className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
                                 autoComplete="off"
                             />
                             <ErrorMessage
@@ -277,7 +277,7 @@ const MapPage = ({ places, shareId }: any) => {
                         <div>
                             <button
                                 type="submit"
-                                className="bg-slate-300 text-black ml-2 px-4 rounded"
+                                className="bg-slate-300 text-gray-800 ml-2 px-4 rounded"
                             >
                                 Create
                             </button>
