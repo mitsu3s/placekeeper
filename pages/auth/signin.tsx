@@ -69,8 +69,8 @@ const Test = () => {
                                     className={`block rounded-lg px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base
                                         ${
                                             isLoading
-                                                ? 'bg-gray-400 cursor-not-allowed'
-                                                : 'bg-gray-800 hover:bg-gray-700 focus-visible:ring active:bg-gray-600'
+                                                ? 'bg-indigo-200 cursor-not-allowed'
+                                                : 'bg-indigo-500 hover:bg-indigo-400 focus-visible:ring active:bg-indigo-600'
                                         }`}
                                     disabled={isLoading}
                                 >
