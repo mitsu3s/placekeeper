@@ -64,7 +64,6 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
                                 {isLoading ? 'Loading...' : 'Sign in'}
                             </button>
                         </div>
-
                         <div className="flex items-center justify-center bg-gray-100 p-4">
                             <p className="text-center text-sm text-gray-500">
                                 New registration is also available here{' '}
