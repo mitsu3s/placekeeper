@@ -4,6 +4,7 @@ import { useHash } from '@/libs/useHash'
 import { PrismaClient } from '@prisma/client'
 import PlaceTable from '@/components/PlaceTable'
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 
 const prisma = new PrismaClient()
 
@@ -92,9 +93,22 @@ const ShareMapPage = ({ places }: any) => {
         return placeName.replace(/\s/g, '_')
     }
     return (
-        <div className="bg-white flex flex-col items-center justify-center h-screen">
-            <div className="my-2"></div>
-            <div className="w-full flex justify-start">
+        <div className="bg-white flex flex-col items-center h-screen">
+            <header className="z-30 flex items-center w-full h-14 sm:h-20 bg-indigo-500">
+                <div className="container flex items-center justify-between px-6 mx-auto">
+                    <Link href="/" className="text-2xl font-black uppercase text-white md:text-3xl">
+                        Place Keeper
+                    </Link>
+                    <div className="flex items-center">
+                        <nav className="items-center text-lg uppercase font-sen text-white lg:flex">
+                            <Link href="/auth/signin" className="flex px-6 py-2">
+                                Create your Map!
+                            </Link>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+            <div className="w-full flex justify-start mt-8">
                 <PlaceTable
                     places={places}
                     formatPlaceNameForHash={formatPlaceNameForHash}
