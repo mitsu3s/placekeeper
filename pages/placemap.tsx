@@ -166,6 +166,12 @@ const MapPage = ({ places, shareId }: any) => {
                 />
             </div>
             <div>
+                <button
+                    className="text-black"
+                    onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })}
+                >
+                    Sign out
+                </button>
                 {shareCode && (
                     <div className="text-black mt-4">
                         <p>共有コード: {shareCode}</p>
