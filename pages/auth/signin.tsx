@@ -54,7 +54,7 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
                                 onClick={handleSignIn}
                                 disabled={isLoading}
                             >
-                                Sign in
+                                {isLoading ? 'Loading...' : 'Sign in'}
                             </button>
                         </div>
 
@@ -66,42 +66,6 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
                     </form>
                 </div>
             </div>
-
-            {/* <button
-                className="text-black"
-                onClick={() => signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })}
-            >
-                Sign out
-            </button> */}
-
-            {/* <div className="bg-white flex flex-col items-center justify-center h-screen">
-                <form method="post" action="/api/auth/signin/email">
-                    <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
-                    <label className="text-black">
-                        Email address:{' '}
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            value={email}
-                            className="text-black border border-black"
-                            onChange={handleInputChange}
-                        />
-                    </label>
-                    <br />
-                    <br />
-                    <button
-                        type="button"
-                        onClick={handleSignIn}
-                        disabled={isLoading}
-                        className="text-black"
-                    >
-                        {isLoading ? 'Loading...' : 'Sign in with Email'}
-                    </button>
-                </form>
-                <br />
-                
-            </div> */}
         </div>
     )
 }
