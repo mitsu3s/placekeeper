@@ -101,7 +101,7 @@ const ShareMapPage = ({ places }: any) => {
                     handlePlaceClick={handlePlaceClick}
                     updateWaypoints={updateWaypoints}
                 />
-                <ShareMap places={places} center={centerPosition} />
+                <ShareMap places={places} center={centerPosition} waypoints={waypoints} />
             </div>
         </div>
     )

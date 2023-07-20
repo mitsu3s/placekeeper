@@ -7,6 +7,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { useState, useEffect } from 'react'
 import { iconLib } from '@/libs/Icon'
 import location from '@/public/icons/location.svg'
+import RoutingMachine from './Routing'
 
 L.Icon.Default.mergeOptions({
     iconUrl: markerIcon.src,
@@ -27,9 +28,32 @@ const locationIcon = new L.Icon({
     iconSize: [35, 60],
 })
 
-const Map = ({ places, center, selectedPosition, waypoints }: any) => {
+const Map = ({ places, center, waypoints }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
     const [selectedWaypoints, setselectedWaypoints] = useState<Waypoint[]>([])
+
+    useEffect(() => {
+        if (selectedWaypoints.length > 0) {
+            if (selectedWaypoints.length == waypoints.length) {
+                let isSame = true
+                for (let i = 0; i < waypoints.length; i++) {
+                    if (
+                        waypoints[i].latitude != selectedWaypoints[i].latitude ||
+                        waypoints[i].longitude != selectedWaypoints[i].longitude
+                    ) {
+                        isSame = false
+                    }
+                }
+                if (!isSame) {
+                    setselectedWaypoints(waypoints)
+                }
+            } else {
+                setselectedWaypoints(waypoints)
+            }
+        } else {
+            setselectedWaypoints(waypoints)
+        }
+    }, [waypoints])
 
     useEffect(() => {
         setCenterPosition(center)
@@ -42,6 +66,9 @@ const Map = ({ places, center, selectedPosition, waypoints }: any) => {
         }
         return null
     }
+
+    const routingComponent =
+        selectedWaypoints.length > 1 ? <RoutingMachine waypoints={selectedWaypoints} /> : null
 
     return (
         <MapContainer
@@ -67,10 +94,8 @@ const Map = ({ places, center, selectedPosition, waypoints }: any) => {
                         </Popup>
                     </Marker>
                 ))}
-
-            {/* <MapClickHandler /> */}
             <ChangeMapCenter center={center} />
-            {/* <RoutingMachine /> */}
+            {routingComponent}
         </MapContainer>
     )
 }
