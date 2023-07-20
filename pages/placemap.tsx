@@ -149,7 +149,7 @@ const MapPage = ({ places, shareId }: any) => {
 
     return (
         <div className="bg-white flex flex-col items-center justify-center">
-            <header className="z-30 flex items-center w-full h-8 sm:h-16 bg-indigo-500 mb-4">
+            <header className="z-30 flex items-center w-full h-20 sm:h-16 bg-indigo-500 mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
                     <Link
                         href="/"
@@ -158,7 +158,7 @@ const MapPage = ({ places, shareId }: any) => {
                         Place Keeper
                     </Link>
                     <div className="flex items-center">
-                        <nav className="text-md items-center md:text-lg font-sen text-white lg:flex">
+                        <nav className="text-md items-center md:text-base lg:text-lg font-sen text-white lg:flex">
                             {shareCode && (
                                 <div className="text-white pr-6 lg:py-2">
                                     ShareCode: {shareCode}
@@ -199,94 +199,90 @@ const MapPage = ({ places, shareId }: any) => {
                     waypoints={waypoints}
                 />
             </div>
-            <div></div>
-            <div className="flex">
-                <div className="pl-4">
-                    <Formik
-                        initialValues={initialValues}
-                        validationSchema={FormValidationSchema}
-                        onSubmit={handleCreate}
-                    >
-                        <Form className="mt-4">
-                            <div className="text-black">
-                                <label htmlFor="latitude" className="text-black">
-                                    Latitude:
-                                </label>
-                                <Field
-                                    type="text"
-                                    id="latitude"
-                                    name="latitude"
-                                    value={selectedPosition ? selectedPosition[0] : ''}
-                                    className="text-black"
-                                    readOnly
-                                />
-                                <ErrorMessage
-                                    name="latitude"
-                                    component="div"
-                                    className="text-red-500"
-                                />
-                            </div>
-                            <div className="text-black">
-                                <label htmlFor="longitude" className="text-black">
-                                    Longitude:
-                                </label>
-                                <Field
-                                    type="text"
-                                    id="longitude"
-                                    name="longitude"
-                                    value={selectedPosition ? selectedPosition[1] : ''}
-                                    className="text-black"
-                                    readOnly
-                                />
-                                <ErrorMessage
-                                    name="longitude"
-                                    component="div"
-                                    className="text-red-500"
-                                />
-                            </div>
-                            <div className="mt-4 text-black">
-                                <label htmlFor="placeName" className="text-black">
-                                    Place Name:
-                                </label>
-                                <Field
-                                    type="text"
-                                    id="placeName"
-                                    name="placeName"
-                                    className="text-black"
-                                />
-                                <ErrorMessage
-                                    name="placeName"
-                                    component="div"
-                                    className="text-red-500"
-                                />
-                            </div>
-                            <div className="mt-2 text-black">
-                                <label htmlFor="description" className="text-black">
-                                    Description:
-                                </label>
-                                <Field
-                                    type="text"
-                                    id="description"
-                                    name="description"
-                                    className="text-black"
-                                />
-                                <ErrorMessage
-                                    name="description"
-                                    component="div"
-                                    className="text-red-500"
-                                />
-                            </div>
-                            <div>
-                                <button
-                                    type="submit"
-                                    className="bg-slate-300 text-black mt-4 px-4 rounded"
-                                >
-                                    Submit
-                                </button>
-                            </div>
-                        </Form>
-                    </Formik>
-                </div>
+            <div className="mt-4">
+                <Formik
+                    initialValues={initialValues}
+                    validationSchema={FormValidationSchema}
+                    onSubmit={handleCreate}
+                >
+                    <Form className="flex">
+                        <div className="">
+                            <label htmlFor="latitude" className="text-gray-400">
+                                Latitude:
+                            </label>
+                            <Field
+                                type="text"
+                                id="latitude"
+                                name="latitude"
+                                value={selectedPosition ? selectedPosition[0] : ''}
+                                className="text-gray-400"
+                                readOnly
+                            />
+                            <ErrorMessage
+                                name="latitude"
+                                component="div"
+                                className="text-red-500"
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="longitude" className="text-gray-400">
+                                Longitude:
+                            </label>
+                            <Field
+                                type="text"
+                                id="longitude"
+                                name="longitude"
+                                value={selectedPosition ? selectedPosition[1] : ''}
+                                className="text-gray-400"
+                                readOnly
+                            />
+                            <ErrorMessage
+                                name="longitude"
+                                component="div"
+                                className="text-red-500"
+                            />
+                        </div>
+                        <div className="text-black">
+                            <label htmlFor="placeName" className="text-black">
+                                Place Name:
+                            </label>
+                            <Field
+                                type="text"
+                                id="placeName"
+                                name="placeName"
+                                className="text-black"
+                                autoComplete="off"
+                            />
+                            <ErrorMessage
+                                name="placeName"
+                                component="div"
+                                className="text-red-500"
+                            />
+                        </div>
+                        <div className="text-black">
+                            <label htmlFor="description" className="text-black">
+                                Description:
+                            </label>
+                            <Field
+                                type="text"
+                                id="description"
+                                name="description"
+                                className="text-black"
+                                autoComplete="off"
+                            />
+                            <ErrorMessage
+                                name="description"
+                                component="div"
+                                className="text-red-500"
+                            />
+                        </div>
+                        <div>
+                            <button type="submit" className="bg-slate-300 text-black px-4 rounded">
+                                Submit
+                            </button>
+                        </div>
+                    </Form>
+                </Formik>
             </div>
         </div>
     )
