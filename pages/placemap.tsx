@@ -162,7 +162,6 @@ const MapPage = ({ places, shareId }: any) => {
                     onMapClick={handleMapClick}
                     center={centerPosition}
                     waypoints={waypoints}
-                    className="z-100"
                 />
             </div>
             <div>
