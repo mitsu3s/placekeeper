@@ -10,6 +10,7 @@ import { useSession, signIn, signOut, getSession } from 'next-auth/react'
 import { GetServerSidePropsContext } from 'next'
 import generateShareCode from '@/utils/shareCodeGenerator'
 import PlaceTable from '@/components/PlaceTable'
+import Link from 'next/link'
 
 const prisma = new PrismaClient()
 
@@ -148,7 +149,28 @@ const MapPage = ({ places, shareId }: any) => {
 
     return (
         <div className="bg-white flex flex-col items-center justify-center">
-            <div className="my-2"></div>
+            <header className="z-30 flex items-center w-full h-8 sm:h-16 bg-indigo-500 mb-4">
+                <div className="container flex items-center justify-between px-6 mx-auto">
+                    <Link
+                        href="/"
+                        className="text-lg sm:text-xl font-black uppercase text-white md:text-2xl"
+                    >
+                        Place Keeper
+                    </Link>
+                    <div className="flex items-center">
+                        <nav className="text-md items-center md:text-lg uppercase font-sen text-white lg:flex">
+                            <button
+                                className="flex px-6 py-2"
+                                onClick={() =>
+                                    signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })
+                                }
+                            >
+                                Sign out
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+            </header>
             <div className="w-full flex justify-start px-1">
                 <PlaceTable
                     places={places}
