@@ -103,7 +103,7 @@ const Home = () => {
                         </p>
 
                         <p
-                            className="mx-auto mt-8 text-sm font-semibold text-blue-600 hover:text-neutral-600"
+                            className="mx-auto mt-8 text-sm font-semibold text-indigo-500"
                             title="read more"
                         >
                             {' '}
