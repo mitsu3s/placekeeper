@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
+import Link from 'next/link'
 
 const SigninSchema = Yup.object().shape({
     email: Yup.string().email('Invalid email address').required('Required'),
@@ -34,7 +35,7 @@ const Test = () => {
             <div className="py-6 sm:py-8 lg:py-12 w-full max-w-lg mx-auto">
                 <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
                     <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 md:text-3xl">
-                        Sign in to Place Keeper
+                        Sign in to <Link href="/">Place Keeper</Link>
                     </h2>
                     <Formik
                         initialValues={initialValues}
