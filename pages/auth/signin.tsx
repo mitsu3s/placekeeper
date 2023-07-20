@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
 import { getCsrfToken } from 'next-auth/react'
 import { useState } from 'react'
-import { signIn, signOut } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 
 const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
     const [email, setEmail] = useState('')
@@ -10,6 +10,7 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
     const handleInputChange = (event: any) => {
         setEmail(event.target.value)
     }
+
     const handleSignIn = async () => {
         if (!isLoading) {
             setIsLoading(true)
@@ -20,6 +21,7 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
             setIsLoading(false)
         }
     }
+
     return (
         <div className="bg-white flex items-center justify-center h-screen">
             <div className="py-6 sm:py-8 lg:py-12 w-full max-w-lg mx-auto">
@@ -50,7 +52,12 @@ const SignIn = ({ csrfToken }: InferGetServerSidePropsType<typeof getServerSideP
                                 />
                             </div>
                             <button
-                                className="block rounded-lg bg-gray-800 px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 hover:bg-gray-700 focus-visible:ring active:bg-gray-600 md:text-base"
+                                className={`block rounded-lg px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base
+                                ${
+                                    isLoading
+                                        ? 'bg-gray-400 cursor-not-allowed'
+                                        : 'bg-gray-800 hover:bg-gray-700 focus-visible:ring active:bg-gray-600'
+                                }`}
                                 onClick={handleSignIn}
                                 disabled={isLoading}
                             >
