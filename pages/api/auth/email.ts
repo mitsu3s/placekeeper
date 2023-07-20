@@ -22,8 +22,6 @@ export async function customSendVerificationRequest(params: any) {
 function html(params: { url: string; host: string; theme: Theme }) {
     const { url, host, theme } = params
 
-    console.log(theme)
-
     const escapedHost = host.replace(/\./g, '&#8203;.')
 
     const brandColor = '#6366f1'
