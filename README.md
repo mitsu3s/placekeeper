@@ -2,11 +2,23 @@
 
 動作確認に関しては、以下を順に行ってください。
 
+### プロジェクトのクローン
+
+```zsh
+$ git clone https://github.com/mitsu3s/placekeeper.git
+```
+
+### 依存関係のインストール
+
+```zsh
+$ yarn install
+```
+
 ### env ファイルの作成
 
 .env
 
-```bash
+```zsh
 DATABASE_URL=mysql://user:password@localhost:3306/placekeeper
 
 NEXTAUTH_URL=http://localhost:3000
@@ -14,7 +26,7 @@ NEXTAUTH_URL=http://localhost:3000
 
 .env.local
 
-```bash
+```zsh
 # メールサーバーの設定（変数の値は別途ファイルに記載します。）
 
 EMAIL_SERVER_USER=
@@ -28,7 +40,7 @@ SECRET=
 
 ### データベースの設定
 
-```bash
+```zsh
 # ユーザーの作成（MariaDB内で）
 
 $ create user 'user'@'localhost' identified by 'password';
@@ -45,7 +57,7 @@ $ npx prisma generate
 
 ### アプリケーションの起動
 
-```bash
+```zsh
 # Next.jsのBuildとStart
 
 $ yarn build && yarn start
