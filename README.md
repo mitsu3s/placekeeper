@@ -6,20 +6,20 @@
 
 .env
 
-```
-DATABASE_URL="mysql://user:password@localhost:3306/placekeeper"
-NEXTAUTH_URL="http://localhost:3000"
+```bash
+DATABASE_URL=mysql://user:password@localhost:3306/placekeeper
+NEXTAUTH_URL=http://localhost:3000
 ```
 
 .env.local
 
-```
-[](メールサーバーの設定（変数の値は別途ファイルに記載します。）)
+```bash
+# メールサーバーの設定（変数の値は別途ファイルに記載します。）
 
 EMAIL_SERVER_USER=
 EMAIL_SERVER_PASSWORD=
-EMAIL_SERVER_HOST==
-EMAIL_SERVER_PORT==
+EMAIL_SERVER_HOST=
+EMAIL_SERVER_PORT=
 EMAIL_FROM=
 
 SECRET=
@@ -27,25 +27,25 @@ SECRET=
 
 ### データベースの設定
 
-```
-<!-- ユーザーの作成（MariaDB内で）-->
+```bash
+# ユーザーの作成（MariaDB内で）
 
 $ create user 'user'@'localhost' identified by 'password';
 $ GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';
 
-<!-- PrismaのMigrateを実行 -->
+# PrismaのMigrateを実行
 
 $ npx prisma migrate dev
 
-<!-- PrismaのGenerateを実行 -->
+# PrismaのGenerateを実行
 
 $ npx prisma generate
 ```
 
 ### アプリケーションの起動
 
-```
-<!-- Next.jsのBuildとStart -->
+```bash
+# Next.jsのBuildとStart
 
 $ yarn build && yarn start
 ```
