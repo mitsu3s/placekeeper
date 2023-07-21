@@ -14,7 +14,7 @@ NEXTAUTH_URL="http://localhost:3000"
 .env.local
 
 ```
-# メールサーバーの設定（変数の値は別途ファイルに記載します。）
+[](メールサーバーの設定（変数の値は別途ファイルに記載します。）)
 
 EMAIL_SERVER_USER=
 EMAIL_SERVER_PASSWORD=
