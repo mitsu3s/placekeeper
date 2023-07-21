@@ -28,20 +28,24 @@ SECRET=
 ### データベースの設定
 
 ```
-# ユーザーの作成(MariaDB内で)
+<!-- ユーザーの作成（MariaDB内で）-->
+
 $ create user 'user'@'localhost' identified by 'password';
 $ GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';
 
-# PrismaのMigrateを実行
+<!-- PrismaのMigrateを実行 -->
+
 $ npx prisma migrate dev
 
-# PrismaのGenerateを実行
-# npx prisma generate
+<!-- PrismaのGenerateを実行 -->
+
+$ npx prisma generate
 ```
 
 ### アプリケーションの起動
 
 ```
-# Next.jsのBuildとStart
+<!-- Next.jsのBuildとStart -->
+
 $ yarn build && yarn start
 ```
