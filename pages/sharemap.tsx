@@ -114,6 +114,7 @@ const ShareMapPage = ({ places }: any) => {
                     formatPlaceNameForHash={formatPlaceNameForHash}
                     handlePlaceClick={handlePlaceClick}
                     updateWaypoints={updateWaypoints}
+                    canDelete={false}
                 />
                 <ShareMap places={places} center={centerPosition} waypoints={waypoints} />
             </div>

@@ -190,6 +190,7 @@ const MapPage = ({ places, shareId }: any) => {
                     formatPlaceNameForHash={formatPlaceNameForHash}
                     handlePlaceClick={handlePlaceClick}
                     updateWaypoints={updateWaypoints}
+                    canDelete={true}
                 />
                 <Map
                     places={places}
