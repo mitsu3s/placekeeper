@@ -8,6 +8,7 @@
 
 ```bash
 DATABASE_URL=mysql://user:password@localhost:3306/placekeeper
+
 NEXTAUTH_URL=http://localhost:3000
 ```
 
