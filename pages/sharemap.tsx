@@ -61,8 +61,8 @@ const centerLongitude = 137.15245841041596
 const ShareMapPage = ({ places }: any) => {
     const [hash, setHash] = useHash()
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
-        centerLatitude,
-        centerLongitude,
+        places.length > 0 ? places[0].latitude : centerLatitude,
+        places.length > 0 ? places[0].longitude : centerLongitude,
     ])
 
     const ShareMap = React.useMemo(
