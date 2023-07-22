@@ -3,9 +3,10 @@ import styles from '@/styles/toast.module.css'
 
 interface ToastMessageProps {
     setShowToast: React.Dispatch<React.SetStateAction<boolean>>
+    message: string
 }
 
-const ToastMessage: React.FC<ToastMessageProps> = ({ setShowToast }) => {
+const ToastMessage: React.FC<ToastMessageProps> = ({ setShowToast, message }) => {
     return (
         <div className={styles.toastContainer}>
             <div
@@ -13,8 +14,8 @@ const ToastMessage: React.FC<ToastMessageProps> = ({ setShowToast }) => {
                 role="alert"
             >
                 <div className="flex p-4">
-                    You are not signed in.
-                    <div className="ml-auto">
+                    {message}
+                    <div className="ml-auto md:ml-2">
                         <button
                             type="button"
                             onClick={() => setShowToast(false)}
