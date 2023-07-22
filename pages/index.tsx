@@ -79,16 +79,19 @@ const Home = () => {
                         />
                     )}
                     <div className="flex items-center">
-                        <nav className="items-center hidden text-lg uppercase font-sen text-white lg:flex">
+                        <nav className="items-center text-lg uppercase font-sen text-white lg:flex">
                             <Link
                                 href={getLink()}
                                 onClick={handleLinkClick}
-                                className="flex px-6 py-2"
+                                className="flex px-6 py-2 hover:text-gray-300"
                             >
                                 Map
                             </Link>
                             {!session && (
-                                <Link href="/auth/signin" className="flex px-6 py-2">
+                                <Link
+                                    href="/auth/signin"
+                                    className="flex px-6 py-2 hover:text-gray-300"
+                                >
                                     Sign In
                                 </Link>
                             )}
@@ -103,11 +106,11 @@ const Home = () => {
                                 </button>
                             )}
                         </nav>
-                        <button className="flex flex-col ml-4 lg:hidden">
+                        {/* <button className="flex flex-col ml-4 lg:hidden">
                             <span className="w-6 h-1 mb-1 bg-white"></span>
                             <span className="w-6 h-1 mb-1 bg-white"></span>
                             <span className="w-6 h-1 mb-1 bg-white"></span>
-                        </button>
+                        </button> */}
                     </div>
                 </div>
             </header>
@@ -145,7 +148,7 @@ const Home = () => {
                             />
                             <button
                                 onClick={handleShowShareMap}
-                                className="text-white bg-indigo-500 ml-4 px-4 py-1 rounded"
+                                className="text-white bg-indigo-500 hover:bg-indigo-400 focus-visible:ring active:bg-indigo-600 ml-4 px-4 py-1 rounded"
                                 disabled={!shareCode}
                             >
                                 Let's Show
