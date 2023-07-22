@@ -21,6 +21,8 @@ $ yarn install
 ```zsh
 DATABASE_URL=mysql://user:password@localhost:3306/placekeeper
 
+NEXT_PUBLIC_URL=http://localhost:3000
+
 NEXTAUTH_URL=http://localhost:3000
 ```
 
