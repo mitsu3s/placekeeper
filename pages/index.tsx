@@ -73,9 +73,21 @@ const Home = () => {
                             >
                                 Map
                             </Link>
-                            <Link href="/auth/signin" className="flex px-6 py-2">
-                                Sign In
-                            </Link>
+                            {!session && (
+                                <Link href="/auth/signin" className="flex px-6 py-2">
+                                    Sign In
+                                </Link>
+                            )}
+                            {session && (
+                                <button
+                                    className="flex px-6 py-2 uppercase"
+                                    onClick={() =>
+                                        signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })
+                                    }
+                                >
+                                    Sign out
+                                </button>
+                            )}
                         </nav>
                         <button className="flex flex-col ml-4 lg:hidden">
                             <span className="w-6 h-1 mb-1 bg-white"></span>
