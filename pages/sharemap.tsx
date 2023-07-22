@@ -101,7 +101,10 @@ const ShareMapPage = ({ places }: any) => {
                     </Link>
                     <div className="flex items-center">
                         <nav className="items-center text-lg uppercase font-sen text-white lg:flex">
-                            <Link href="/auth/signin" className="flex px-6 py-2">
+                            <Link
+                                href="/auth/signin"
+                                className="flex px-6 py-2 hover:text-gray-300"
+                            >
                                 Create your Map!
                             </Link>
                         </nav>
