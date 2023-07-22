@@ -7,7 +7,7 @@ import ToastMessage from '@/components/Toast'
 const Home = () => {
     const router = useRouter()
     const { data: session, status } = useSession()
-    const [showToast, setShowToast] = useState(false)
+    const [isSignedIn, setIsSignedIn] = useState(false)
     const [shareCode, setShareCode] = useState('')
 
     const handleShowShareMap = () => {
@@ -16,7 +16,7 @@ const Home = () => {
 
     const handleLinkClick = () => {
         if (!session) {
-            setShowToast(true)
+            setIsSignedIn(true)
         }
     }
 
@@ -63,9 +63,9 @@ const Home = () => {
                         </svg>
                         Place Keeper
                     </Link>
-                    {showToast && (
+                    {isSignedIn && (
                         <ToastMessage
-                            setShowToast={setShowToast}
+                            setIsSignedIn={setIsSignedIn}
                             message={'You are not signed in.'}
                         />
                     )}

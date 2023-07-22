@@ -2,11 +2,11 @@ import React from 'react'
 import styles from '@/styles/toast.module.css'
 
 interface ToastMessageProps {
-    setShowToast: React.Dispatch<React.SetStateAction<boolean>>
+    setIsSignedIn: React.Dispatch<React.SetStateAction<boolean>>
     message: string
 }
 
-const ToastMessage: React.FC<ToastMessageProps> = ({ setShowToast, message }) => {
+const ToastMessage: React.FC<ToastMessageProps> = ({ setIsSignedIn, message }) => {
     return (
         <div className={styles.toastContainer}>
             <div
@@ -18,7 +18,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({ setShowToast, message }) =>
                     <div className="ml-auto md:ml-2">
                         <button
                             type="button"
-                            onClick={() => setShowToast(false)}
+                            onClick={() => setIsSignedIn(false)}
                             className="inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md text-red-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-100 focus:ring-red-400 transition-all text-sm"
                         >
                             <span className="sr-only">Close</span>
