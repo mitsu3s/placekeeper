@@ -63,7 +63,12 @@ const Home = () => {
                         </svg>
                         Place Keeper
                     </Link>
-                    {showToast && <ToastMessage setShowToast={setShowToast} />}
+                    {showToast && (
+                        <ToastMessage
+                            setShowToast={setShowToast}
+                            message={'You are not signed in.'}
+                        />
+                    )}
                     <div className="flex items-center">
                         <nav className="items-center hidden text-lg uppercase font-sen text-white lg:flex">
                             <Link
