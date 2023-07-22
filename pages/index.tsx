@@ -97,7 +97,7 @@ const Home = () => {
                             )}
                             {session && (
                                 <button
-                                    className="flex px-6 py-2 uppercase"
+                                    className="flex px-6 py-2 uppercase hover:text-gray-300"
                                     onClick={() =>
                                         signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })
                                     }
@@ -115,7 +115,7 @@ const Home = () => {
                 </div>
             </header>
             <section>
-                <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-20">
+                <div className="px-4 py-12 mx-auto max-w-7xl sm:px-6 md:px-12 lg:px-24 lg:py-[72px]">
                     <div className="flex flex-col w-full mb-12 text-center">
                         <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mx-auto mb-5 rounded-full"></div>
                         <h1 className="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl">
