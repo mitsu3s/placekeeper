@@ -281,7 +281,7 @@ const MapPage = ({ places, shareId }: any) => {
                         <div>
                             <button
                                 type="submit"
-                                className="bg-indigo-500 text-white ml-2 px-4 rounded"
+                                className="bg-indigo-500 hover:bg-indigo-400 focus-visible:ring active:bg-indigo-600 text-white ml-2 px-4 rounded"
                             >
                                 Create
                             </button>
