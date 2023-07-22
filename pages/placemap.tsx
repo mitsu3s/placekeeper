@@ -170,13 +170,13 @@ const MapPage = ({ places, shareId }: any) => {
                             {!shareCode && (
                                 <button
                                     onClick={handleGenerateShareCode}
-                                    className="text-white pr-6 lg:py-2"
+                                    className="text-white pr-6 lg:py-2 hover:text-gray-300"
                                 >
                                     Generate Share Code
                                 </button>
                             )}
                             <button
-                                className="px-6 py-2 uppercase"
+                                className="px-6 py-2 uppercase hover:text-gray-300"
                                 onClick={() =>
                                     signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })
                                 }
