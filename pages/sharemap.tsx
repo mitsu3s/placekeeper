@@ -29,7 +29,7 @@ export const getServerSideProps = async (context: any) => {
         if (!adminUser) {
             return {
                 redirect: {
-                    destination: '/',
+                    destination: '/?invalidShareCode=true',
                     permanent: false,
                 },
             }

@@ -7,7 +7,8 @@ import ToastMessage from '@/components/Toast'
 const Home = () => {
     const router = useRouter()
     const { data: session, status } = useSession()
-    const [isSignedIn, setIsSignedIn] = useState(false)
+    const [showToastMessage, setShowToastMessage] = useState(false)
+    const [invalidShareCode, setInvalidShareCode] = useState(true)
     const [shareCode, setShareCode] = useState('')
 
     const handleShowShareMap = () => {
@@ -16,7 +17,7 @@ const Home = () => {
 
     const handleLinkClick = () => {
         if (!session) {
-            setIsSignedIn(true)
+            setShowToastMessage(true)
         }
     }
 
@@ -63,10 +64,18 @@ const Home = () => {
                         </svg>
                         Place Keeper
                     </Link>
-                    {isSignedIn && (
+                    {showToastMessage && (
                         <ToastMessage
-                            setIsSignedIn={setIsSignedIn}
+                            setshowToastMessage={setShowToastMessage}
                             message={'You are not signed in.'}
+                            reload={false}
+                        />
+                    )}
+                    {router.query.invalidShareCode && (
+                        <ToastMessage
+                            setshowToastMessage={setInvalidShareCode}
+                            message={'Invalid Share Code.'}
+                            reload={true}
                         />
                     )}
                     <div className="flex items-center">

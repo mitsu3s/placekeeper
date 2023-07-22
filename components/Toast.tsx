@@ -1,12 +1,21 @@
 import React from 'react'
 import styles from '@/styles/toast.module.css'
+import { useRouter } from 'next/router'
 
 interface ToastMessageProps {
-    setIsSignedIn: React.Dispatch<React.SetStateAction<boolean>>
+    setshowToastMessage: React.Dispatch<React.SetStateAction<boolean>>
     message: string
+    reload: boolean
 }
 
-const ToastMessage: React.FC<ToastMessageProps> = ({ setIsSignedIn, message }) => {
+const ToastMessage: React.FC<ToastMessageProps> = ({ setshowToastMessage, message, reload }) => {
+    const router = useRouter()
+    const handleClick = () => {
+        setshowToastMessage(false)
+        if (reload) {
+            router.push('/')
+        }
+    }
     return (
         <div className={styles.toastContainer}>
             <div
@@ -18,7 +27,7 @@ const ToastMessage: React.FC<ToastMessageProps> = ({ setIsSignedIn, message }) =
                     <div className="ml-auto md:ml-2">
                         <button
                             type="button"
-                            onClick={() => setIsSignedIn(false)}
+                            onClick={handleClick}
                             className="inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md text-red-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-100 focus:ring-red-400 transition-all text-sm"
                         >
                             <span className="sr-only">Close</span>
