@@ -209,7 +209,7 @@ const MapPage = ({ places, shareId }: any) => {
                     validationSchema={FormValidationSchema}
                     onSubmit={handleCreate}
                 >
-                    <Form className="flex">
+                    <Form className="flex bg-white">
                         <div className="flex flex-col">
                             {/* <label htmlFor="latitude" className="text-gray-400">
                                 Latitude:{' '}
