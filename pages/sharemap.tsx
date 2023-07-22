@@ -55,8 +55,8 @@ export const getServerSideProps = async (context: any) => {
     }
 }
 
-const centerLatitude = 34.95475940197166
-const centerLongitude = 137.15245841041596
+const centerLatitude = 35.17096778816617
+const centerLongitude = 136.8829223456777
 
 const ShareMapPage = ({ places }: any) => {
     const [hash, setHash] = useHash()
