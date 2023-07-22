@@ -148,7 +148,7 @@ const MapPage = ({ places, shareId }: any) => {
     }
 
     return (
-        <div className="bg-white flex flex-col items-center justify-center">
+        <div className="bg-white flex flex-col items-center h-screen">
             <header className="z-30 flex items-center w-full h-20 sm:h-16 bg-indigo-500 mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
                     <Link
@@ -208,7 +208,7 @@ const MapPage = ({ places, shareId }: any) => {
                 >
                     <Form className="flex">
                         <div className="flex flex-col">
-                            <label htmlFor="latitude" className="text-gray-400">
+                            {/* <label htmlFor="latitude" className="text-gray-400">
                                 Latitude:{' '}
                             </label>
                             <Field
@@ -239,7 +239,7 @@ const MapPage = ({ places, shareId }: any) => {
                                 name="longitude"
                                 component="div"
                                 className="text-red-500"
-                            />
+                            /> */}
                         </div>
                         <div className="text-gray-800 ml-6">
                             <label htmlFor="placeName" className="text-gray-800">
