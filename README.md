@@ -1,6 +1,28 @@
+# Place Keeper
+
+---
+
 ## 動作確認方法
 
 動作確認に関しては、以下を順に行ってください。
+
+### 動作環境
+
+-   Node.js 19.6.0
+-   yarn 1.22.19
+
+### yarn のインストール
+
+yarn がインストールされていない場合
+
+```zsh
+$ npm install -g yarn
+
+or
+
+$ brew install yarn
+
+```
 
 ### プロジェクトのクローン
 
