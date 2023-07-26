@@ -146,6 +146,24 @@ const MapPage = ({ places, shareId }: any) => {
         }
     }
 
+    const [address, setAddress] = useState('スカイツリー')
+
+    const handleApiSearch = async () => {
+        const url = `https://msearch.gsi.go.jp/address-search/AddressSearch?q=${encodeURIComponent(
+            address
+        )}`
+        const response = await fetch(url)
+        const results = await response.json()
+
+        if (Array.isArray(results) && results.length > 0) {
+            //見つかった住所（施設）の位置を表示
+            const coordinates = results[0].geometry.coordinates
+            console.log(coordinates)
+        } else {
+            console.log('Not found')
+        }
+    }
+
     const formatPlaceNameForHash = (placeName: string) => {
         return placeName.replace(/\s/g, '_')
     }
@@ -210,40 +228,6 @@ const MapPage = ({ places, shareId }: any) => {
                     onSubmit={handleCreate}
                 >
                     <Form className="flex bg-white">
-                        <div className="flex flex-col">
-                            {/* <label htmlFor="latitude" className="text-gray-400">
-                                Latitude:{' '}
-                            </label>
-                            <Field
-                                type="text"
-                                id="latitude"
-                                name="latitude"
-                                value={selectedPosition ? selectedPosition[0] : ''}
-                                className="text-gray-400 w-32 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
-                                readOnly
-                            />
-                            <ErrorMessage
-                                name="latitude"
-                                component="div"
-                                className="text-red-500"
-                            />
-                            <label htmlFor="longitude" className="text-gray-400">
-                                Longitude:
-                            </label>
-                            <Field
-                                type="text"
-                                id="longitude"
-                                name="longitude"
-                                value={selectedPosition ? selectedPosition[1] : ''}
-                                className="text-gray-400 w-32 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
-                                readOnly
-                            />
-                            <ErrorMessage
-                                name="longitude"
-                                component="div"
-                                className="text-red-500"
-                            /> */}
-                        </div>
                         <div className="text-gray-800 ml-6">
                             <label htmlFor="placeName" className="text-gray-800">
                                 Place Name:{' '}
@@ -288,6 +272,14 @@ const MapPage = ({ places, shareId }: any) => {
                         </div>
                     </Form>
                 </Formik>
+            </div>
+            <div>
+                <button
+                    className="px-6 py-2 uppercase text-black hover:text-gray-300"
+                    onClick={handleApiSearch}
+                >
+                    API Search
+                </button>
             </div>
         </div>
     )
