@@ -158,7 +158,7 @@ const PlaceTable = ({
                                                 </td>
                                                 <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                                     <a
-                                                        href={`/#${formatPlaceNameForHash(
+                                                        href={`#${formatPlaceNameForHash(
                                                             place.name
                                                         )}`}
                                                         onClick={(event) => {
