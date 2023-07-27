@@ -146,24 +146,6 @@ const MapPage = ({ places, shareId }: any) => {
         }
     }
 
-    const [address, setAddress] = useState('スカイツリー')
-
-    const handleApiSearch = async () => {
-        const url = `https://msearch.gsi.go.jp/address-search/AddressSearch?q=${encodeURIComponent(
-            address
-        )}`
-        const response = await fetch(url)
-        const results = await response.json()
-
-        if (Array.isArray(results) && results.length > 0) {
-            //見つかった住所（施設）の位置を表示
-            const coordinates = results[0].geometry.coordinates
-            console.log(coordinates)
-        } else {
-            console.log('Not found')
-        }
-    }
-
     const formatPlaceNameForHash = (placeName: string) => {
         return placeName.replace(/\s/g, '_')
     }
@@ -272,14 +254,6 @@ const MapPage = ({ places, shareId }: any) => {
                         </div>
                     </Form>
                 </Formik>
-            </div>
-            <div>
-                <button
-                    className="px-6 py-2 uppercase text-black hover:text-gray-300"
-                    onClick={handleApiSearch}
-                >
-                    API Search
-                </button>
             </div>
         </div>
     )
