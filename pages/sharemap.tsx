@@ -5,6 +5,7 @@ import { PrismaClient } from '@prisma/client'
 import PlaceTable from '@/components/PlaceTable'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
+import forHash from '@/utils/forHash'
 
 const prisma = new PrismaClient()
 
@@ -86,11 +87,7 @@ const ShareMapPage = ({ places }: any) => {
 
     const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
         setCenterPosition([lat, lng])
-        setHash(formatPlaceNameForHash(placeName))
-    }
-
-    const formatPlaceNameForHash = (placeName: string) => {
-        return placeName.replace(/\s/g, '_')
+        setHash(forHash(placeName))
     }
     return (
         <div className="bg-white flex flex-col items-center h-screen">
@@ -114,7 +111,6 @@ const ShareMapPage = ({ places }: any) => {
             <div className="w-full flex justify-start mt-8">
                 <PlaceTable
                     places={places}
-                    formatPlaceNameForHash={formatPlaceNameForHash}
                     handlePlaceClick={handlePlaceClick}
                     updateWaypoints={updateWaypoints}
                     canDelete={false}
