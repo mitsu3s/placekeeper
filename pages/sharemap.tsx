@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import { useHash } from '@/libs/useHash'
+import { useHash } from '@/utils/useHash'
 import { PrismaClient } from '@prisma/client'
 import PlaceTable from '@/components/PlaceTable'
 import dynamic from 'next/dynamic'
