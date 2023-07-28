@@ -11,6 +11,7 @@ import { GetServerSidePropsContext } from 'next'
 import generateShareCode from '@/utils/shareCodeGenerator'
 import PlaceTable from '@/components/PlaceTable'
 import Link from 'next/link'
+import forHash from '@/utils/forHash'
 
 const prisma = new PrismaClient()
 
@@ -106,7 +107,7 @@ const MapPage = ({ places, shareId }: any) => {
 
     const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
         setCenterPosition([lat, lng])
-        setHash(formatPlaceNameForHash(placeName))
+        setHash(forHash(placeName))
     }
 
     const handleGenerateShareCode = async () => {
@@ -144,10 +145,6 @@ const MapPage = ({ places, shareId }: any) => {
         } else {
             router.push('/')
         }
-    }
-
-    const formatPlaceNameForHash = (placeName: string) => {
-        return placeName.replace(/\s/g, '_')
     }
 
     return (
@@ -190,7 +187,6 @@ const MapPage = ({ places, shareId }: any) => {
             <div className="w-full flex justify-start px-1">
                 <PlaceTable
                     places={places}
-                    formatPlaceNameForHash={formatPlaceNameForHash}
                     handlePlaceClick={handlePlaceClick}
                     updateWaypoints={updateWaypoints}
                     canDelete={true}

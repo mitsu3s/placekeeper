@@ -2,14 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useSession, signIn, signOut, getSession } from 'next-auth/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import forHash from '@/utils/forHash'
 
-const PlaceTable = ({
-    places,
-    formatPlaceNameForHash,
-    handlePlaceClick,
-    updateWaypoints,
-    canDelete,
-}: any) => {
+const PlaceTable = ({ places, handlePlaceClick, updateWaypoints, canDelete }: any) => {
     const [selectedPlaces, setSelectedPlaces] = useState<any[]>([])
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [filteredPlaces, setFilteredPlaces] = useState<any[]>(places)
@@ -158,9 +153,7 @@ const PlaceTable = ({
                                                 </td>
                                                 <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                                     <a
-                                                        href={`#${formatPlaceNameForHash(
-                                                            place.name
-                                                        )}`}
+                                                        href={`#${forHash(place.name)}`}
                                                         onClick={(event) => {
                                                             event.preventDefault()
                                                             handlePlaceClick(
