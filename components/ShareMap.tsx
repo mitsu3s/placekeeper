@@ -10,9 +10,12 @@ import location from '@/public/icons/location.svg'
 import RoutingMachine from './Routing'
 
 L.Icon.Default.mergeOptions({
-    iconUrl: markerIcon.src,
-    iconRetinaUrl: markerIcon2x.src,
     shadowUrl: markerShadow.src,
+    iconUrl: location.src,
+    iconRetinaUrl: location.src,
+    iconAnchor: [9, 52],
+    popupAnchor: [8, -40],
+    iconSize: [35, 60],
 })
 
 interface Waypoint {
