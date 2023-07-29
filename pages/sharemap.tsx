@@ -89,6 +89,7 @@ const ShareMapPage = ({ places }: any) => {
         setCenterPosition([lat, lng])
         setHash(forHash(placeName))
     }
+
     return (
         <div className="bg-white flex flex-col items-center h-screen">
             <header className="z-30 flex items-center w-full h-14 sm:h-20 bg-indigo-500">
