@@ -39,10 +39,8 @@ model Session {
 
 model User {
   id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
+  email         String   @unique
+  emailVerified DateTime
   sessions      Session[]
   places        Place[]
   share         Share?
