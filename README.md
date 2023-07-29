@@ -4,7 +4,12 @@
 
 -   Next.js 13.4.6
 -   Node.js 19.6.0
+-   React 18.2.0
 -   yarn 1.22.19
+-   Prisma 5.0.0
+-   NextAuth.js 4.22.1
+-   React Leaflet 4.2.1
+-   React Leaflet Routing Machine 0.0.5
 
 ### yarn のインストール
 
