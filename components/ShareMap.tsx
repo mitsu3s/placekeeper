@@ -23,7 +23,7 @@ interface Waypoint {
 const locationIcon = new L.Icon({
     iconUrl: location.src,
     iconRetinaUrl: location.src,
-    iconAnchor: [17, 49],
+    iconAnchor: [9, 52],
     popupAnchor: [8, -40],
     iconSize: [35, 60],
 })
