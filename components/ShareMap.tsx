@@ -5,7 +5,7 @@ import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
 import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { useState, useEffect } from 'react'
-import { iconLib } from '@/document/Icon'
+// import { iconLib } from '@/document/Icon'
 import location from '@/public/icons/location.svg'
 import RoutingMachine from './Routing'
 
