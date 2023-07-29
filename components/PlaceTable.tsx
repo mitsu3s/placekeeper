@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSession, signIn, signOut, getSession } from 'next-auth/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
-import forHash from '@/utils/forHash'
+import forHash from '@/utils/replaceSpace'
 
 const PlaceTable = ({ places, handlePlaceClick, updateWaypoints, canDelete }: any) => {
     const [selectedPlaces, setSelectedPlaces] = useState<any[]>([])

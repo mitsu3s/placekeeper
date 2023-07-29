@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client'
 import PlaceTable from '@/components/PlaceTable'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import forHash from '@/utils/forHash'
+import forHash from '@/utils/replaceSpace'
 
 const prisma = new PrismaClient()
 

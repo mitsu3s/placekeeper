@@ -11,7 +11,7 @@ import { GetServerSidePropsContext } from 'next'
 import generateShareCode from '@/utils/shareCodeGenerator'
 import PlaceTable from '@/components/PlaceTable'
 import Link from 'next/link'
-import forHash from '@/utils/forHash'
+import forHash from '@/utils/replaceSpace'
 
 const prisma = new PrismaClient()
 
