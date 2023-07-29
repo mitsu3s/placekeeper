@@ -49,7 +49,7 @@ NEXTAUTH_URL=http://localhost:3000
 .env.local
 
 ```zsh
-# メールサーバーの設定（変数の値は別途ファイルに記載します。）
+# メールサーバーの設定（変数の値はzipファイルに同封しているSERVER.mdを参照してください。）
 
 EMAIL_SERVER_USER=
 EMAIL_SERVER_PASSWORD=
