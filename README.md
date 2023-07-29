@@ -37,6 +37,8 @@ $ git clone https://github.com/mitsu3s/placekeeper.git
 ### 依存関係のインストール
 
 ```zsh
+# 依存関係をyarnを用いてインストール（アプリケーションのルートディレクトリで）
+
 $ yarn install
 ```
 
@@ -87,8 +89,10 @@ $ npx prisma generate
 
 ### アプリケーションの起動
 
+起動したら、http://localhost:3000 に接続してください。
+
 ```zsh
-# Next.jsのBuildとStart
+# Next.jsのBuildとStartを実行（アプリケーションのルートディレクトリで）
 
 $ yarn build && yarn start
 ```
