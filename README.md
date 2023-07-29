@@ -42,6 +42,8 @@ $ yarn install
 
 ### env ファイルの作成
 
+両ファイルともアプリケーションのルートディレクトリに置いてください。
+
 .env
 
 ```zsh
@@ -72,13 +74,13 @@ SECRET=
 # ユーザーの作成（MariaDB内で）
 
 $ create user 'user'@'localhost' identified by 'password';
-$ GRANT ALL PRIVILEGES ON *.* TO 'user'@'localhost';
+$ grant all privileges on *.* to 'user'@'localhost';
 
-# PrismaのMigrateを実行
+# PrismaのMigrateを実行（アプリケーションのルートディレクトリで）
 
 $ npx prisma migrate dev
 
-# PrismaのGenerateを実行
+# PrismaのGenerateを実行（アプリケーションのルートディレクトリで）
 
 $ npx prisma generate
 ```
