@@ -2,23 +2,19 @@ import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
 import * as Yup from 'yup'
-import { PrismaClient } from '@prisma/client'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { useHash } from '@/utils/useHash'
-import { useSession, signIn, signOut, getSession } from 'next-auth/react'
+import { useSession, signOut, getSession } from 'next-auth/react'
 import { GetServerSidePropsContext } from 'next'
 import generateShareCode from '@/utils/shareCodeGenerator'
 import PlaceTable from '@/components/PlaceTable'
 import Link from 'next/link'
 import forHash from '@/utils/replaceSpace'
 import { getPlaces } from '@/handlers/place/get'
-import { getShare } from '@/handlers/share/get'
-
-const FormValidationSchema = Yup.object().shape({
-    placeName: Yup.string().required('Place Name is required'),
-    description: Yup.string().required('Description is required'),
-})
+import { getShareId } from '@/handlers/share/get'
+import { PlaceMapProps } from '@/libs/interface'
+import { MapFormSchema } from '@/libs/validation'
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
     const session = await getSession(context)
@@ -33,12 +29,12 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
     }
 
     const places = await getPlaces(session.user.id)
-    const shareCode = await getShare(session.user.id)
+    const shareId = await getShareId(session.user.id)
 
     return {
         props: {
             places,
-            shareId: shareCode,
+            shareId,
         },
     }
 }
@@ -46,10 +42,10 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const MapPage = ({ places, shareId }: any) => {
-    const { data: session, status } = useSession()
+const MapPage = ({ places, shareId }: PlaceMapProps) => {
+    const { data: session } = useSession()
     const router = useRouter()
-    const [hash, setHash] = useHash()
+    const [, setHash] = useHash()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
         places.length > 0 ? places[0].latitude : centerLatitude,
@@ -183,7 +179,7 @@ const MapPage = ({ places, shareId }: any) => {
             <div className="mt-4">
                 <Formik
                     initialValues={initialValues}
-                    validationSchema={FormValidationSchema}
+                    validationSchema={MapFormSchema}
                     onSubmit={handleCreate}
                 >
                     <Form className="flex bg-white">

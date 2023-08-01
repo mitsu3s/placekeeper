@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 import { useHash } from '@/utils/useHash'
-import { PrismaClient } from '@prisma/client'
 import PlaceTable from '@/components/PlaceTable'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import forHash from '@/utils/replaceSpace'
-
-const prisma = new PrismaClient()
+import { getAdmin } from '@/handlers/share/get'
+import { getPlaces } from '@/handlers/place/get'
+import { ShareMapProps } from '@/libs/interface'
 
 export const getServerSideProps = async (context: any) => {
     const { sharecode } = context.query
+
     if (!sharecode) {
         return {
             redirect: {
@@ -21,13 +21,9 @@ export const getServerSideProps = async (context: any) => {
     }
 
     try {
-        const adminUser = await prisma.share.findUnique({
-            where: {
-                shareId: sharecode,
-            },
-        })
+        const admin = await getAdmin(sharecode)
 
-        if (!adminUser) {
+        if (!admin) {
             return {
                 redirect: {
                     destination: '/?invalidShareCode=true',
@@ -36,11 +32,8 @@ export const getServerSideProps = async (context: any) => {
             }
         }
 
-        const places = await prisma.place.findMany({
-            where: {
-                userId: adminUser.userId,
-            },
-        })
+        const places = await getPlaces(admin.userId)
+
         return {
             props: {
                 places,
@@ -59,8 +52,8 @@ export const getServerSideProps = async (context: any) => {
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const ShareMapPage = ({ places }: any) => {
-    const [hash, setHash] = useHash()
+const ShareMapPage = ({ places }: ShareMapProps) => {
+    const [, setHash] = useHash()
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
         places.length > 0 ? places[0].latitude : centerLatitude,
         places.length > 0 ? places[0].longitude : centerLongitude,
