@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
-import * as Yup from 'yup'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { useHash } from '@/utils/useHash'
