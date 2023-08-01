@@ -5,8 +5,14 @@ import { useRouter } from 'next/router'
 import forHash from '@/utils/replaceSpace'
 import { PlaceCoordinate } from '@/libs/interface/place'
 import { Place } from '@prisma/client'
+import { PlaceTableProps } from '@/libs/interface/props'
 
-const PlaceTable = ({ places, handlePlaceClick, updateWaypoints, canDelete }: any) => {
+const PlaceTable: React.FC<PlaceTableProps> = ({
+    places,
+    handlePlaceClick,
+    updateWaypoints,
+    canDelete,
+}) => {
     const { data: session } = useSession()
     const router = useRouter()
 

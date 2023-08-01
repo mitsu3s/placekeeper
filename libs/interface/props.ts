@@ -8,3 +8,10 @@ export interface MapProps {
 export interface ShareMapProps {
     places: Place[]
 }
+
+export interface PlaceTableProps {
+    places: Place[]
+    handlePlaceClick: (placeName: string, lat: number, lng: number) => void
+    updateWaypoints: (selectedPlaces: any) => void
+    canDelete: boolean
+}
