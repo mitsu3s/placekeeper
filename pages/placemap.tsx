@@ -11,7 +11,7 @@ import Link from 'next/link'
 import forHash from '@/utils/replaceSpace'
 import { getPlaces } from '@/handlers/place/get'
 import { getShareId } from '@/handlers/share/get'
-import { PlaceMapProps } from '@/libs/interface'
+import { MapProps } from '@/libs/interface'
 import { MapFormSchema } from '@/libs/validation'
 import { GetServerSideProps } from 'next'
 
@@ -41,7 +41,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const MapPage = ({ places, shareId }: PlaceMapProps) => {
+const MapPage = ({ places, shareId }: MapProps) => {
     const { data: session } = useSession()
     const router = useRouter()
     const [, setHash] = useHash()

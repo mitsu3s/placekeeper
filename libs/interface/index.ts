@@ -1,6 +1,6 @@
 import { Place } from '@prisma/client'
 
-export interface PlaceMapProps {
+export interface MapProps {
     places: Place[]
     shareId: string
 }
