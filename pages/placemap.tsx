@@ -12,17 +12,8 @@ import generateShareCode from '@/utils/shareCodeGenerator'
 import PlaceTable from '@/components/PlaceTable'
 import Link from 'next/link'
 import forHash from '@/utils/replaceSpace'
-
-const prisma = new PrismaClient()
-
-interface Place {
-    id: string
-    latitude: number
-    longitude: number
-    name: string
-    description: string
-    userId: string
-}
+import { getPlaces } from '@/handlers/place/get'
+import { getShare } from '@/handlers/share/get'
 
 const FormValidationSchema = Yup.object().shape({
     placeName: Yup.string().required('Place Name is required'),
@@ -41,18 +32,8 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         }
     }
 
-    const places = await prisma.place.findMany({
-        where: {
-            userId: session.user.id,
-        },
-    })
-    const share = await prisma.share.findUnique({
-        where: {
-            userId: session.user.id,
-        },
-    })
-
-    const shareCode = share?.shareId || ''
+    const places = await getPlaces(session.user.id)
+    const shareCode = await getShare(session.user.id)
 
     return {
         props: {
