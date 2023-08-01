@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { useHash } from '@/utils/useHash'
 import { useSession, signOut, getSession } from 'next-auth/react'
-import { GetServerSidePropsContext } from 'next'
 import generateShareCode from '@/utils/shareCodeGenerator'
 import PlaceTable from '@/components/PlaceTable'
 import Link from 'next/link'
@@ -14,8 +13,9 @@ import { getPlaces } from '@/handlers/place/get'
 import { getShareId } from '@/handlers/share/get'
 import { PlaceMapProps } from '@/libs/interface'
 import { MapFormSchema } from '@/libs/validation'
+import { GetServerSideProps } from 'next'
 
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession(context)
 
     if (!session) {
