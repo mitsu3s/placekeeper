@@ -11,8 +11,8 @@ import Link from 'next/link'
 import forHash from '@/utils/replaceSpace'
 import { getPlaces } from '@/handlers/place/get'
 import { getShareId } from '@/handlers/share/get'
-import { MapProps } from '@/libs/interface'
-import { MapFormSchema } from '@/libs/validation'
+import { MapProps } from '@/libs/interface/props'
+import { MapFormSchema } from '@/libs/validation/form'
 import { GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

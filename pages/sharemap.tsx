@@ -6,7 +6,7 @@ import Link from 'next/link'
 import forHash from '@/utils/replaceSpace'
 import { getAdmin } from '@/handlers/share/get'
 import { getPlaces } from '@/handlers/place/get'
-import { ShareMapProps } from '@/libs/interface'
+import { ShareMapProps } from '@/libs/interface/props'
 import { GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {

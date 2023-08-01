@@ -3,10 +3,7 @@ import { signIn } from 'next-auth/react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import Link from 'next/link'
-
-const SigninSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email address').required('Required'),
-})
+import { SigninFormSchema } from '@/libs/validation/form'
 
 interface FormValues {
     email: string
@@ -39,7 +36,7 @@ const Test = () => {
                     </h2>
                     <Formik
                         initialValues={initialValues}
-                        validationSchema={SigninSchema}
+                        validationSchema={SigninFormSchema}
                         onSubmit={handleSignIn}
                     >
                         <Form className="mx-auto max-w-lg rounded-lg border">
