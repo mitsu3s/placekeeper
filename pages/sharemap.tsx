@@ -7,9 +7,10 @@ import forHash from '@/utils/replaceSpace'
 import { getAdmin } from '@/handlers/share/get'
 import { getPlaces } from '@/handlers/place/get'
 import { ShareMapProps } from '@/libs/interface'
+import { GetServerSideProps } from 'next'
 
-export const getServerSideProps = async (context: any) => {
-    const { sharecode } = context.query
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const sharecode = context.query.sharecode as string
 
     if (!sharecode) {
         return {
