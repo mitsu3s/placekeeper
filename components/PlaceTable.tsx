@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react'
-import { useSession, signIn, signOut, getSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import forHash from '@/utils/replaceSpace'
+import { PlaceCoordinate } from '@/libs/interface/place'
+import { Place } from '@prisma/client'
 
 const PlaceTable = ({ places, handlePlaceClick, updateWaypoints, canDelete }: any) => {
-    const [selectedPlaces, setSelectedPlaces] = useState<any[]>([])
-    const [searchTerm, setSearchTerm] = useState<string>('')
-    const [filteredPlaces, setFilteredPlaces] = useState<any[]>(places)
-    const { data: session, status } = useSession()
+    const { data: session } = useSession()
     const router = useRouter()
+
+    const [selectedPlaces, setSelectedPlaces] = useState<PlaceCoordinate[]>([])
+    const [searchTerm, setSearchTerm] = useState<string>('')
+    const [filteredPlaces, setFilteredPlaces] = useState<Place[]>(places)
 
     useEffect(() => {
         updateWaypoints(selectedPlaces)
     }, [selectedPlaces])
 
-    const handleDelete = (placeId: any) => {
+    const handleDelete = async (placeId: string) => {
         if (session) {
             try {
-                console.log(placeId)
-                const res = axios.post('/api/place/delete', { placeId: placeId })
-                console.log(res)
+                await axios.post('/api/place/delete', { placeId: placeId })
                 router.reload()
             } catch (error) {
                 console.log(error)
@@ -31,15 +32,16 @@ const PlaceTable = ({ places, handlePlaceClick, updateWaypoints, canDelete }: an
         }
     }
 
-    const handleCheckboxChange = (place: any) => {
+    const handleCheckboxChange = (place: Place) => {
         const isSelected = selectedPlaces.some(
-            (p: any) => p.latitude === place.latitude && p.longitude === place.longitude
+            (p: PlaceCoordinate) => p.latitude === place.latitude && p.longitude === place.longitude
         )
 
         if (isSelected) {
             setSelectedPlaces(
                 selectedPlaces.filter(
-                    (p: any) => !(p.latitude === place.latitude && p.longitude === place.longitude)
+                    (p: PlaceCoordinate) =>
+                        !(p.latitude === place.latitude && p.longitude === place.longitude)
                 )
             )
         } else {
@@ -53,7 +55,7 @@ const PlaceTable = ({ places, handlePlaceClick, updateWaypoints, canDelete }: an
     }
 
     const handleSearchIconClick = () => {
-        const filteredResults = places.filter((place: any) => {
+        const filteredResults = places.filter((place: Place) => {
             return place.name.toLowerCase().includes(searchTerm.toLowerCase())
         })
         setFilteredPlaces(filteredResults)
@@ -122,7 +124,7 @@ const PlaceTable = ({ places, handlePlaceClick, updateWaypoints, canDelete }: an
                                 <tbody className="divide-y divide-gray-200 ">
                                     {places &&
                                         places.length > 0 &&
-                                        filteredPlaces.map((place: any, index: any) => (
+                                        filteredPlaces.map((place: Place, index: number) => (
                                             <tr key={index}>
                                                 <td className="py-3 pl-4">
                                                     <div className="flex items-center h-5">
@@ -132,7 +134,7 @@ const PlaceTable = ({ places, handlePlaceClick, updateWaypoints, canDelete }: an
                                                                 type="checkbox"
                                                                 className="border-gray-200 rounded text-blue-600 focus:ring-blue-500"
                                                                 checked={selectedPlaces.some(
-                                                                    (p: any) =>
+                                                                    (p: PlaceCoordinate) =>
                                                                         p.latitude ===
                                                                             place.latitude &&
                                                                         p.longitude ===

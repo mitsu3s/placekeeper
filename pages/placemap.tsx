@@ -114,7 +114,6 @@ const MapPage = ({ places, shareId }: MapProps) => {
     }
 
     const updateWaypoints = (selectedPlaces: any) => {
-        console.log(selectedPlaces)
         const selectedWaypoints = selectedPlaces.map((place: any) => ({
             latitude: place.latitude,
             longitude: place.longitude,
