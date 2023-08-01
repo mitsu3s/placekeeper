@@ -8,6 +8,7 @@ import { getAdmin } from '@/handlers/share/get'
 import { getPlaces } from '@/handlers/place/get'
 import { ShareMapProps } from '@/libs/interface/props'
 import { GetServerSideProps } from 'next'
+import { PlaceCoordinate } from '@/libs/interface/place'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const sharecode = context.query.sharecode as string
@@ -53,12 +54,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const ShareMapPage = ({ places }: ShareMapProps) => {
+const ShareMapPage: React.FC<ShareMapProps> = ({ places }) => {
     const [, setHash] = useHash()
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
         places.length > 0 ? places[0].latitude : centerLatitude,
         places.length > 0 ? places[0].longitude : centerLongitude,
     ])
+    const [waypoints, setWaypoints] = useState<PlaceCoordinate[]>([])
 
     const ShareMap = React.useMemo(
         () =>
@@ -69,19 +71,13 @@ const ShareMapPage = ({ places }: ShareMapProps) => {
         []
     )
 
-    const [waypoints, setWaypoints] = useState<string[]>([])
-
-    const updateWaypoints = (selectedPlaces: any) => {
-        const selectedWaypoints = selectedPlaces.map((place: any) => ({
-            latitude: place.latitude,
-            longitude: place.longitude,
-        }))
-        setWaypoints(selectedWaypoints)
+    const handlePlaceClick = (placeName: string, latitude: number, longitude: number) => {
+        setCenterPosition([latitude, longitude])
+        setHash(forHash(placeName))
     }
 
-    const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
-        setCenterPosition([lat, lng])
-        setHash(forHash(placeName))
+    const updateWaypoints = (selectedWaypoints: PlaceCoordinate[]) => {
+        setWaypoints(selectedWaypoints)
     }
 
     return (
