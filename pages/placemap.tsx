@@ -53,14 +53,6 @@ const MapPage = ({ places, shareId }: MapProps) => {
     const [shareCode, setShareCode] = useState(shareId)
     const [waypoints, setWaypoints] = useState<string[]>([])
 
-    const updateWaypoints = (selectedPlaces: any) => {
-        const selectedWaypoints = selectedPlaces.map((place: any) => ({
-            latitude: place.latitude,
-            longitude: place.longitude,
-        }))
-        setWaypoints(selectedWaypoints)
-    }
-
     const Map = React.useMemo(
         () =>
             dynamic(() => import('@/components/Map'), {
@@ -86,24 +78,6 @@ const MapPage = ({ places, shareId }: MapProps) => {
         setHash(forHash(placeName))
     }
 
-    const handleGenerateShareCode = async () => {
-        if (session) {
-            try {
-                const newShareCode = generateShareCode(10)
-                setShareCode(newShareCode)
-                const res = await axios.post('/api/share/create', {
-                    shareCode: newShareCode,
-                    userId: session.user.id,
-                })
-                console.log(res)
-            } catch (error) {
-                console.log(error)
-            }
-        } else {
-            router.push('/')
-        }
-    }
-
     const handleCreate = async (values: any) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
@@ -111,8 +85,7 @@ const MapPage = ({ places, shareId }: MapProps) => {
         if (session) {
             try {
                 values.userId = session.user.id
-                const res = await axios.post('/api/place/create', values)
-                console.log(res)
+                await axios.post('/api/place/create', values)
                 router.reload()
             } catch (error) {
                 console.log(error)
@@ -121,6 +94,32 @@ const MapPage = ({ places, shareId }: MapProps) => {
         } else {
             router.push('/')
         }
+    }
+
+    const handleGenerateShareCode = async () => {
+        if (session) {
+            try {
+                const newShareCode = generateShareCode(10)
+                setShareCode(newShareCode)
+                await axios.post('/api/share/create', {
+                    shareCode: newShareCode,
+                    userId: session.user.id,
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            router.push('/')
+        }
+    }
+
+    const updateWaypoints = (selectedPlaces: any) => {
+        console.log(selectedPlaces)
+        const selectedWaypoints = selectedPlaces.map((place: any) => ({
+            latitude: place.latitude,
+            longitude: place.longitude,
+        }))
+        setWaypoints(selectedWaypoints)
     }
 
     return (
