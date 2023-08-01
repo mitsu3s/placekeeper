@@ -1,4 +1,5 @@
 import { Place } from '@prisma/client'
+import { PlaceCoordinate } from './place'
 
 export interface MapProps {
     places: Place[]
@@ -11,7 +12,7 @@ export interface ShareMapProps {
 
 export interface PlaceTableProps {
     places: Place[]
-    handlePlaceClick: (placeName: string, lat: number, lng: number) => void
-    updateWaypoints: (selectedPlaces: any) => void
+    handlePlaceClick: (placeName: string, latitude: number, longitude: number) => void
+    updateWaypoints: (selectedRoutingpoints: PlaceCoordinate[]) => void
     canDelete: boolean
 }
