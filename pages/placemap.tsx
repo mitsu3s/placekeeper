@@ -14,6 +14,7 @@ import { getShareId } from '@/handlers/share/get'
 import { MapProps } from '@/libs/interface/props'
 import { MapFormSchema } from '@/libs/validation/form'
 import { GetServerSideProps } from 'next'
+import { PlaceCoordinate } from '@/libs/interface/place'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession(context)
@@ -41,9 +42,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const MapPage = ({ places, shareId }: MapProps) => {
+const MapPage: React.FC<MapProps> = ({ places, shareId }) => {
     const { data: session } = useSession()
     const router = useRouter()
+
     const [, setHash] = useHash()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
@@ -51,7 +53,7 @@ const MapPage = ({ places, shareId }: MapProps) => {
         places.length > 0 ? places[0].longitude : centerLongitude,
     ])
     const [shareCode, setShareCode] = useState(shareId)
-    const [waypoints, setWaypoints] = useState<string[]>([])
+    const [waypoints, setWaypoints] = useState<PlaceCoordinate[]>([])
 
     const Map = React.useMemo(
         () =>
@@ -63,18 +65,16 @@ const MapPage = ({ places, shareId }: MapProps) => {
     )
 
     const initialValues = {
-        latitude: '',
-        longitude: '',
         placeName: '',
         description: '',
     }
 
-    const handleMapClick = (lat: number, lng: number) => {
-        setSelectedPosition([lat, lng])
+    const handleMapClick = (latitude: number, longitude: number) => {
+        setSelectedPosition([latitude, longitude])
     }
 
-    const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
-        setCenterPosition([lat, lng])
+    const handlePlaceClick = (placeName: string, latitude: number, longitude: number) => {
+        setCenterPosition([latitude, longitude])
         setHash(forHash(placeName))
     }
 
@@ -113,11 +113,7 @@ const MapPage = ({ places, shareId }: MapProps) => {
         }
     }
 
-    const updateWaypoints = (selectedPlaces: any) => {
-        const selectedWaypoints = selectedPlaces.map((place: any) => ({
-            latitude: place.latitude,
-            longitude: place.longitude,
-        }))
+    const updateWaypoints = (selectedWaypoints: PlaceCoordinate[]) => {
         setWaypoints(selectedWaypoints)
     }
 
