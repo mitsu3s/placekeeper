@@ -3,10 +3,7 @@ import { signIn } from 'next-auth/react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Link from 'next/link'
 import { SigninFormSchema } from '@/libs/validation/form'
-
-interface FormValues {
-    email: string
-}
+import { SigninForm } from '@/libs/interface/form'
 
 const Test = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -15,7 +12,7 @@ const Test = () => {
         email: '',
     }
 
-    const handleSignIn = async (values: FormValues) => {
+    const handleSignIn = async (values: SigninForm) => {
         if (!isLoading) {
             setIsLoading(true)
             await signIn('email', {
