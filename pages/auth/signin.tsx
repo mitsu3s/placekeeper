@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 import Link from 'next/link'
 import { SigninFormSchema } from '@/libs/validation/form'
 
