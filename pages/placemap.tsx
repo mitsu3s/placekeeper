@@ -13,9 +13,8 @@ import { getPlaces } from '@/handlers/place/get'
 import { getShareId } from '@/handlers/share/get'
 import { MapProps } from '@/libs/interface/props'
 import { MapFormSchema } from '@/libs/validation/form'
-import { GetServerSideProps } from 'next'
 import { PlaceCoordinate } from '@/libs/interface/place'
-import { NextPage } from 'next'
+import { NextPage, GetServerSideProps } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession(context)
@@ -54,7 +53,7 @@ const MapPage: NextPage<MapProps> = ({ places, shareId }) => {
         places.length > 0 ? places[0].longitude : centerLongitude,
     ])
     const [shareCode, setShareCode] = useState(shareId)
-    const [routigPoints, setRoutingPoints] = useState<PlaceCoordinate[]>([])
+    const [routigPoint, setRoutingPoint] = useState<PlaceCoordinate[]>([])
 
     const Map = React.useMemo(
         () =>
@@ -115,7 +114,7 @@ const MapPage: NextPage<MapProps> = ({ places, shareId }) => {
     }
 
     const updateWaypoints = (selectedRoutingpoints: PlaceCoordinate[]) => {
-        setRoutingPoints(selectedRoutingpoints)
+        setRoutingPoint(selectedRoutingpoints)
     }
 
     return (
@@ -167,7 +166,7 @@ const MapPage: NextPage<MapProps> = ({ places, shareId }) => {
                     selectedPosition={selectedPosition}
                     onMapClick={handleMapClick}
                     center={centerPosition}
-                    waypoints={routigPoints}
+                    waypoints={routigPoint}
                 />
             </div>
             <div className="mt-4">
