@@ -4,8 +4,9 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import Link from 'next/link'
 import { SigninFormSchema } from '@/libs/validation/form'
 import { SigninForm } from '@/libs/interface/form'
+import { NextPage } from 'next'
 
-const Test = () => {
+const Test: NextPage = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const initialValues = {

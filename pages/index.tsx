@@ -3,8 +3,9 @@ import { useSession, signOut } from 'next-auth/react'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import ToastMessage from '@/components/Toast'
+import { NextPage } from 'next'
 
-const Home = () => {
+const Home: NextPage = () => {
     const router = useRouter()
     const { data: session } = useSession()
     const [showToastMessage, setShowToastMessage] = useState(false)

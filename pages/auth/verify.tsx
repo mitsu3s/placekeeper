@@ -1,4 +1,6 @@
-const Verify = () => {
+import { NextPage } from 'next'
+
+const Verify: NextPage = () => {
     return (
         <div className="bg-white bg-opacity-95 flex items-center justify-center h-screen">
             <div className="mx-auto max-w-md rounded-xl bg-white border">

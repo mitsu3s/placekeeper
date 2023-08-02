@@ -7,7 +7,7 @@ import forHash from '@/utils/replaceSpace'
 import { getAdmin } from '@/handlers/share/get'
 import { getPlaces } from '@/handlers/place/get'
 import { ShareMapProps } from '@/libs/interface/props'
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps, NextPage } from 'next'
 import { PlaceCoordinate } from '@/libs/interface/place'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
@@ -54,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const ShareMapPage: React.FC<ShareMapProps> = ({ places }) => {
+const ShareMapPage: NextPage<ShareMapProps> = ({ places }) => {
     const [, setHash] = useHash()
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
         places.length > 0 ? places[0].latitude : centerLatitude,

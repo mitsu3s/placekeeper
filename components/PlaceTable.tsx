@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
@@ -6,8 +6,9 @@ import forHash from '@/utils/replaceSpace'
 import { PlaceCoordinate } from '@/libs/interface/place'
 import { Place } from '@prisma/client'
 import { PlaceTableProps } from '@/libs/interface/props'
+import { NextPage } from 'next'
 
-const PlaceTable: React.FC<PlaceTableProps> = ({
+const PlaceTable: NextPage<PlaceTableProps> = ({
     places,
     handlePlaceClick,
     updateWaypoints,

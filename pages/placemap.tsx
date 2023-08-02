@@ -15,6 +15,7 @@ import { MapProps } from '@/libs/interface/props'
 import { MapFormSchema } from '@/libs/validation/form'
 import { GetServerSideProps } from 'next'
 import { PlaceCoordinate } from '@/libs/interface/place'
+import { NextPage } from 'next'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession(context)
@@ -42,7 +43,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const MapPage: React.FC<MapProps> = ({ places, shareId }) => {
+const MapPage: NextPage<MapProps> = ({ places, shareId }) => {
     const { data: session } = useSession()
     const router = useRouter()
 
