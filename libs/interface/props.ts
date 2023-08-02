@@ -1,7 +1,7 @@
 import { Place } from '@prisma/client'
 import { PlaceCoordinate } from './type'
 
-export interface MapProps {
+export interface MapPageProps {
     places: Place[]
     shareId: string
 }
