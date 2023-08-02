@@ -78,7 +78,7 @@ const Map: NextPage<MapProps> = ({
 
     const routingComponent =
         selectedRoutingPoints.length > 1 ? (
-            <RoutingMachine waypoints={selectedRoutingPoints} />
+            <RoutingMachine routingPoints={selectedRoutingPoints} />
         ) : null
 
     return (

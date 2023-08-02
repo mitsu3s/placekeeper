@@ -4,9 +4,9 @@ import 'leaflet-routing-machine'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 
 const createRoutineMachineLayer = (props: any) => {
-    const { waypoints } = props
-    const leafletWaypoints = waypoints.map((waypoint: any) =>
-        L.latLng(waypoint.latitude, waypoint.longitude)
+    const { routingPoints } = props
+    const leafletWaypoints = routingPoints.map((routingPoint: any) =>
+        L.latLng(routingPoint.latitude, routingPoint.longitude)
     )
 
     const instance = L.Routing.control({
