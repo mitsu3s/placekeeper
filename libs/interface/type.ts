@@ -4,6 +4,6 @@ export interface PlaceCoordinate {
 }
 
 export interface RoutingPoint {
-    latitude: string
-    longitude: string
+    latitude: number
+    longitude: number
 }
