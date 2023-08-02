@@ -29,14 +29,23 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         }
     }
 
-    const places = await getPlaces(session.user.id)
-    const shareId = await getShareId(session.user.id)
+    try {
+        const places = await getPlaces(session.user.id)
+        const shareId = await getShareId(session.user.id)
 
-    return {
-        props: {
-            places,
-            shareId,
-        },
+        return {
+            props: {
+                places,
+                shareId,
+            },
+        }
+    } catch (error) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
     }
 }
 
