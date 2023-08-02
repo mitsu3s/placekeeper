@@ -13,6 +13,14 @@ export interface ShareMapProps {
 export interface PlaceTableProps {
     places: Place[]
     handlePlaceClick: (placeName: string, latitude: number, longitude: number) => void
-    updateWaypoints: (selectedRoutingpoints: PlaceCoordinate[]) => void
+    updateRoutingPoints: (selectedRoutingpoints: PlaceCoordinate[]) => void
     canDelete: boolean
+}
+
+export interface MapProps {
+    places: Place[]
+    selectedPosition: [number, number] | null
+    handleMapClick: (latitude: number, longitude: number) => void
+    center: [number, number]
+    routingPoints: PlaceCoordinate[]
 }

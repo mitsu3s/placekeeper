@@ -63,7 +63,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
         places.length > 0 ? places[0].longitude : centerLongitude,
     ])
     const [shareCode, setShareCode] = useState(shareId)
-    const [routigPoint, setRoutingPoint] = useState<PlaceCoordinate[]>([])
+    const [routigPoints, setRoutingPoints] = useState<PlaceCoordinate[]>([])
 
     const Map = React.useMemo(
         () =>
@@ -123,8 +123,8 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
         }
     }
 
-    const updateWaypoints = (selectedRoutingpoints: PlaceCoordinate[]) => {
-        setRoutingPoint(selectedRoutingpoints)
+    const updateRoutingPoints = (selectedRoutingpoints: PlaceCoordinate[]) => {
+        setRoutingPoints(selectedRoutingpoints)
     }
 
     return (
@@ -168,15 +168,15 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                 <PlaceTable
                     places={places}
                     handlePlaceClick={handlePlaceClick}
-                    updateWaypoints={updateWaypoints}
+                    updateRoutingPoints={updateRoutingPoints}
                     canDelete={true}
                 />
                 <Map
                     places={places}
                     selectedPosition={selectedPosition}
-                    onMapClick={handleMapClick}
+                    handleMapClick={handleMapClick}
                     center={centerPosition}
-                    waypoints={routigPoint}
+                    routingPoints={routigPoints}
                 />
             </div>
             <div className="mt-4">

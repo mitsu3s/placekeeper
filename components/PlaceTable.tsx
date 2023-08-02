@@ -11,7 +11,7 @@ import { NextPage } from 'next'
 const PlaceTable: NextPage<PlaceTableProps> = ({
     places,
     handlePlaceClick,
-    updateWaypoints,
+    updateRoutingPoints,
     canDelete,
 }) => {
     const { data: session } = useSession()
@@ -22,7 +22,7 @@ const PlaceTable: NextPage<PlaceTableProps> = ({
     const [filteredPlaces, setFilteredPlaces] = useState<Place[]>(places)
 
     useEffect(() => {
-        updateWaypoints(selectedPlaces)
+        updateRoutingPoints(selectedPlaces)
     }, [selectedPlaces])
 
     const handleDelete = async (placeId: string) => {

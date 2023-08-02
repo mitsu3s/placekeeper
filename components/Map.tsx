@@ -6,6 +6,9 @@ import { useState, useEffect } from 'react'
 import marker from '@/public/icons/marker.svg'
 import RoutingMachine from './Routing'
 import { RoutingPoint } from '@/libs/interface/type'
+import { NextPage } from 'next'
+import { MapProps } from '@/libs/interface/props'
+import { Place } from '@prisma/client'
 
 L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
@@ -16,32 +19,38 @@ L.Icon.Default.mergeOptions({
     iconSize: [35, 60],
 })
 
-const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) => {
+const Map: NextPage<MapProps> = ({
+    places,
+    selectedPosition,
+    handleMapClick,
+    center,
+    routingPoints,
+}) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
-    const [selectedWaypoints, setselectedWaypoints] = useState<RoutingPoint[]>([])
+    const [selectedRoutingPoints, setSelectedRoutingPoints] = useState<RoutingPoint[]>([])
 
     useEffect(() => {
-        if (selectedWaypoints.length > 0) {
-            if (selectedWaypoints.length == waypoints.length) {
+        if (selectedRoutingPoints.length > 0) {
+            if (selectedRoutingPoints.length == routingPoints.length) {
                 let isSame = true
-                for (let i = 0; i < waypoints.length; i++) {
+                for (let i = 0; i < routingPoints.length; i++) {
                     if (
-                        waypoints[i].latitude != selectedWaypoints[i].latitude ||
-                        waypoints[i].longitude != selectedWaypoints[i].longitude
+                        routingPoints[i].latitude != selectedRoutingPoints[i].latitude ||
+                        routingPoints[i].longitude != selectedRoutingPoints[i].longitude
                     ) {
                         isSame = false
                     }
                 }
                 if (!isSame) {
-                    setselectedWaypoints(waypoints)
+                    setSelectedRoutingPoints(routingPoints)
                 }
             } else {
-                setselectedWaypoints(waypoints)
+                setSelectedRoutingPoints(routingPoints)
             }
         } else {
-            setselectedWaypoints(waypoints)
+            setSelectedRoutingPoints(routingPoints)
         }
-    }, [waypoints])
+    }, [routingPoints])
 
     useEffect(() => {
         setCenterPosition(center)
@@ -60,7 +69,7 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
             click: (event) => {
                 const { lat, lng } = event.latlng || {}
                 if (lat && lng) {
-                    onMapClick(lat, lng)
+                    handleMapClick(lat, lng)
                 }
             },
         })
@@ -68,7 +77,9 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
     }
 
     const routingComponent =
-        selectedWaypoints.length > 1 ? <RoutingMachine waypoints={selectedWaypoints} /> : null
+        selectedRoutingPoints.length > 1 ? (
+            <RoutingMachine waypoints={selectedRoutingPoints} />
+        ) : null
 
     return (
         <MapContainer
@@ -83,12 +94,8 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
             />
             {places &&
                 places.length > 0 &&
-                places.map((place: any) => (
-                    <Marker
-                        key={place.id}
-                        position={[place.latitude, place.longitude]}
-                        // icon={locationIcon}
-                    >
+                places.map((place: Place) => (
+                    <Marker key={place.id} position={[place.latitude, place.longitude]}>
                         <Popup>
                             {place.name} <br /> {place.description}
                         </Popup>
