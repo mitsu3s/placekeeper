@@ -1,47 +1,16 @@
 import { MapContainer, Marker, Popup, TileLayer, useMapEvents, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
-import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
-import { useState, useEffect, use } from 'react'
-// import { iconLib } from '@/document/Icon'
-import location from '@/public/icons/location.svg'
+import { useState, useEffect } from 'react'
+import marker from '@/public/icons/marker.svg'
 import RoutingMachine from './Routing'
+import { RoutingPoint } from '@/libs/interface/type'
 
 L.Icon.Default.mergeOptions({
-    // iconUrl: markerIcon.src,
-    // iconRetinaUrl: markerIcon2x.src,
     shadowUrl: markerShadow.src,
-    iconUrl: location.src,
-    iconRetinaUrl: location.src,
-    iconAnchor: [9, 52],
-    popupAnchor: [8, -40],
-    iconSize: [35, 60],
-})
-
-// デフォルトマーカーの色違い
-// const colorMarker = (color: string) => {
-//     return new L.Icon({
-//         iconUrl: `https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-${color}.png`,
-//         shadowUrl: markerShadow.src,
-//         iconSize: [25, 41],
-//         iconAnchor: [12, 41],
-//         popupAnchor: [1, -34],
-//         shadowSize: [41, 41],
-//     })
-// }
-
-interface Waypoint {
-    latitude: string
-    longitude: string
-}
-
-// カスタムマーカー直接書く
-const locationIcon = new L.Icon({
-    shadowUrl: markerShadow.src,
-    iconUrl: location.src,
-    iconRetinaUrl: location.src,
+    iconUrl: marker.src,
+    iconRetinaUrl: marker.src,
     iconAnchor: [9, 52],
     popupAnchor: [8, -40],
     iconSize: [35, 60],
@@ -49,7 +18,7 @@ const locationIcon = new L.Icon({
 
 const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
-    const [selectedWaypoints, setselectedWaypoints] = useState<Waypoint[]>([])
+    const [selectedWaypoints, setselectedWaypoints] = useState<RoutingPoint[]>([])
 
     useEffect(() => {
         if (selectedWaypoints.length > 0) {
@@ -118,7 +87,7 @@ const Map = ({ places, selectedPosition, onMapClick, center, waypoints }: any) =
                     <Marker
                         key={place.id}
                         position={[place.latitude, place.longitude]}
-                        icon={locationIcon}
+                        // icon={locationIcon}
                     >
                         <Popup>
                             {place.name} <br /> {place.description}

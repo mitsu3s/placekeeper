@@ -8,7 +8,7 @@ import { getAdmin } from '@/handlers/share/get'
 import { getPlaces } from '@/handlers/place/get'
 import { ShareMapProps } from '@/libs/interface/props'
 import { GetServerSideProps, NextPage } from 'next'
-import { PlaceCoordinate } from '@/libs/interface/place'
+import { PlaceCoordinate } from '@/libs/interface/type'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const sharecode = context.query.sharecode as string

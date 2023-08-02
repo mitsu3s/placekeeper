@@ -13,7 +13,7 @@ import { getPlaces } from '@/handlers/place/get'
 import { getShareId } from '@/handlers/share/get'
 import { MapProps } from '@/libs/interface/props'
 import { MapFormSchema } from '@/libs/validation/form'
-import { PlaceCoordinate } from '@/libs/interface/place'
+import { PlaceCoordinate } from '@/libs/interface/type'
 import { NextPage, GetServerSideProps } from 'next'
 import { PlaceForm } from '@/libs/interface/form'
 

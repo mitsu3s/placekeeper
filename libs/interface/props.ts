@@ -1,5 +1,5 @@
 import { Place } from '@prisma/client'
-import { PlaceCoordinate } from './place'
+import { PlaceCoordinate } from './type'
 
 export interface MapProps {
     places: Place[]
