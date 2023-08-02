@@ -39,6 +39,7 @@ interface Waypoint {
 
 // カスタムマーカー直接書く
 const locationIcon = new L.Icon({
+    shadowUrl: markerShadow.src,
     iconUrl: location.src,
     iconRetinaUrl: location.src,
     iconAnchor: [9, 52],
