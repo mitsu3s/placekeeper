@@ -15,6 +15,7 @@ import { MapProps } from '@/libs/interface/props'
 import { MapFormSchema } from '@/libs/validation/form'
 import { PlaceCoordinate } from '@/libs/interface/place'
 import { NextPage, GetServerSideProps } from 'next'
+import { PlaceForm } from '@/libs/interface/form'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession(context)
@@ -78,7 +79,7 @@ const MapPage: NextPage<MapProps> = ({ places, shareId }) => {
         setHash(forHash(placeName))
     }
 
-    const handleCreate = async (values: any) => {
+    const handleCreate = async (values: PlaceForm) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
 
