@@ -1,18 +1,17 @@
-import React from 'react'
 import styles from '@/styles/toast.module.css'
 import { useRouter } from 'next/router'
+import { NextPage } from 'next'
+import { ToastMessageProps } from '@/libs/interface/props'
 
-interface ToastMessageProps {
-    setshowToastMessage: React.Dispatch<React.SetStateAction<boolean>>
-    message: string
-    reload: boolean
-}
-
-const ToastMessage: React.FC<ToastMessageProps> = ({ setshowToastMessage, message, reload }) => {
+const ToastMessage: NextPage<ToastMessageProps> = ({
+    setshowToastMessage,
+    message,
+    shouldReload,
+}) => {
     const router = useRouter()
     const handleClick = () => {
         setshowToastMessage(false)
-        if (reload) {
+        if (shouldReload) {
             router.push('/')
         }
     }

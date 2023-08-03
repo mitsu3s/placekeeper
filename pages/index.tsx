@@ -69,14 +69,14 @@ const Home: NextPage = () => {
                         <ToastMessage
                             setshowToastMessage={setShowToastMessage}
                             message={'You are not signed in.'}
-                            reload={false}
+                            shouldReload={false}
                         />
                     )}
                     {router.query.invalidShareCode && (
                         <ToastMessage
                             setshowToastMessage={setInvalidShareCode}
                             message={'Invalid Share Code.'}
-                            reload={true}
+                            shouldReload={true}
                         />
                     )}
                     <div className="flex items-center">

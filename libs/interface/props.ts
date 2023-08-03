@@ -30,3 +30,9 @@ export interface ShareMapProps {
     center: [number, number]
     routingPoints: PlaceCoordinate[]
 }
+
+export interface ToastMessageProps {
+    setshowToastMessage: React.Dispatch<React.SetStateAction<boolean>>
+    message: string
+    shouldReload: boolean
+}
