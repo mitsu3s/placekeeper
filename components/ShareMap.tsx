@@ -1,62 +1,50 @@
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents, useMap } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
-import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
-import markerIcon from 'leaflet/dist/images/marker-icon.png'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { useState, useEffect } from 'react'
-// import { iconLib } from '@/document/Icon'
-import location from '@/public/icons/location.svg'
+import marker from '@/public/icons/marker.svg'
 import RoutingMachine from './Routing'
+import { Place } from '@prisma/client'
+import { NextPage } from 'next'
+import { ShareMapProps } from '@/libs/interface/props'
+import { RoutingPoint } from '@/libs/interface/type'
 
 L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
-    iconUrl: location.src,
-    iconRetinaUrl: location.src,
+    iconUrl: marker.src,
+    iconRetinaUrl: marker.src,
     iconAnchor: [9, 52],
     popupAnchor: [8, -40],
     iconSize: [35, 60],
 })
 
-interface Waypoint {
-    latitude: string
-    longitude: string
-}
-
-const locationIcon = new L.Icon({
-    iconUrl: location.src,
-    iconRetinaUrl: location.src,
-    iconAnchor: [9, 52],
-    popupAnchor: [8, -40],
-    iconSize: [35, 60],
-})
-
-const Map = ({ places, center, waypoints }: any) => {
+const Map: NextPage<ShareMapProps> = ({ places, center, routingPoints }) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
-    const [selectedWaypoints, setselectedWaypoints] = useState<Waypoint[]>([])
+    const [selectedRoutingPoints, setSelectedRoutingPoints] = useState<RoutingPoint[]>([])
 
     useEffect(() => {
-        if (selectedWaypoints.length > 0) {
-            if (selectedWaypoints.length == waypoints.length) {
+        if (selectedRoutingPoints.length > 0) {
+            if (selectedRoutingPoints.length == routingPoints.length) {
                 let isSame = true
-                for (let i = 0; i < waypoints.length; i++) {
+                for (let i = 0; i < routingPoints.length; i++) {
                     if (
-                        waypoints[i].latitude != selectedWaypoints[i].latitude ||
-                        waypoints[i].longitude != selectedWaypoints[i].longitude
+                        routingPoints[i].latitude != selectedRoutingPoints[i].latitude ||
+                        routingPoints[i].longitude != selectedRoutingPoints[i].longitude
                     ) {
                         isSame = false
                     }
                 }
                 if (!isSame) {
-                    setselectedWaypoints(waypoints)
+                    setSelectedRoutingPoints(routingPoints)
                 }
             } else {
-                setselectedWaypoints(waypoints)
+                setSelectedRoutingPoints(routingPoints)
             }
         } else {
-            setselectedWaypoints(waypoints)
+            setSelectedRoutingPoints(routingPoints)
         }
-    }, [waypoints])
+    }, [routingPoints])
 
     useEffect(() => {
         setCenterPosition(center)
@@ -71,7 +59,9 @@ const Map = ({ places, center, waypoints }: any) => {
     }
 
     const routingComponent =
-        selectedWaypoints.length > 1 ? <RoutingMachine waypoints={selectedWaypoints} /> : null
+        selectedRoutingPoints.length > 1 ? (
+            <RoutingMachine routingPoints={selectedRoutingPoints} />
+        ) : null
 
     return (
         <MapContainer
@@ -86,12 +76,8 @@ const Map = ({ places, center, waypoints }: any) => {
             />
             {places &&
                 places.length > 0 &&
-                places.map((place: any) => (
-                    <Marker
-                        key={place.id}
-                        position={[place.latitude, place.longitude]}
-                        icon={locationIcon}
-                    >
+                places.map((place: Place) => (
+                    <Marker key={place.id} position={[place.latitude, place.longitude]}>
                         <Popup>
                             {place.name} <br /> {place.description}
                         </Popup>

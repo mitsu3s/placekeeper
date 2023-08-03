@@ -1,25 +1,19 @@
 import { useState } from 'react'
 import { signIn } from 'next-auth/react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
-import * as Yup from 'yup'
 import Link from 'next/link'
+import { SigninFormSchema } from '@/libs/validation/form'
+import { SigninForm } from '@/libs/interface/form'
+import { NextPage } from 'next'
 
-const SigninSchema = Yup.object().shape({
-    email: Yup.string().email('Invalid email address').required('Required'),
-})
-
-interface FormValues {
-    email: string
-}
-
-const Test = () => {
+const Test: NextPage = () => {
     const [isLoading, setIsLoading] = useState(false)
 
     const initialValues = {
         email: '',
     }
 
-    const handleSignIn = async (values: FormValues) => {
+    const handleSignIn = async (values: SigninForm) => {
         if (!isLoading) {
             setIsLoading(true)
             await signIn('email', {
@@ -39,7 +33,7 @@ const Test = () => {
                     </h2>
                     <Formik
                         initialValues={initialValues}
-                        validationSchema={SigninSchema}
+                        validationSchema={SigninFormSchema}
                         onSubmit={handleSignIn}
                     >
                         <Form className="mx-auto max-w-lg rounded-lg border">

@@ -1,14 +1,15 @@
 import Link from 'next/link'
-import { useSession, signIn, signOut } from 'next-auth/react'
+import { useSession, signOut } from 'next-auth/react'
 import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import ToastMessage from '@/components/Toast'
+import { NextPage } from 'next'
 
-const Home = () => {
+const Home: NextPage = () => {
     const router = useRouter()
-    const { data: session, status } = useSession()
+    const { data: session } = useSession()
     const [showToastMessage, setShowToastMessage] = useState(false)
-    const [invalidShareCode, setInvalidShareCode] = useState(true)
+    const [, setInvalidShareCode] = useState(true)
     const [shareCode, setShareCode] = useState('')
 
     const handleShowShareMap = () => {
@@ -68,14 +69,14 @@ const Home = () => {
                         <ToastMessage
                             setshowToastMessage={setShowToastMessage}
                             message={'You are not signed in.'}
-                            reload={false}
+                            shouldReload={false}
                         />
                     )}
                     {router.query.invalidShareCode && (
                         <ToastMessage
                             setshowToastMessage={setInvalidShareCode}
                             message={'Invalid Share Code.'}
-                            reload={true}
+                            shouldReload={true}
                         />
                     )}
                     <div className="flex items-center">
@@ -106,11 +107,6 @@ const Home = () => {
                                 </button>
                             )}
                         </nav>
-                        {/* <button className="flex flex-col ml-4 lg:hidden">
-                            <span className="w-6 h-1 mb-1 bg-white"></span>
-                            <span className="w-6 h-1 mb-1 bg-white"></span>
-                            <span className="w-6 h-1 mb-1 bg-white"></span>
-                        </button> */}
                     </div>
                 </div>
             </header>

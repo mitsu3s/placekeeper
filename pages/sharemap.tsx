@@ -1,16 +1,18 @@
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
 import { useHash } from '@/utils/useHash'
-import { PrismaClient } from '@prisma/client'
 import PlaceTable from '@/components/PlaceTable'
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import forHash from '@/utils/replaceSpace'
+import { getAdmin } from '@/handlers/share/get'
+import { getPlaces } from '@/handlers/place/get'
+import { ShareMapPageProps } from '@/libs/interface/props'
+import { GetServerSideProps, NextPage } from 'next'
+import { PlaceCoordinate } from '@/libs/interface/type'
 
-const prisma = new PrismaClient()
+export const getServerSideProps: GetServerSideProps = async (context) => {
+    const sharecode = context.query.sharecode as string
 
-export const getServerSideProps = async (context: any) => {
-    const { sharecode } = context.query
     if (!sharecode) {
         return {
             redirect: {
@@ -21,13 +23,9 @@ export const getServerSideProps = async (context: any) => {
     }
 
     try {
-        const adminUser = await prisma.share.findUnique({
-            where: {
-                shareId: sharecode,
-            },
-        })
+        const admin = await getAdmin(sharecode)
 
-        if (!adminUser) {
+        if (!admin) {
             return {
                 redirect: {
                     destination: '/?invalidShareCode=true',
@@ -36,11 +34,8 @@ export const getServerSideProps = async (context: any) => {
             }
         }
 
-        const places = await prisma.place.findMany({
-            where: {
-                userId: adminUser.userId,
-            },
-        })
+        const places = await getPlaces(admin.userId)
+
         return {
             props: {
                 places,
@@ -59,12 +54,13 @@ export const getServerSideProps = async (context: any) => {
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const ShareMapPage = ({ places }: any) => {
-    const [hash, setHash] = useHash()
+const ShareMapPage: NextPage<ShareMapPageProps> = ({ places }) => {
+    const [, setHash] = useHash()
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
         places.length > 0 ? places[0].latitude : centerLatitude,
         places.length > 0 ? places[0].longitude : centerLongitude,
     ])
+    const [routingPoints, setRoutingPoints] = useState<PlaceCoordinate[]>([])
 
     const ShareMap = React.useMemo(
         () =>
@@ -75,19 +71,13 @@ const ShareMapPage = ({ places }: any) => {
         []
     )
 
-    const [waypoints, setWaypoints] = useState<string[]>([])
-
-    const updateWaypoints = (selectedPlaces: any) => {
-        const selectedWaypoints = selectedPlaces.map((place: any) => ({
-            latitude: place.latitude,
-            longitude: place.longitude,
-        }))
-        setWaypoints(selectedWaypoints)
+    const handlePlaceClick = (placeName: string, latitude: number, longitude: number) => {
+        setCenterPosition([latitude, longitude])
+        setHash(forHash(placeName))
     }
 
-    const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
-        setCenterPosition([lat, lng])
-        setHash(forHash(placeName))
+    const updateRoutingPoints = (selectedRoutingpoints: PlaceCoordinate[]) => {
+        setRoutingPoints(selectedRoutingpoints)
     }
 
     return (
@@ -113,10 +103,10 @@ const ShareMapPage = ({ places }: any) => {
                 <PlaceTable
                     places={places}
                     handlePlaceClick={handlePlaceClick}
-                    updateWaypoints={updateWaypoints}
+                    updateRoutingPoints={updateRoutingPoints}
                     canDelete={false}
                 />
-                <ShareMap places={places} center={centerPosition} waypoints={waypoints} />
+                <ShareMap places={places} center={centerPosition} routingPoints={routingPoints} />
             </div>
         </div>
     )

@@ -1,6 +1,7 @@
+import { NextPage } from 'next'
 import Link from 'next/link'
 
-const Error = () => {
+const Error: NextPage = () => {
     return (
         <div className="bg-white bg-opacity-95 flex items-center justify-center h-screen">
             <div className="mx-auto max-w-md rounded-xl bg-white border">

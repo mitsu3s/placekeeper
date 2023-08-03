@@ -1,35 +1,23 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import axios from 'axios'
-import * as Yup from 'yup'
-import { PrismaClient } from '@prisma/client'
 import { useRouter } from 'next/router'
 import dynamic from 'next/dynamic'
 import { useHash } from '@/utils/useHash'
-import { useSession, signIn, signOut, getSession } from 'next-auth/react'
-import { GetServerSidePropsContext } from 'next'
+import { useSession, signOut, getSession } from 'next-auth/react'
 import generateShareCode from '@/utils/shareCodeGenerator'
 import PlaceTable from '@/components/PlaceTable'
 import Link from 'next/link'
 import forHash from '@/utils/replaceSpace'
+import { getPlaces } from '@/handlers/place/get'
+import { getShareId } from '@/handlers/share/get'
+import { MapPageProps } from '@/libs/interface/props'
+import { MapFormSchema } from '@/libs/validation/form'
+import { PlaceCoordinate } from '@/libs/interface/type'
+import { NextPage, GetServerSideProps } from 'next'
+import { PlaceForm } from '@/libs/interface/form'
 
-const prisma = new PrismaClient()
-
-interface Place {
-    id: string
-    latitude: number
-    longitude: number
-    name: string
-    description: string
-    userId: string
-}
-
-const FormValidationSchema = Yup.object().shape({
-    placeName: Yup.string().required('Place Name is required'),
-    description: Yup.string().required('Description is required'),
-})
-
-export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession(context)
 
     if (!session) {
@@ -41,49 +29,41 @@ export const getServerSideProps = async (context: GetServerSidePropsContext) => 
         }
     }
 
-    const places = await prisma.place.findMany({
-        where: {
-            userId: session.user.id,
-        },
-    })
-    const share = await prisma.share.findUnique({
-        where: {
-            userId: session.user.id,
-        },
-    })
+    try {
+        const places = await getPlaces(session.user.id)
+        const shareId = await getShareId(session.user.id)
 
-    const shareCode = share?.shareId || ''
-
-    return {
-        props: {
-            places,
-            shareId: shareCode,
-        },
+        return {
+            props: {
+                places,
+                shareId,
+            },
+        }
+    } catch (error) {
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false,
+            },
+        }
     }
 }
 
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const MapPage = ({ places, shareId }: any) => {
-    const { data: session, status } = useSession()
+const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
+    const { data: session } = useSession()
     const router = useRouter()
-    const [hash, setHash] = useHash()
+
+    const [, setHash] = useHash()
     const [selectedPosition, setSelectedPosition] = useState<[number, number] | null>(null)
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
         places.length > 0 ? places[0].latitude : centerLatitude,
         places.length > 0 ? places[0].longitude : centerLongitude,
     ])
     const [shareCode, setShareCode] = useState(shareId)
-    const [waypoints, setWaypoints] = useState<string[]>([])
-
-    const updateWaypoints = (selectedPlaces: any) => {
-        const selectedWaypoints = selectedPlaces.map((place: any) => ({
-            latitude: place.latitude,
-            longitude: place.longitude,
-        }))
-        setWaypoints(selectedWaypoints)
-    }
+    const [routigPoints, setRoutingPoints] = useState<PlaceCoordinate[]>([])
 
     const Map = React.useMemo(
         () =>
@@ -95,48 +75,27 @@ const MapPage = ({ places, shareId }: any) => {
     )
 
     const initialValues = {
-        latitude: '',
-        longitude: '',
         placeName: '',
         description: '',
     }
 
-    const handleMapClick = (lat: number, lng: number) => {
-        setSelectedPosition([lat, lng])
+    const handleMapClick = (latitude: number, longitude: number) => {
+        setSelectedPosition([latitude, longitude])
     }
 
-    const handlePlaceClick = (placeName: string, lat: number, lng: number) => {
-        setCenterPosition([lat, lng])
+    const handlePlaceClick = (placeName: string, latitude: number, longitude: number) => {
+        setCenterPosition([latitude, longitude])
         setHash(forHash(placeName))
     }
 
-    const handleGenerateShareCode = async () => {
-        if (session) {
-            try {
-                const newShareCode = generateShareCode(10)
-                setShareCode(newShareCode)
-                const res = await axios.post('/api/share/create', {
-                    shareCode: newShareCode,
-                    userId: session.user.id,
-                })
-                console.log(res)
-            } catch (error) {
-                console.log(error)
-            }
-        } else {
-            router.push('/')
-        }
-    }
-
-    const handleCreate = async (values: any) => {
+    const handleCreate = async (values: PlaceForm) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
 
         if (session) {
             try {
                 values.userId = session.user.id
-                const res = await axios.post('/api/place/create', values)
-                console.log(res)
+                await axios.post('/api/place/create', values)
                 router.reload()
             } catch (error) {
                 console.log(error)
@@ -145,6 +104,27 @@ const MapPage = ({ places, shareId }: any) => {
         } else {
             router.push('/')
         }
+    }
+
+    const handleGenerateShareCode = async () => {
+        if (session) {
+            try {
+                const newShareCode = generateShareCode(10)
+                setShareCode(newShareCode)
+                await axios.post('/api/share/create', {
+                    shareCode: newShareCode,
+                    userId: session.user.id,
+                })
+            } catch (error) {
+                console.log(error)
+            }
+        } else {
+            router.push('/')
+        }
+    }
+
+    const updateRoutingPoints = (selectedRoutingpoints: PlaceCoordinate[]) => {
+        setRoutingPoints(selectedRoutingpoints)
     }
 
     return (
@@ -188,21 +168,21 @@ const MapPage = ({ places, shareId }: any) => {
                 <PlaceTable
                     places={places}
                     handlePlaceClick={handlePlaceClick}
-                    updateWaypoints={updateWaypoints}
+                    updateRoutingPoints={updateRoutingPoints}
                     canDelete={true}
                 />
                 <Map
                     places={places}
                     selectedPosition={selectedPosition}
-                    onMapClick={handleMapClick}
+                    handleMapClick={handleMapClick}
                     center={centerPosition}
-                    waypoints={waypoints}
+                    routingPoints={routigPoints}
                 />
             </div>
             <div className="mt-4">
                 <Formik
                     initialValues={initialValues}
-                    validationSchema={FormValidationSchema}
+                    validationSchema={MapFormSchema}
                     onSubmit={handleCreate}
                 >
                     <Form className="flex bg-white">
