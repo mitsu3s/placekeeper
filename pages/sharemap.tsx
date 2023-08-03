@@ -6,7 +6,7 @@ import Link from 'next/link'
 import forHash from '@/utils/replaceSpace'
 import { getAdmin } from '@/handlers/share/get'
 import { getPlaces } from '@/handlers/place/get'
-import { ShareMapProps } from '@/libs/interface/props'
+import { ShareMapPageProps } from '@/libs/interface/props'
 import { GetServerSideProps, NextPage } from 'next'
 import { PlaceCoordinate } from '@/libs/interface/type'
 
@@ -54,13 +54,13 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 const centerLatitude = 35.17096778816617
 const centerLongitude = 136.8829223456777
 
-const ShareMapPage: NextPage<ShareMapProps> = ({ places }) => {
+const ShareMapPage: NextPage<ShareMapPageProps> = ({ places }) => {
     const [, setHash] = useHash()
     const [centerPosition, setCenterPosition] = useState<[number, number]>([
         places.length > 0 ? places[0].latitude : centerLatitude,
         places.length > 0 ? places[0].longitude : centerLongitude,
     ])
-    const [waypoints, setWaypoints] = useState<PlaceCoordinate[]>([])
+    const [routingPoints, setRoutingPoints] = useState<PlaceCoordinate[]>([])
 
     const ShareMap = React.useMemo(
         () =>
@@ -76,8 +76,8 @@ const ShareMapPage: NextPage<ShareMapProps> = ({ places }) => {
         setHash(forHash(placeName))
     }
 
-    const updateWaypoints = (selectedWaypoints: PlaceCoordinate[]) => {
-        setWaypoints(selectedWaypoints)
+    const updateRoutingPoints = (selectedRoutingpoints: PlaceCoordinate[]) => {
+        setRoutingPoints(selectedRoutingpoints)
     }
 
     return (
@@ -103,10 +103,10 @@ const ShareMapPage: NextPage<ShareMapProps> = ({ places }) => {
                 <PlaceTable
                     places={places}
                     handlePlaceClick={handlePlaceClick}
-                    updateWaypoints={updateWaypoints}
+                    updateRoutingPoints={updateRoutingPoints}
                     canDelete={false}
                 />
-                <ShareMap places={places} center={centerPosition} waypoints={waypoints} />
+                <ShareMap places={places} center={centerPosition} routingPoints={routingPoints} />
             </div>
         </div>
     )

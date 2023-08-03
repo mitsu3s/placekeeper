@@ -2,10 +2,12 @@ import L from 'leaflet'
 import { createControlComponent } from '@react-leaflet/core'
 import 'leaflet-routing-machine'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
+import { RoutingPoint } from '@/libs/interface/type'
 
 const createRoutineMachineLayer = (props: any) => {
     const { routingPoints } = props
-    const leafletWaypoints = routingPoints.map((routingPoint: any) =>
+    console.log(props)
+    const leafletWaypoints = routingPoints.map((routingPoint: RoutingPoint) =>
         L.latLng(routingPoint.latitude, routingPoint.longitude)
     )
 
