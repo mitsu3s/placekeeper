@@ -17,6 +17,14 @@ import { RoutingPoint } from '@/libs/interface/type'
 import { NextPage } from 'next'
 import { MapProps } from '@/libs/interface/props'
 import { Place } from '@prisma/client'
+import Search from './Search'
+
+const POSITION_CLASSES = {
+    bottomleft: 'leaflet-bottom leaflet-left',
+    bottomright: 'leaflet-bottom leaflet-right',
+    topleft: 'leaflet-top leaflet-left',
+    topright: 'leaflet-top leaflet-right',
+}
 
 L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
@@ -84,6 +92,17 @@ const Map: NextPage<MapProps> = ({
         return null
     }
 
+    const SecrchComponent = () => {
+        const positionClass = POSITION_CLASSES.topleft
+        return (
+            <div className={positionClass}>
+                <div className="leaflet-control leaflet-bar">
+                    <Search />
+                </div>
+            </div>
+        )
+    }
+
     const routingComponent =
         selectedRoutingPoints.length > 1 ? (
             <RoutingMachine routingPoints={selectedRoutingPoints} />
@@ -116,6 +135,7 @@ const Map: NextPage<MapProps> = ({
             <MapClickHandler />
             <ChangeMapCenter center={center} />
             {routingComponent}
+            <SecrchComponent />
         </MapContainer>
     )
 }
