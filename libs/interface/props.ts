@@ -36,3 +36,7 @@ export interface ToastMessageProps {
     message: string
     shouldReload: boolean
 }
+
+export interface CommonMetaProps {
+    title: string
+}

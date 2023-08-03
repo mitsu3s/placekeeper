@@ -1,8 +1,10 @@
+import CommonMeta from '@/components/CommonMeta'
 import { NextPage } from 'next'
 
 const Verify: NextPage = () => {
     return (
         <div className="bg-white bg-opacity-95 flex items-center justify-center h-screen">
+            <CommonMeta title="Auth Verify" />
             <div className="mx-auto max-w-md rounded-xl bg-white border">
                 <div className="px-12 py-10">
                     <h3 className="text-2xl font-medium text-gray-800 mb-8 text-center">

@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import ToastMessage from '@/components/Toast'
 import { NextPage } from 'next'
+import CommonMeta from '@/components/CommonMeta'
 
 const Home: NextPage = () => {
     const router = useRouter()
@@ -28,6 +29,7 @@ const Home: NextPage = () => {
 
     return (
         <div className="bg-slate-100 h-screen">
+            <CommonMeta title="Place Keeper" />
             <header className="z-30 flex items-center w-full h-24 sm:h-32 bg-indigo-500">
                 <div className="container flex items-center justify-between px-6 mx-auto">
                     <Link

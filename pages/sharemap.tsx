@@ -9,6 +9,7 @@ import { getPlaces } from '@/handlers/place/get'
 import { ShareMapPageProps } from '@/libs/interface/props'
 import { GetServerSideProps, NextPage } from 'next'
 import { PlaceCoordinate } from '@/libs/interface/type'
+import CommonMeta from '@/components/CommonMeta'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const sharecode = context.query.sharecode as string
@@ -82,6 +83,7 @@ const ShareMapPage: NextPage<ShareMapPageProps> = ({ places }) => {
 
     return (
         <div className="bg-white flex flex-col items-center h-screen">
+            <CommonMeta title="Share Map" />
             <header className="z-30 flex items-center w-full h-14 sm:h-20 bg-indigo-500">
                 <div className="container flex items-center justify-between px-6 mx-auto">
                     <Link href="/" className="text-2xl font-black uppercase text-white md:text-3xl">

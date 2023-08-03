@@ -16,6 +16,7 @@ import { MapFormSchema } from '@/libs/validation/form'
 import { PlaceCoordinate } from '@/libs/interface/type'
 import { NextPage, GetServerSideProps } from 'next'
 import { PlaceForm } from '@/libs/interface/form'
+import CommonMeta from '@/components/CommonMeta'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession(context)
@@ -129,6 +130,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
 
     return (
         <div className="bg-white flex flex-col items-center h-screen">
+            <CommonMeta title="User Map" />
             <header className="z-30 flex items-center w-full h-20 sm:h-16 bg-indigo-500 mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
                     <Link
