@@ -48,7 +48,7 @@ function html(params: { url: string; host: string; theme: Theme }) {
                 align="center"
                 style="padding: 10px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};"
             >
-                PlaceKeeperへのサインインを完了してください。<br/>(<strong>${escapedHost}</strong>)
+                Please complete the sign in to PlaceKeeper. <br/>(<strong>${escapedHost}</strong>)
             </td>
         </tr>
         <tr>
@@ -76,7 +76,7 @@ function html(params: { url: string; host: string; theme: Theme }) {
                 align="center"
                 style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};"
             >
-                このメールに覚えがない場合は メールを削除してください。
+                If you do not recognize this email, please delete it.
             </td>
         </tr>
     </table>
