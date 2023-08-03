@@ -8,6 +8,7 @@ import { Place } from '@prisma/client'
 import { PlaceTableProps } from '@/libs/interface/props'
 import { NextPage } from 'next'
 import matchAddress from '@/utils/matchAddress'
+import ToastMessage from './Toast'
 
 const PlaceTable: NextPage<PlaceTableProps> = ({
     places,
@@ -70,6 +71,8 @@ const PlaceTable: NextPage<PlaceTableProps> = ({
         setFilteredPlaces(filteredResults)
     }
 
+    const [showToastMessage, setShowToastMessage] = useState(false)
+
     const handleSearchAddress = async () => {
         const url = `https://msearch.gsi.go.jp/address-search/AddressSearch?q=${encodeURIComponent(
             address
@@ -79,14 +82,25 @@ const PlaceTable: NextPage<PlaceTableProps> = ({
 
         if (Array.isArray(getData) && getData.length > 0) {
             const searchResult = matchAddress(address, getData)
-            handlePlaceClick(address, searchResult[1], searchResult[0])
+            if (searchResult.length != 0) {
+                handlePlaceClick(address, searchResult[1], searchResult[0])
+            } else {
+                setShowToastMessage(true)
+            }
         } else {
-            alert('Not Found')
+            setShowToastMessage(true)
         }
     }
 
     return (
         <div className="flex flex-col">
+            {showToastMessage && (
+                <ToastMessage
+                    setshowToastMessage={setShowToastMessage}
+                    message={'Not Found Address'}
+                    shouldReload={false}
+                />
+            )}
             <div className="-m-1.5 overflow-x-auto ml-3 mr-4">
                 <div className="p-1.5 min-w-full inline-block align-middle">
                     <div className="border rounded-lg divide-y divide-gray-200">
