@@ -1,4 +1,12 @@
-import { MapContainer, Marker, Popup, TileLayer, useMapEvents, useMap } from 'react-leaflet'
+import {
+    MapContainer,
+    Marker,
+    Popup,
+    TileLayer,
+    useMapEvents,
+    useMap,
+    ZoomControl,
+} from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
@@ -9,6 +17,13 @@ import { RoutingPoint } from '@/libs/interface/type'
 import { NextPage } from 'next'
 import { MapProps } from '@/libs/interface/props'
 import { Place } from '@prisma/client'
+
+const POSITION_CLASSES = {
+    bottomleft: 'leaflet-bottom leaflet-left',
+    bottomright: 'leaflet-bottom leaflet-right',
+    topleft: 'leaflet-top leaflet-left',
+    topright: 'leaflet-top leaflet-right',
+}
 
 L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
@@ -76,6 +91,17 @@ const Map: NextPage<MapProps> = ({
         return null
     }
 
+    // const SecrchComponent = () => {
+    //     const positionClass = POSITION_CLASSES.topleft
+    //     return (
+    //         <div className={positionClass}>
+    //             <div className="leaflet-control leaflet-bar">
+    //                 <Search />
+    //             </div>
+    //         </div>
+    //     )
+    // }
+
     const routingComponent =
         selectedRoutingPoints.length > 1 ? (
             <RoutingMachine routingPoints={selectedRoutingPoints} />
@@ -87,11 +113,14 @@ const Map: NextPage<MapProps> = ({
             zoom={14}
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
+            zoomControl={false}
         >
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+            <ZoomControl position="bottomright" />
+            {/* <SecrchComponent /> */}
             {places &&
                 places.length > 0 &&
                 places.map((place: Place) => (
