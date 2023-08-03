@@ -7,6 +7,7 @@ import { PlaceCoordinate } from '@/libs/interface/type'
 import { Place } from '@prisma/client'
 import { PlaceTableProps } from '@/libs/interface/props'
 import { NextPage } from 'next'
+import matchAddress from '@/utils/matchAddress'
 
 const PlaceTable: NextPage<PlaceTableProps> = ({
     places,
@@ -74,11 +75,11 @@ const PlaceTable: NextPage<PlaceTableProps> = ({
             address
         )}`
         const response = await fetch(url)
-        const results = await response.json()
+        const getData = await response.json()
 
-        if (Array.isArray(results) && results.length > 0) {
-            const coordinates = results[0].geometry.coordinates
-            handlePlaceClick(address, coordinates[1], coordinates[0])
+        if (Array.isArray(getData) && getData.length > 0) {
+            const searchResult = matchAddress(address, getData)
+            handlePlaceClick(address, searchResult[1], searchResult[0])
         } else {
             alert('Not Found')
         }
