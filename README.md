@@ -11,8 +11,8 @@ Intuitive Location Sharing Application.
 -   NextAuth.js 4.22.1
 -   yarn 1.22.19
 
-## Usage
+<!-- ## Usage
 
 ```zsh
 $ yarn build && yarn start
-```
+``` -->
