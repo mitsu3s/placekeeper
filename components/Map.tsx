@@ -17,7 +17,6 @@ import { RoutingPoint } from '@/libs/interface/type'
 import { NextPage } from 'next'
 import { MapProps } from '@/libs/interface/props'
 import { Place } from '@prisma/client'
-import Search from './Search'
 
 const POSITION_CLASSES = {
     bottomleft: 'leaflet-bottom leaflet-left',
@@ -92,16 +91,16 @@ const Map: NextPage<MapProps> = ({
         return null
     }
 
-    const SecrchComponent = () => {
-        const positionClass = POSITION_CLASSES.topleft
-        return (
-            <div className={positionClass}>
-                <div className="leaflet-control leaflet-bar">
-                    <Search />
-                </div>
-            </div>
-        )
-    }
+    // const SecrchComponent = () => {
+    //     const positionClass = POSITION_CLASSES.topleft
+    //     return (
+    //         <div className={positionClass}>
+    //             <div className="leaflet-control leaflet-bar">
+    //                 <Search />
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
     const routingComponent =
         selectedRoutingPoints.length > 1 ? (
@@ -121,6 +120,7 @@ const Map: NextPage<MapProps> = ({
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <ZoomControl position="bottomright" />
+            {/* <SecrchComponent /> */}
             {places &&
                 places.length > 0 &&
                 places.map((place: Place) => (
@@ -135,7 +135,6 @@ const Map: NextPage<MapProps> = ({
             <MapClickHandler />
             <ChangeMapCenter center={center} />
             {routingComponent}
-            <SecrchComponent />
         </MapContainer>
     )
 }
