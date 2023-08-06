@@ -65,6 +65,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
     ])
     const [shareCode, setShareCode] = useState(shareId)
     const [routigPoints, setRoutingPoints] = useState<PlaceCoordinate[]>([])
+    const [isOpen, setIsOpen] = useState(false)
 
     const Map = React.useMemo(
         () =>
@@ -128,6 +129,14 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
         setRoutingPoints(selectedRoutingpoints)
     }
 
+    const showDropdown = () => {
+        setIsOpen(true)
+    }
+
+    const hideDropdown = () => {
+        setIsOpen(false)
+    }
+
     return (
         <div className="bg-white flex flex-col items-center h-screen">
             <CommonMeta title="User Map" />
@@ -139,7 +148,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                     >
                         Place Keeper
                     </Link>
-                    <div className="flex items-center">
+                    {/* <div className="flex items-center">
                         <nav className="text-md items-center md:text-base lg:text-lg font-sen text-white lg:flex">
                             {shareCode && (
                                 <div className="text-white pr-6 lg:py-2">
@@ -163,6 +172,64 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                                 Sign out
                             </button>
                         </nav>
+                    </div> */}
+                    <div className="relative inline-block">
+                        <button
+                            type="button"
+                            className="uppercase text-md md:text-base lg:text-lg font-sen text-white py-3 px-4 inline-flex justify-center items-center gap-2 transition-all"
+                            onMouseEnter={showDropdown}
+                            onMouseLeave={hideDropdown}
+                        >
+                            Actions
+                            <svg
+                                className={`w-2.5 h-2.5 text-white ${isOpen ? 'rotate-180' : ''}`}
+                                width="16"
+                                height="16"
+                                viewBox="0 0 16 16"
+                                fill="none"
+                                xmlns="http://www.w3.org/2000/svg"
+                            >
+                                <path
+                                    d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
+                                    stroke="currentColor"
+                                    strokeWidth="2"
+                                    strokeLinecap="round"
+                                />
+                            </svg>
+                        </button>
+
+                        {isOpen && (
+                            <div
+                                className="transition-[opacity,margin] duration opacity-100 absolute right-0 mt-2 min-w-[10rem] bg-white shadow-lg rounded-lg p-2 after:h-4 after:absolute after:-bottom-4 after:left-0 after:w-full before:h-4 before:absolute before:-top-4 before:left-0 before:w-full z-50  border-indigo-100 border-2"
+                                onMouseEnter={showDropdown}
+                                onMouseLeave={hideDropdown}
+                            >
+                                <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500">
+                                    User: {session?.user.email}
+                                </div>
+                                {shareCode && (
+                                    <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500">
+                                        ShareCode: {shareCode}
+                                    </div>
+                                )}
+                                {!shareCode && (
+                                    <button
+                                        onClick={handleGenerateShareCode}
+                                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500 w-full"
+                                    >
+                                        Generate Share Code
+                                    </button>
+                                )}
+                                <button
+                                    className="uppercase flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500 w-full"
+                                    onClick={() =>
+                                        signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })
+                                    }
+                                >
+                                    Sign out
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </header>
