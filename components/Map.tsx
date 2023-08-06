@@ -114,6 +114,7 @@ const Map: NextPage<MapProps> = ({
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
             zoomControl={false}
+            className="z-0"
         >
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
