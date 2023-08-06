@@ -91,7 +91,7 @@ const Map: NextPage<MapProps> = ({
         return null
     }
 
-    // const SecrchComponent = () => {
+    // const SearchComponent = () => {
     //     const positionClass = POSITION_CLASSES.topleft
     //     return (
     //         <div className={positionClass}>
@@ -121,7 +121,7 @@ const Map: NextPage<MapProps> = ({
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <ZoomControl position="bottomright" />
-            {/* <SecrchComponent /> */}
+            {/* <SearchComponent /> */}
             {places &&
                 places.length > 0 &&
                 places.map((place: Place) => (
