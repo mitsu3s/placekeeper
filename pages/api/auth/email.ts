@@ -19,7 +19,7 @@ export async function customSendVerificationRequest(params: any) {
     }
 }
 
-function html(params: { url: string; host: string; theme: Theme }) {
+const html = (params: { url: string; host: string; theme: Theme }) => {
     const { url, host, theme } = params
 
     const escapedHost = host.replace(/\./g, '&#8203;.')
@@ -83,6 +83,6 @@ function html(params: { url: string; host: string; theme: Theme }) {
     </body>`
 }
 
-function text({ url, host }: { url: string; host: string }) {
+const text = ({ url, host }: { url: string; host: string }) => {
     return `Sign in to ${host}\n${url}\n\n`
 }

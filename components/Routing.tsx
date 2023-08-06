@@ -33,6 +33,4 @@ const createRoutineMachineLayer = (props: any) => {
     return instance
 }
 
-const RoutingMachine = createControlComponent(createRoutineMachineLayer)
-
-export default RoutingMachine
+export const RoutingMachine = createControlComponent(createRoutineMachineLayer)

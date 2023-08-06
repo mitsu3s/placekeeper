@@ -1,8 +1,8 @@
-import { CommonMetaProps } from '@/libs/interface/props'
 import { NextPage } from 'next'
 import Head from 'next/head'
+import { CommonMetaProps } from '@/libs/interface/props'
 
-const CommonMeta: NextPage<CommonMetaProps> = ({ title }) => {
+export const CommonMeta: NextPage<CommonMetaProps> = ({ title }) => {
     return (
         <Head>
             <title>{title}</title>
@@ -10,5 +10,3 @@ const CommonMeta: NextPage<CommonMetaProps> = ({ title }) => {
         </Head>
     )
 }
-
-export default CommonMeta

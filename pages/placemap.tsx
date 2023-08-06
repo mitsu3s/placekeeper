@@ -1,22 +1,22 @@
+import { NextPage, GetServerSideProps } from 'next'
 import React, { useState } from 'react'
-import { Formik, Form, Field, ErrorMessage } from 'formik'
-import axios from 'axios'
 import { useRouter } from 'next/router'
-import dynamic from 'next/dynamic'
-import { useHash } from '@/utils/useHash'
-import { useSession, signOut, getSession } from 'next-auth/react'
-import generateShareCode from '@/utils/shareCodeGenerator'
-import PlaceTable from '@/components/PlaceTable'
 import Link from 'next/link'
-import forHash from '@/utils/replaceSpace'
+import dynamic from 'next/dynamic'
+import { useSession, signOut, getSession } from 'next-auth/react'
+import axios from 'axios'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { MapPageProps } from '@/libs/interface/props'
+import { PlaceForm } from '@/libs/interface/form'
+import { PlaceCoordinate } from '@/libs/interface/type'
+import { MapFormSchema } from '@/libs/validation/form'
 import { getPlaces } from '@/handlers/place/get'
 import { getShareId } from '@/handlers/share/get'
-import { MapPageProps } from '@/libs/interface/props'
-import { MapFormSchema } from '@/libs/validation/form'
-import { PlaceCoordinate } from '@/libs/interface/type'
-import { NextPage, GetServerSideProps } from 'next'
-import { PlaceForm } from '@/libs/interface/form'
-import CommonMeta from '@/components/CommonMeta'
+import { useHash } from '@/utils/useHash'
+import { generateShareCode } from '@/utils/shareCodeGenerator'
+import { replaceSpace } from '@/utils/replaceSpace'
+import { CommonMeta } from '@/components/CommonMeta'
+import { PlaceTable } from '@/components/PlaceTable'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getSession(context)
@@ -86,7 +86,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
 
     const handlePlaceClick = (placeName: string, latitude: number, longitude: number) => {
         setCenterPosition([latitude, longitude])
-        setHash(forHash(placeName))
+        setHash(replaceSpace(placeName))
     }
 
     const handleCreate = async (values: PlaceForm) => {

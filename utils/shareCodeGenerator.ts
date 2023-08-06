@@ -1,4 +1,4 @@
-const generateShareCode = (length: number): string => {
+export const generateShareCode = (length: number): string => {
     const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     const charactersLength = characters.length
     let result = ''
@@ -10,5 +10,3 @@ const generateShareCode = (length: number): string => {
 
     return result
 }
-
-export default generateShareCode

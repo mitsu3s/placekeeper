@@ -1,9 +1,9 @@
-import styles from '@/styles/toast.module.css'
-import { useRouter } from 'next/router'
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { ToastMessageProps } from '@/libs/interface/props'
+import styles from '@/styles/toast.module.css'
 
-const ToastMessage: NextPage<ToastMessageProps> = ({
+export const ToastMessage: NextPage<ToastMessageProps> = ({
     setshowToastMessage,
     message,
     shouldReload,
@@ -50,5 +50,3 @@ const ToastMessage: NextPage<ToastMessageProps> = ({
         </div>
     )
 }
-
-export default ToastMessage

@@ -1,14 +1,14 @@
+import { NextPage } from 'next'
+import { useState, useEffect } from 'react'
+import { Place } from '@prisma/client'
 import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
-import { useState, useEffect } from 'react'
-import marker from '@/public/icons/marker.svg'
-import RoutingMachine from './Routing'
-import { Place } from '@prisma/client'
-import { NextPage } from 'next'
 import { ShareMapProps } from '@/libs/interface/props'
 import { RoutingPoint } from '@/libs/interface/type'
+import { RoutingMachine } from '@/components/Routing'
+import marker from '@/public/icons/marker.svg'
 
 L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,
@@ -19,7 +19,7 @@ L.Icon.Default.mergeOptions({
     iconSize: [35, 60],
 })
 
-const Map: NextPage<ShareMapProps> = ({ places, center, routingPoints }) => {
+const ShareMap: NextPage<ShareMapProps> = ({ places, center, routingPoints }) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
     const [selectedRoutingPoints, setSelectedRoutingPoints] = useState<RoutingPoint[]>([])
 
@@ -89,4 +89,4 @@ const Map: NextPage<ShareMapProps> = ({ places, center, routingPoints }) => {
     )
 }
 
-export default Map
+export default ShareMap

@@ -1,15 +1,15 @@
+import { NextPage, GetServerSideProps } from 'next'
 import React, { useState } from 'react'
-import { useHash } from '@/utils/useHash'
-import PlaceTable from '@/components/PlaceTable'
-import dynamic from 'next/dynamic'
 import Link from 'next/link'
-import forHash from '@/utils/replaceSpace'
-import { getAdmin } from '@/handlers/share/get'
-import { getPlaces } from '@/handlers/place/get'
+import dynamic from 'next/dynamic'
 import { ShareMapPageProps } from '@/libs/interface/props'
-import { GetServerSideProps, NextPage } from 'next'
 import { PlaceCoordinate } from '@/libs/interface/type'
-import CommonMeta from '@/components/CommonMeta'
+import { getPlaces } from '@/handlers/place/get'
+import { getAdmin } from '@/handlers/share/get'
+import { useHash } from '@/utils/useHash'
+import { replaceSpace } from '@/utils/replaceSpace'
+import { CommonMeta } from '@/components/CommonMeta'
+import { PlaceTable } from '@/components/PlaceTable'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const sharecode = context.query.sharecode as string
@@ -74,7 +74,7 @@ const ShareMapPage: NextPage<ShareMapPageProps> = ({ places }) => {
 
     const handlePlaceClick = (placeName: string, latitude: number, longitude: number) => {
         setCenterPosition([latitude, longitude])
-        setHash(forHash(placeName))
+        setHash(replaceSpace(placeName))
     }
 
     const updateRoutingPoints = (selectedRoutingpoints: PlaceCoordinate[]) => {

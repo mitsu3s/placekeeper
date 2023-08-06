@@ -1,6 +1,6 @@
-import CommonMeta from '@/components/CommonMeta'
 import { NextPage } from 'next'
 import Link from 'next/link'
+import { CommonMeta } from '@/components/CommonMeta'
 
 const Error: NextPage = () => {
     return (

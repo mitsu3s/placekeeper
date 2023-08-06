@@ -1,4 +1,4 @@
-const matchAddress = (address: string, apiData: any) => {
+export const matchAddress = (address: string, apiData: any) => {
     let matchingCoordinates: number[] = []
     let maxMatchingCount = 0
 
@@ -16,5 +16,3 @@ const matchAddress = (address: string, apiData: any) => {
 
     return matchingCoordinates
 }
-
-export default matchAddress

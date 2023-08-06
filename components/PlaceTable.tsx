@@ -1,16 +1,16 @@
+import { NextPage } from 'next'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import axios from 'axios'
-import { useRouter } from 'next/router'
-import forHash from '@/utils/replaceSpace'
-import { PlaceCoordinate } from '@/libs/interface/type'
 import { Place } from '@prisma/client'
 import { PlaceTableProps } from '@/libs/interface/props'
-import { NextPage } from 'next'
-import matchAddress from '@/utils/matchAddress'
-import ToastMessage from './Toast'
+import { PlaceCoordinate } from '@/libs/interface/type'
+import { replaceSpace } from '@/utils/replaceSpace'
+import { matchAddress } from '@/utils/matchAddress'
+import { ToastMessage } from '@/components/Toast'
 
-const PlaceTable: NextPage<PlaceTableProps> = ({
+export const PlaceTable: NextPage<PlaceTableProps> = ({
     places,
     handlePlaceClick,
     updateRoutingPoints,
@@ -226,7 +226,7 @@ const PlaceTable: NextPage<PlaceTableProps> = ({
                                                 </td>
                                                 <td className="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
                                                     <a
-                                                        href={`#${forHash(place.name)}`}
+                                                        href={`#${replaceSpace(place.name)}`}
                                                         onClick={(event) => {
                                                             event.preventDefault()
                                                             handlePlaceClick(
@@ -273,5 +273,3 @@ const PlaceTable: NextPage<PlaceTableProps> = ({
         </div>
     )
 }
-
-export default PlaceTable

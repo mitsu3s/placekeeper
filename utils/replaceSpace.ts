@@ -1,5 +1,3 @@
-const replaceSpace = (placename: string) => {
+export const replaceSpace = (placename: string) => {
     return placename.replace(/\s/g, '_')
 }
-
-export default replaceSpace

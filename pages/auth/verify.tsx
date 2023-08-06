@@ -1,5 +1,5 @@
-import CommonMeta from '@/components/CommonMeta'
 import { NextPage } from 'next'
+import { CommonMeta } from '@/components/CommonMeta'
 
 const Verify: NextPage = () => {
     return (

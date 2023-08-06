@@ -1,10 +1,10 @@
+import { NextPage } from 'next'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { useSession, signOut } from 'next-auth/react'
-import React, { useState } from 'react'
 import { useRouter } from 'next/router'
-import ToastMessage from '@/components/Toast'
-import { NextPage } from 'next'
-import CommonMeta from '@/components/CommonMeta'
+import { ToastMessage } from '@/components/Toast'
+import { CommonMeta } from '@/components/CommonMeta'
 
 const Home: NextPage = () => {
     const router = useRouter()

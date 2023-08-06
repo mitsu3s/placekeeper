@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useRouter } from 'next/router'
 
-export function useHash(): [string, (newHash: string) => void] {
+export const useHash = (): [string, (newHash: string) => void] => {
     const router = useRouter()
     const hash = extractHash(router.asPath)
     const setHash = useCallback((newHash: string) => {
@@ -10,6 +10,6 @@ export function useHash(): [string, (newHash: string) => void] {
     return [hash, setHash]
 }
 
-function extractHash(url: string): string {
+const extractHash = (url: string): string => {
     return url.split('#')[1] ?? ''
 }
