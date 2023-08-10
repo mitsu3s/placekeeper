@@ -12,12 +12,12 @@ import {
 } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
-import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { MapProps } from '@/libs/interface/props'
 import { RoutingPoint } from '@/libs/interface/type'
 import { RoutingMachine } from '@/components/Routing'
 import { Search } from '@/components/Search'
 import marker from '@/public/icons/marker.svg'
+import shadow from '@/public/images/shadow.png'
 
 const POSITION_CLASSES = {
     bottomleft: 'leaflet-bottom leaflet-left',
@@ -27,7 +27,7 @@ const POSITION_CLASSES = {
 }
 
 L.Icon.Default.mergeOptions({
-    shadowUrl: markerShadow.src,
+    shadowUrl: shadow.src,
     iconUrl: marker.src,
     iconRetinaUrl: marker.src,
     iconAnchor: [9, 52],
