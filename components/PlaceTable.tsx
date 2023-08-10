@@ -22,7 +22,7 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
     const [selectedPlaces, setSelectedPlaces] = useState<PlaceCoordinate[]>([])
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [filteredPlaces, setFilteredPlaces] = useState<Place[]>(places)
-    const [address, setAddress] = useState<string>('')
+    const [showToastMessage, setShowToastMessage] = useState(false)
 
     useEffect(() => {
         updateRoutingPoints(selectedPlaces)
@@ -69,27 +69,6 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
             return place.name.toLowerCase().includes(searchTerm.toLowerCase())
         })
         setFilteredPlaces(filteredResults)
-    }
-
-    const [showToastMessage, setShowToastMessage] = useState(false)
-
-    const handleSearchAddress = async () => {
-        const url = `https://msearch.gsi.go.jp/address-search/AddressSearch?q=${encodeURIComponent(
-            address
-        )}`
-        const response = await fetch(url)
-        const getData = await response.json()
-
-        if (Array.isArray(getData) && getData.length > 0) {
-            const searchResult = matchAddress(address, getData)
-            if (searchResult.length != 0) {
-                handlePlaceClick(address, searchResult[1], searchResult[0])
-            } else {
-                setShowToastMessage(true)
-            }
-        } else {
-            setShowToastMessage(true)
-        }
     }
 
     return (
