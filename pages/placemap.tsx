@@ -90,6 +90,11 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
         setHash(replaceSpace(placeName))
     }
 
+    const handleSearchClick = (placeName: string, latitude: number, longitude: number) => {
+        setCenterPosition([latitude, longitude])
+        setHash(replaceSpace(placeName))
+    }
+
     const handleCreate = async (values: PlaceForm) => {
         values.latitude = selectedPosition ? selectedPosition[0] : ''
         values.longitude = selectedPosition ? selectedPosition[1] : ''
@@ -140,7 +145,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
     return (
         <div className="bg-white flex flex-col items-center h-screen">
             <CommonMeta title="User Map" />
-            <header className="z-30 flex items-center w-full h-20 sm:h-16 bg-indigo-500 mb-4">
+            <header className="flex items-center w-full h-20 sm:h-16 bg-indigo-500 mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
                     <Link
                         href="/"
@@ -148,31 +153,6 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                     >
                         Place Keeper
                     </Link>
-                    {/* <div className="flex items-center">
-                        <nav className="text-md items-center md:text-base lg:text-lg font-sen text-white lg:flex">
-                            {shareCode && (
-                                <div className="text-white pr-6 lg:py-2">
-                                    ShareCode: {shareCode}
-                                </div>
-                            )}
-                            {!shareCode && (
-                                <button
-                                    onClick={handleGenerateShareCode}
-                                    className="text-white pr-6 lg:py-2 hover:text-gray-300"
-                                >
-                                    Generate Share Code
-                                </button>
-                            )}
-                            <button
-                                className="px-6 py-2 uppercase hover:text-gray-300"
-                                onClick={() =>
-                                    signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })
-                                }
-                            >
-                                Sign out
-                            </button>
-                        </nav>
-                    </div> */}
                     <div className="relative inline-block">
                         <button
                             type="button"
@@ -200,7 +180,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
 
                         {isOpen && (
                             <div
-                                className="transition-[opacity,margin] duration opacity-100 absolute right-0 mt-2 min-w-[10rem] bg-white shadow-lg rounded-lg p-2 after:h-4 after:absolute after:-bottom-4 after:left-0 after:w-full before:h-4 before:absolute before:-top-4 before:left-0 before:w-full z-50  border-indigo-100 border-2"
+                                className="transition-[opacity,margin] duration opacity-100 absolute right-0 mt-2 min-w-[10rem] bg-white shadow-lg rounded-lg p-2 after:h-4 after:absolute after:-bottom-4 after:left-0 after:w-full before:h-4 before:absolute before:-top-4 before:left-0 before:w-full border-indigo-100 border-2 z-10"
                                 onMouseEnter={showDropdown}
                                 onMouseLeave={hideDropdown}
                             >
@@ -244,6 +224,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                     places={places}
                     selectedPosition={selectedPosition}
                     handleMapClick={handleMapClick}
+                    handleSearchClick={handleSearchClick}
                     center={centerPosition}
                     routingPoints={routigPoints}
                 />

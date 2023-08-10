@@ -17,6 +17,7 @@ import { MapProps } from '@/libs/interface/props'
 import { RoutingPoint } from '@/libs/interface/type'
 import { RoutingMachine } from '@/components/Routing'
 import marker from '@/public/icons/marker.svg'
+import Search from './Search'
 
 const POSITION_CLASSES = {
     bottomleft: 'leaflet-bottom leaflet-left',
@@ -38,11 +39,13 @@ const Map: NextPage<MapProps> = ({
     places,
     selectedPosition,
     handleMapClick,
+    handleSearchClick,
     center,
     routingPoints,
 }) => {
     const [centerPosition, setCenterPosition] = useState<[number, number]>([0, 0])
     const [selectedRoutingPoints, setSelectedRoutingPoints] = useState<RoutingPoint[]>([])
+    const [enableMapClick, setEnableMapClick] = useState<boolean>(true)
 
     useEffect(() => {
         if (selectedRoutingPoints.length > 0) {
@@ -80,6 +83,9 @@ const Map: NextPage<MapProps> = ({
     }
 
     const MapClickHandler = () => {
+        if (!enableMapClick) {
+            return null
+        }
         useMapEvents({
             click: (event) => {
                 const { lat, lng } = event.latlng || {}
@@ -91,16 +97,32 @@ const Map: NextPage<MapProps> = ({
         return null
     }
 
-    // const SearchComponent = () => {
-    //     const positionClass = POSITION_CLASSES.topleft
-    //     return (
-    //         <div className={positionClass}>
-    //             <div className="leaflet-control leaflet-bar">
-    //                 <Search />
-    //             </div>
-    //         </div>
-    //     )
-    // }
+    const invalidClick = () => {
+        setEnableMapClick(false)
+    }
+
+    const validClick = () => {
+        setEnableMapClick(true)
+    }
+
+    const handleSearch = (placeName: string, latitude: number, longitude: number) => {
+        handleSearchClick(placeName, latitude, longitude)
+    }
+
+    const SearchComponent = () => {
+        const positionClass = POSITION_CLASSES.topleft
+        return (
+            <div className={positionClass}>
+                <div
+                    className="leaflet-control leaflet-bar"
+                    onMouseEnter={invalidClick}
+                    onMouseLeave={validClick}
+                >
+                    <Search handleSearch={handleSearch} />
+                </div>
+            </div>
+        )
+    }
 
     const routingComponent =
         selectedRoutingPoints.length > 1 ? (
@@ -121,7 +143,7 @@ const Map: NextPage<MapProps> = ({
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <ZoomControl position="bottomright" />
-            {/* <SearchComponent /> */}
+            <SearchComponent />
             {places &&
                 places.length > 0 &&
                 places.map((place: Place) => (
