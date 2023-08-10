@@ -180,7 +180,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                             onMouseEnter={showDropdown}
                             onMouseLeave={hideDropdown}
                         >
-                            Actions
+                            User Info
                             <svg
                                 className={`w-2.5 h-2.5 text-white ${isOpen ? 'rotate-180' : ''}`}
                                 width="16"
@@ -205,7 +205,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                                 onMouseLeave={hideDropdown}
                             >
                                 <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500">
-                                    User: {session?.user.email}
+                                    Email: {session?.user.email}
                                 </div>
                                 {shareCode && (
                                     <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500">
