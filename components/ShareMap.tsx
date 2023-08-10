@@ -1,7 +1,7 @@
 import { NextPage } from 'next'
 import { useState, useEffect } from 'react'
 import { Place } from '@prisma/client'
-import { MapContainer, Marker, Popup, TileLayer, useMap } from 'react-leaflet'
+import { MapContainer, Marker, Popup, TileLayer, useMap, ZoomControl } from 'react-leaflet'
 import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import markerShadow from 'leaflet/dist/images/marker-shadow.png'
@@ -69,11 +69,13 @@ const ShareMap: NextPage<ShareMapProps> = ({ places, center, routingPoints }) =>
             zoom={14}
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
+            zoomControl={false}
         >
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
+            <ZoomControl position="bottomright" />
             {places &&
                 places.length > 0 &&
                 places.map((place: Place) => (
