@@ -41,3 +41,7 @@ export interface ToastMessageProps {
 export interface CommonMetaProps {
     title: string
 }
+
+export interface SearchProps {
+    handleSearch: (placeName: string, latitude: number, longitude: number) => void
+}

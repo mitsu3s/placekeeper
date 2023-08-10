@@ -1,8 +1,10 @@
+import { NextPage } from 'next'
 import { useState } from 'react'
+import { SearchProps } from '@/libs/interface/props'
 import { matchAddress } from '@/utils/matchAddress'
 import { ToastMessage } from '@/components/Toast'
 
-const Search = ({ handleSearch }: any) => {
+const Search: NextPage<SearchProps> = ({ handleSearch }) => {
     const [address, setAddress] = useState('')
     const [showToastMessage, setShowToastMessage] = useState(false)
 

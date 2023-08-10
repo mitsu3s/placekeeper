@@ -7,7 +7,6 @@ import { Place } from '@prisma/client'
 import { PlaceTableProps } from '@/libs/interface/props'
 import { PlaceCoordinate } from '@/libs/interface/type'
 import { replaceSpace } from '@/utils/replaceSpace'
-import { matchAddress } from '@/utils/matchAddress'
 import { ToastMessage } from '@/components/Toast'
 
 export const PlaceTable: NextPage<PlaceTableProps> = ({
