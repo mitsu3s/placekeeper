@@ -4,7 +4,7 @@ import { SearchProps } from '@/libs/interface/props'
 import { matchAddress } from '@/utils/matchAddress'
 import { ToastMessage } from '@/components/Toast'
 
-const Search: NextPage<SearchProps> = ({ handleSearch }) => {
+export const Search: NextPage<SearchProps> = ({ handleSearch }) => {
     const [address, setAddress] = useState('')
     const [showToastMessage, setShowToastMessage] = useState(false)
 
@@ -69,5 +69,3 @@ const Search: NextPage<SearchProps> = ({ handleSearch }) => {
         </div>
     )
 }
-
-export default Search
