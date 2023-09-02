@@ -16,7 +16,42 @@
     }
 }
 
+@font-face {
+    font-family: 'San Francisco';
+    src: url('/public/fonts/SF-Pro-Display-Black.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-BlackItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-Bold.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-BoldItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-Heavy.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-HeavyItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-Light.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-LightItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-Medium.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-MediumItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-Regular.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-RegularItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-Semibold.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-SemiboldItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-Thin.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-ThinItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-Ultralight.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Display-UltralightItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-Bold.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-BoldItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-Heavy.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-HeavyItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-Light.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-LightItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-Medium.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-MediumItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-Regular.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-RegularItalic.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-Semibold.woff') format('woff'),
+        url('/public/fonts/SF-Pro-Text-SemiboldItalic.woff') format('woff');
+}
+
 body {
+    font-family: -apple-system, 'BlinkMacSystemFont', 'San Francisco', Sans-Serif;
     color: rgb(var(--foreground-rgb));
     background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb)))
         rgb(var(--background-start-rgb));
