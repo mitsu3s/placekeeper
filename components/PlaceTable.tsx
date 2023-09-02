@@ -84,13 +84,13 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
                     <div className="border rounded-lg divide-y divide-gray-200">
                         <div className="py-3 px-4">
                             <div className="relative max-w-xs">
-                                <label htmlFor="hs-table-search" className="sr-only">
+                                <label htmlFor="search-place" className="sr-only">
                                     Search Place
                                 </label>
                                 <input
                                     type="text"
-                                    name="hs-table-search"
-                                    id="hs-table-search"
+                                    name="search-place"
+                                    id="search-place"
                                     className="p-3 pl-10 block w-full border border-gray-200 text-sm text-gray-800 rounded-md outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
                                     placeholder="Search Place"
                                     value={searchTerm}
