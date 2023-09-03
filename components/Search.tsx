@@ -28,7 +28,7 @@ export const Search: NextPage<SearchProps> = ({ handleSearch }) => {
     }
 
     return (
-        <div className="relative max-w-xs search-address-container">
+        <div className="relative w-44 md:w-48 xl:w-56 search-address-container">
             {showToastMessage && (
                 <div className="z-10">
                     <ToastMessage
