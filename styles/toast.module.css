@@ -1,4 +1,7 @@
+@import '@fontsource/ubuntu/700.css';
+
 .toastContainer {
+    font-family: 'Ubuntu';
     position: fixed;
     top: -100px;
     left: 50%;

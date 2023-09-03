@@ -6,7 +6,6 @@ import { RoutingPoint } from '@/libs/interface/type'
 
 const createRoutineMachineLayer = (props: any) => {
     const { routingPoints } = props
-    console.log(props)
     const leafletWaypoints = routingPoints.map((routingPoint: RoutingPoint) =>
         L.latLng(routingPoint.latitude, routingPoint.longitude)
     )

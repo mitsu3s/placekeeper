@@ -28,7 +28,7 @@ export const Search: NextPage<SearchProps> = ({ handleSearch }) => {
     }
 
     return (
-        <div className="relative max-w-xs">
+        <div className="relative w-44 md:w-48 xl:w-56 search-address-container">
             {showToastMessage && (
                 <div className="z-10">
                     <ToastMessage
@@ -38,13 +38,13 @@ export const Search: NextPage<SearchProps> = ({ handleSearch }) => {
                     />
                 </div>
             )}
-            <label htmlFor="hs-table-search" className="sr-only">
+            <label htmlFor="search-address" className="sr-only">
                 Search Address
             </label>
             <input
                 type="text"
-                name="hs-table-search"
-                id="hs-table-search"
+                name="search-address"
+                id="search-address"
                 className="p-3 pl-10 block w-full border border-gray-200 text-sm text-gray-800 rounded-md outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
                 placeholder="Search Address"
                 value={address}
