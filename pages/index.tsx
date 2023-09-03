@@ -117,7 +117,7 @@ const Home: NextPage = () => {
                     <div className="flex flex-col w-full mb-12 text-center">
                         <div className="inline-flex items-center justify-center flex-shrink-0 w-20 h-20 mx-auto mb-5 rounded-full"></div>
                         <h1 className="max-w-5xl text-3xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl">
-                            Manage your location with<br className="hidden lg:block"></br>
+                            Manage favorite location with<br className="hidden lg:block"></br>
                             intuitive controls
                         </h1>
 
