@@ -1,4 +1,8 @@
-.leaflet-routing-alternatives-container {
+@import '@fontsource/ubuntu/700.css';
+
+.leaflet-routing-alternatives-container,
+.search-address-container {
+    font-family: 'Ubuntu';
     --tw-text-opacity: 1;
     color: rgba(0, 0, 0, var(--tw-text-opacity));
     --tw-bg-opacity: 1;
