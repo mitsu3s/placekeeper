@@ -37,7 +37,7 @@ Intuitive Map Sharing Application.
 ### Install Dependencies
 
 ```zsh
-# Run in the root directory of the application
+# Run (in the root directory of the application)
 $ yarn install
 ```
 
@@ -67,6 +67,7 @@ $ npx prisma generate
 ### Launch Applications
 
 ```zsh
+# Run (in the root directory of the application)
 # After execution, connect to http://localhost:3000.
 $ yarn build && yarn start
 ```
