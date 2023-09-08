@@ -73,4 +73,5 @@ $ yarn build && yarn start
 ### Attention
 
 Running the application requires a description of the mail server in the .env file, which is not included here for security reasons.
+
 Therefore, if you are considering running the application, please contact me at the email address listed on my GitHub.
