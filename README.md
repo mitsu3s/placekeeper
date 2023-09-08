@@ -37,6 +37,7 @@ Intuitive Map Sharing Application.
 ### Install Dependencies
 
 ```zsh
+# Run in the root directory of the application
 $ yarn install
 ```
 
@@ -70,7 +71,7 @@ $ npx prisma generate
 $ yarn build && yarn start
 ```
 
-### Attention
+## Attention
 
 Running the application requires a description of the mail server in the .env file, which is not included here for security reasons.
 
