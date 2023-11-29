@@ -189,10 +189,10 @@
     "@types/react" "*"
     hoist-non-react-statics "^3.3.0"
 
-"@types/leaflet-routing-machine@^3.2.4":
-  version "3.2.4"
-  resolved "https://registry.yarnpkg.com/@types/leaflet-routing-machine/-/leaflet-routing-machine-3.2.4.tgz#fd302ffde7ec5eb834d4e47c9c5b4ec0c04fbf54"
-  integrity sha512-CFcWghU+eDel/zY2Q1u1tI6rxL2V6SfJ85/prt7s2QEw8tK+OkH+o5PLm/7eYsZH86i30ff5rmEk8GN1nZ9ODg==
+"@types/leaflet-routing-machine@^3.2.8":
+  version "3.2.8"
+  resolved "https://registry.yarnpkg.com/@types/leaflet-routing-machine/-/leaflet-routing-machine-3.2.8.tgz#e8d3554fe0995c8ab20c32b27c778cd3bd228b55"
+  integrity sha512-v2pJDv/nqbB769SsytHemhLkqwjVor9UdWvZ1l6Y2SEaXNt1yDwVrktc4sCT8/4n7npuEb8VP+UAk8xrPePqSQ==
   dependencies:
     "@types/leaflet" "*"
 
