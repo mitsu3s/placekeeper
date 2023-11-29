@@ -34,7 +34,7 @@
         "yup": "^1.2.0"
     },
     "devDependencies": {
-        "@types/leaflet": "^1.9.3",
+        "@types/leaflet": "^1.9.8",
         "@types/leaflet-routing-machine": "^3.2.4",
         "@types/nodemailer": "^6.4.8"
     }
