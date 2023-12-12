@@ -1,6 +1,6 @@
-## PlaceKeeper
+## Place Keeper
 
-Intuitive Map Sharing Application.
+Map Sharing Application.
 
 ## Description
 
@@ -37,7 +37,7 @@ Intuitive Map Sharing Application.
 ### Install Dependencies
 
 ```zsh
-# Run (in the root directory of the application)
+# Run (In App)
 $ yarn install
 ```
 
@@ -53,21 +53,21 @@ NEXTAUTH_URL=http://localhost:3000
 ### Database Settings
 
 ```zsh
-# Create user (in MariaDB)
+# Create user (In MariaDB)
 $ create user 'user'@'localhost' identified by 'password';
 $ grant all privileges on *.* to 'user'@'localhost';
 
-# Run Prisma Migrate (in the root directory of the application)
+# Run Prisma Migrate (In App)
 $ npx prisma migrate dev
 
-# Run Prisma Generate (in the root directory of the application)
+# Run Prisma Generate (In App)
 $ npx prisma generate
 ```
 
 ### Launch Applications
 
 ```zsh
-# Run (in the root directory of the application)
+# Run (In App)
 # After execution, connect to http://localhost:3000.
 $ yarn build && yarn start
 ```
@@ -76,6 +76,6 @@ $ yarn build && yarn start
 
 Running the application requires a description of the mail server in the .env file, which is not included here for security reasons.
 
-Also, the database may go to sleep and not work well.  
+Also, the database may go to sleep and not work well.
 
-Therefore, if you are considering running the application or have any problems, please contact me at the email address listed on my GitHub. (It may take a few days to contact you. Please understand.)  
+Therefore, if you are considering running the application or have any problems, please contact me at the email address listed on my GitHub. (It may take a few days to contact you. Please understand.)
