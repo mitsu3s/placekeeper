@@ -3,5 +3,6 @@
     "extends": ["config:base"],
     "labels": ["dependencies"],
     "timezone": "Asia/Tokyo",
-    "automergeSchedule": ["invalid"]
+    "automergeSchedule": ["invalid"],
+    "baseBranches": ["develop"]
 }
