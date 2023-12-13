@@ -3,5 +3,6 @@
     "extends": ["config:base"],
     "labels": ["dependencies"],
     "schedule": ["after 10am and before 12pm every weekend"],
-    "timezone": "Asia/Tokyo"
+    "timezone": "Asia/Tokyo",
+    "automergeSchedule": ["invalid"]
 }
