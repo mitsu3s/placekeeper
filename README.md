@@ -25,11 +25,11 @@ Map Sharing Application.
 
 | Language/FrameWork | Version |
 | :----------------- | ------: |
-| TypeScript         |   5.1.3 |
-| Next.js            |  13.4.6 |
-| Node.js            |  19.6.0 |
+| TypeScript         |   5.3.3 |
+| Next.js            |  13.5.6 |
+| Node.js            | 20.10.0 |
 | React              |  18.2.0 |
-| MariaDB            | 10.4.27 |
+| MariaDB            | 10.4.28 |
 | yarn               | 1.22.19 |
 
 ## Usage
