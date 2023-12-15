@@ -21,6 +21,11 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@fontsource/kiwi-maru@^5.0.11":
+  version "5.0.11"
+  resolved "https://registry.yarnpkg.com/@fontsource/kiwi-maru/-/kiwi-maru-5.0.11.tgz#cbe35e8e497b30cc6e41c32cd34ee7ef48cdc21c"
+  integrity sha512-z2OBbho/74buE0wfFYA7KecRjmZxpBtSqWzceOwj9YeMCW4F2emjg56HTZ214/TVinjCcKohZO9uFpvcJiLQEw==
+
 "@fontsource/ubuntu@^5.0.8":
   version "5.0.8"
   resolved "https://registry.yarnpkg.com/@fontsource/ubuntu/-/ubuntu-5.0.8.tgz#5009cfaf00057277acdb88caa3537686248a484d"
