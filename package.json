@@ -16,7 +16,7 @@
         "@types/node": "20.10.4",
         "@types/react": "18.2.45",
         "@types/react-dom": "18.2.17",
-        "autoprefixer": "10.4.16",
+        "autoprefixer": "10.4.17",
         "axios": "^1.6.2",
         "formik": "^2.4.5",
         "leaflet": "^1.9.4",
