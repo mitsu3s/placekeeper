@@ -144,7 +144,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
 
     return (
         <div className="bg-white flex flex-col items-center h-screen">
-            <CommonMeta title="User Map" />
+            <CommonMeta title="User Map - Place Keeper" />
             <header className="flex items-center w-full h-20 sm:h-16 bg-indigo-500 mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
                     <Link
