@@ -146,10 +146,14 @@ const Home: NextPage = () => {
                             />
                             <button
                                 onClick={handleShowShareMap}
-                                className="text-white bg-indigo-500 hover:bg-indigo-400 focus-visible:ring active:bg-indigo-600 ml-4 px-4 py-1 rounded"
+                                className={`text-white ${
+                                    !shareCode
+                                        ? 'bg-gray-400 cursor-not-allowed'
+                                        : 'bg-indigo-500 hover:bg-indigo-400 focus-visible:ring active:bg-indigo-500'
+                                } ml-4 px-4 py-1 rounded`}
                                 disabled={!shareCode}
                             >
-                                Let's Show
+                                Show
                             </button>
                         </div>
                     </div>
