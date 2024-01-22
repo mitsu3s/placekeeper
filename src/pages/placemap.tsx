@@ -3,9 +3,11 @@ import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { useSession, signOut, getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth/next'
+import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
+import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { MapPageProps } from '@/libs/interface/props'
 import { PlaceForm } from '@/libs/interface/form'
 import { PlaceCoordinate } from '@/libs/interface/type'
@@ -19,7 +21,7 @@ import { CommonMeta } from '@/components/CommonMeta'
 import { PlaceTable } from '@/components/PlaceTable'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-    const session = await getSession(context)
+    const session = await getServerSession(context.req, context.res, authOptions)
 
     if (!session) {
         return {
