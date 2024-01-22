@@ -27,7 +27,7 @@ const Test: NextPage = () => {
 
     return (
         <div className="bg-white flex items-center justify-center h-screen">
-            <CommonMeta title="Sign in - Place Keeper" />
+            <CommonMeta title="Sign in" />
             <div className="py-6 sm:py-8 lg:py-12 w-full max-w-lg mx-auto">
                 <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
                     <h2 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 md:text-3xl">
