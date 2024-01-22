@@ -79,3 +79,6 @@ Running the application requires a description of the mail server in the .env fi
 Also, the database may go to sleep and not work well.
 
 Therefore, if you are considering running the application or have any problems, please contact me at the email address listed on my GitHub. (It may take a few days to contact you. Please understand.)
+
+There is currently an unexplained error on the deployment. Therefore, it works fine locally, but not on deployment.
+We apologize for the inconvenience.
