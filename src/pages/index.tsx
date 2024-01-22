@@ -12,6 +12,7 @@ const Home: NextPage = () => {
     const [showToastMessage, setShowToastMessage] = useState(false)
     const [, setInvalidShareCode] = useState(true)
     const [shareCode, setShareCode] = useState('')
+    console.log('index session', session)
 
     const handleShowShareMap = () => {
         router.push(`/sharemap?sharecode=${shareCode}`)
