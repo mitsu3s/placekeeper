@@ -1,4 +1,4 @@
-## PlaceKeeper
+## Place Keeper
 
 Intuitive Map Sharing Application.
 
@@ -76,6 +76,6 @@ $ yarn build && yarn start
 
 Running the application requires a description of the mail server in the .env file, which is not included here for security reasons.
 
-Also, the database may go to sleep and not work well.  
+Also, the database may go to sleep and not work well.
 
-Therefore, if you are considering running the application or have any problems, please contact me at the email address listed on my GitHub. (It may take a few days to contact you. Please understand.)  
+Therefore, if you are considering running the application or have any problems, please contact me at the email address listed on my GitHub. (It may take a few days to contact you. Please understand.)
