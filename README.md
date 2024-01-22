@@ -1,6 +1,6 @@
-# Place Keeper
+## Place Keeper
 
-Intuitive Map Sharing Application.
+Map Sharing Application.
 
 ## Description
 
@@ -25,11 +25,11 @@ Intuitive Map Sharing Application.
 
 | Language/FrameWork | Version |
 | :----------------- | ------: |
-| TypeScript         |   5.1.3 |
-| Next.js            |  13.4.6 |
-| Node.js            |  19.6.0 |
+| TypeScript         |   5.3.3 |
+| Next.js            |  13.5.6 |
+| Node.js            | 20.10.0 |
 | React              |  18.2.0 |
-| MariaDB            | 10.4.27 |
+| MariaDB            | 10.4.28 |
 | yarn               | 1.22.19 |
 
 ## Usage
@@ -37,7 +37,7 @@ Intuitive Map Sharing Application.
 ### Install Dependencies
 
 ```zsh
-# Run (in the root directory of the application)
+# Run (In App)
 $ yarn install
 ```
 
@@ -53,21 +53,21 @@ NEXTAUTH_URL=http://localhost:3000
 ### Database Settings
 
 ```zsh
-# Create user (in MariaDB)
+# Create user (In MariaDB)
 $ create user 'user'@'localhost' identified by 'password';
 $ grant all privileges on *.* to 'user'@'localhost';
 
-# Run Prisma Migrate (in the root directory of the application)
+# Run Prisma Migrate (In App)
 $ npx prisma migrate dev
 
-# Run Prisma Generate (in the root directory of the application)
+# Run Prisma Generate (In App)
 $ npx prisma generate
 ```
 
 ### Launch Applications
 
 ```zsh
-# Run (in the root directory of the application)
+# Run (In App)
 # After execution, connect to http://localhost:3000.
 $ yarn build && yarn start
 ```
