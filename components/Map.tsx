@@ -16,8 +16,8 @@ import { MapProps } from '@/libs/interface/props'
 import { RoutingPoint } from '@/libs/interface/type'
 import { RoutingMachine } from '@/components/Routing'
 import { Search } from '@/components/Search'
-import marker from '@/../public/icons/marker.svg'
-import shadow from '@/../public/images/shadow.png'
+import marker from '@/public/icons/marker.svg'
+import shadow from '@/public/images/shadow.png'
 
 const POSITION_CLASSES = {
     bottomleft: 'leaflet-bottom leaflet-left',

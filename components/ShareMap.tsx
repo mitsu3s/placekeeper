@@ -8,7 +8,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { ShareMapProps } from '@/libs/interface/props'
 import { RoutingPoint } from '@/libs/interface/type'
 import { RoutingMachine } from '@/components/Routing'
-import marker from '@/../public/icons/marker.svg'
+import marker from '@/public/icons/marker.svg'
 
 L.Icon.Default.mergeOptions({
     shadowUrl: markerShadow.src,

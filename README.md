@@ -1,6 +1,6 @@
-## Place Keeper
+## PlaceKeeper
 
-Map Sharing Application.
+Intuitive Map Sharing Application.
 
 ## Description
 
@@ -25,11 +25,11 @@ Map Sharing Application.
 
 | Language/FrameWork | Version |
 | :----------------- | ------: |
-| TypeScript         |   5.3.3 |
-| Next.js            |  13.5.6 |
-| Node.js            | 20.10.0 |
+| TypeScript         |   5.1.3 |
+| Next.js            |  13.4.6 |
+| Node.js            |  19.6.0 |
 | React              |  18.2.0 |
-| MariaDB            | 10.4.28 |
+| MariaDB            | 10.4.27 |
 | yarn               | 1.22.19 |
 
 ## Usage
@@ -37,7 +37,7 @@ Map Sharing Application.
 ### Install Dependencies
 
 ```zsh
-# Run (In App)
+# Run (in the root directory of the application)
 $ yarn install
 ```
 
@@ -53,21 +53,21 @@ NEXTAUTH_URL=http://localhost:3000
 ### Database Settings
 
 ```zsh
-# Create user (In MariaDB)
+# Create user (in MariaDB)
 $ create user 'user'@'localhost' identified by 'password';
 $ grant all privileges on *.* to 'user'@'localhost';
 
-# Run Prisma Migrate (In App)
+# Run Prisma Migrate (in the root directory of the application)
 $ npx prisma migrate dev
 
-# Run Prisma Generate (In App)
+# Run Prisma Generate (in the root directory of the application)
 $ npx prisma generate
 ```
 
 ### Launch Applications
 
 ```zsh
-# Run (In App)
+# Run (in the root directory of the application)
 # After execution, connect to http://localhost:3000.
 $ yarn build && yarn start
 ```
@@ -76,6 +76,6 @@ $ yarn build && yarn start
 
 Running the application requires a description of the mail server in the .env file, which is not included here for security reasons.
 
-Also, the database may go to sleep and not work well.
+Also, the database may go to sleep and not work well.  
 
-Therefore, if you are considering running the application or have any problems, please contact me at the email address listed on my GitHub. (It may take a few days to contact you. Please understand.)
+Therefore, if you are considering running the application or have any problems, please contact me at the email address listed on my GitHub. (It may take a few days to contact you. Please understand.)  
