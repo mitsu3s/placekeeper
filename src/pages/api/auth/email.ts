@@ -48,7 +48,7 @@ const html = (params: { url: string; host: string; theme: Theme }) => {
                 align="center"
                 style="padding: 10px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};"
             >
-                Please complete the sign in to PlaceKeeper. <br/>(<strong>${escapedHost}</strong>)
+                Please complete the sign in to Place Keeper. <br/>(<strong>${escapedHost}</strong>)
             </td>
         </tr>
         <tr>
