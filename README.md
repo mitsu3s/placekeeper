@@ -1,4 +1,4 @@
-## Place Keeper
+# Place Keeper
 
 Map Sharing Application.
 
@@ -53,7 +53,7 @@ NEXTAUTH_URL=http://localhost:3000
 ### Database Settings
 
 ```zsh
-# Create user (In MariaDB)
+# Create User (In MariaDB)
 $ create user 'user'@'localhost' identified by 'password';
 $ grant all privileges on *.* to 'user'@'localhost';
 
@@ -74,7 +74,7 @@ $ yarn build && yarn start
 
 ## Attention
 
-Running the application requires a description of the mail server in the .env file, which is not included here for security reasons.
+Running the application locally requires a description of the mail server in the .env file, which is not included here for security reasons.
 
 Also, the database may go to sleep and not work well.
 
