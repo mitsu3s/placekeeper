@@ -1,7 +1,8 @@
 @import '@fontsource/ubuntu/700.css';
+@import '@fontsource/kiwi-maru/500.css';
 
 .toastContainer {
-    font-family: 'Ubuntu';
+    font-family: 'Ubuntu', 'Kiwi Maru';
     position: fixed;
     top: -100px;
     left: 50%;

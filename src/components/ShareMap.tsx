@@ -8,6 +8,7 @@ import markerShadow from 'leaflet/dist/images/marker-shadow.png'
 import { ShareMapProps } from '@/libs/interface/props'
 import { RoutingPoint } from '@/libs/interface/type'
 import { RoutingMachine } from '@/components/Routing'
+import styles from '@/styles/leaflet.module.css'
 import marker from '@/../public/icons/marker.svg'
 
 L.Icon.Default.mergeOptions({
@@ -70,6 +71,7 @@ const ShareMap: NextPage<ShareMapProps> = ({ places, center, routingPoints }) =>
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
             zoomControl={false}
+            className={styles.leafletContainer}
         >
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

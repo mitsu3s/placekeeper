@@ -16,6 +16,7 @@ import { MapProps } from '@/libs/interface/props'
 import { RoutingPoint } from '@/libs/interface/type'
 import { RoutingMachine } from '@/components/Routing'
 import { Search } from '@/components/Search'
+import styles from '@/styles/leaflet.module.css'
 import marker from '@/../public/icons/marker.svg'
 import shadow from '@/../public/images/shadow.png'
 
@@ -136,7 +137,7 @@ const Map: NextPage<MapProps> = ({
             scrollWheelZoom={false}
             style={{ height: '80vh', width: '80%' }}
             zoomControl={false}
-            className="z-0"
+            className={styles.leafletContainer}
         >
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
