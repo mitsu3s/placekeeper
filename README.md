@@ -79,5 +79,3 @@ Running the application requires a description of the mail server in the .env fi
 Also, the database may go to sleep and not work well.
 
 Therefore, if you are considering running the application or have any problems, please contact me at the email address listed on my GitHub. (It may take a few days to contact you. Please understand.)
-
-We are currently experiencing an unexplained problem in our production environment. Therefore, it can only be run locally. (See README.md for local execution.)
