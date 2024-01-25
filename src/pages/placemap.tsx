@@ -218,7 +218,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                     </div>
                 </div>
             </header>
-            <div className="w-full flex justify-start px-1">
+            <div className="bg-white w-full flex justify-start px-1">
                 <PlaceTable
                     places={places}
                     handlePlaceClick={handlePlaceClick}
