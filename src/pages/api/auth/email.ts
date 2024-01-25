@@ -23,9 +23,9 @@ const html = (params: { url: string; host: string; theme: Theme }) => {
 
     const escapedHost = host.replace(/\./g, '&#8203;.')
 
-    const brandColor = '#6366f1'
+    const brandColor = '#826eff'
     const color = {
-        background: '#826eff',
+        background: '#f9f9f9',
         text: '#1F2937',
         mainBackground: '#ffffff',
         buttonBackground: brandColor,
