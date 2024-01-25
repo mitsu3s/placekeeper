@@ -4,7 +4,6 @@ import { Theme } from 'next-auth'
 export async function customSendVerificationRequest(params: any) {
     const { identifier, url, provider, theme } = params
     const { host } = new URL(url)
-    // NOTE: You are not required to use `nodemailer`, use whatever you want.
     const transport = createTransport(provider.server)
     const result = await transport.sendMail({
         to: identifier,
@@ -26,7 +25,7 @@ const html = (params: { url: string; host: string; theme: Theme }) => {
 
     const brandColor = '#6366f1'
     const color = {
-        background: '#f9f9f9',
+        background: '#826eff',
         text: '#1F2937',
         mainBackground: '#ffffff',
         buttonBackground: brandColor,
@@ -64,7 +63,7 @@ const html = (params: { url: string; host: string; theme: Theme }) => {
                                 href="${url}"
                                 target="_blank"
                                 style="font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: ${color.buttonText}; text-decoration: none; border-radius: 5px; padding: 10px 20px; border: 1px solid ${color.buttonBorder}; display: inline-block; font-weight: bold;"
-                                >Sign in</a
+                                >Sign In</a
                             >
                         </td>
                     </tr>
