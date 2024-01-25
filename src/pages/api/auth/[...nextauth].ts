@@ -25,6 +25,7 @@ export const authOptions: NextAuthOptions = {
                     identifier: email,
                     url,
                     provider: { server, from },
+                    theme: { colorScheme: 'light' },
                 })
             },
         }),
