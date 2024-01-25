@@ -68,6 +68,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
     const [shareCode, setShareCode] = useState(shareId)
     const [routigPoints, setRoutingPoints] = useState<PlaceCoordinate[]>([])
     const [isOpen, setIsOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const Map = React.useMemo(
         () =>
@@ -103,8 +104,10 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
 
         if (session) {
             try {
+                setIsLoading(true)
                 values.userId = session.user.id
                 await axios.post('/api/place/create', values)
+                setIsLoading(false)
                 router.reload()
             } catch (error) {
                 console.log(error)
@@ -145,9 +148,9 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
     }
 
     return (
-        <div className="bg-white flex flex-col items-center h-screen">
+        <div className="bg-white flex flex-col items-center h-screen w-screen">
             <CommonMeta title="User Map - Place Keeper" />
-            <header className="flex items-center w-full h-20 sm:h-16 bg-indigo-500 mb-4">
+            <header className="flex items-center w-full h-20 sm:h-16 bg-[#826eff] mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
                     <Link
                         href="/"
@@ -231,56 +234,64 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                     routingPoints={routigPoints}
                 />
             </div>
-            <div className="mt-4">
+            <div className="bg-white py-4 w-screen flex justify-center">
                 <Formik
                     initialValues={initialValues}
                     validationSchema={MapFormSchema}
                     onSubmit={handleCreate}
                 >
-                    <Form className="flex bg-white">
-                        <div className="text-gray-800 ml-6">
-                            <label htmlFor="placeName" className="text-gray-800">
-                                Place Name:{' '}
-                            </label>
-                            <Field
-                                type="text"
-                                id="placeName"
-                                name="placeName"
-                                className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
-                                autoComplete="off"
-                            />
-                            <ErrorMessage
-                                name="placeName"
-                                component="div"
-                                className="text-red-500"
-                            />
-                        </div>
-                        <div className="text-gray-800 ml-2">
-                            <label htmlFor="description" className="text-gray-800">
-                                Description:{' '}
-                            </label>
-                            <Field
-                                type="text"
-                                id="description"
-                                name="description"
-                                className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
-                                autoComplete="off"
-                            />
-                            <ErrorMessage
-                                name="description"
-                                component="div"
-                                className="text-red-500"
-                            />
-                        </div>
-                        <div>
-                            <button
-                                type="submit"
-                                className="bg-indigo-500 hover:bg-indigo-400 focus-visible:ring active:bg-indigo-600 text-white ml-2 px-4 rounded"
-                            >
-                                Create
-                            </button>
-                        </div>
-                    </Form>
+                    {({ isValid }) => (
+                        <Form className="flex bg-white">
+                            <div className="text-gray-800 ml-6">
+                                <label htmlFor="placeName" className="text-gray-800">
+                                    Place Name:{' '}
+                                </label>
+                                <Field
+                                    type="text"
+                                    id="placeName"
+                                    name="placeName"
+                                    className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
+                                    autoComplete="off"
+                                />
+                                <ErrorMessage
+                                    name="placeName"
+                                    component="div"
+                                    className="text-red-500"
+                                />
+                            </div>
+                            <div className="text-gray-800 ml-2">
+                                <label htmlFor="description" className="text-gray-800">
+                                    Description:{' '}
+                                </label>
+                                <Field
+                                    type="text"
+                                    id="description"
+                                    name="description"
+                                    className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
+                                    autoComplete="off"
+                                />
+                                <ErrorMessage
+                                    name="description"
+                                    component="div"
+                                    className="text-red-500"
+                                />
+                            </div>
+                            <div>
+                                <button
+                                    type="submit"
+                                    className={`text-white ml-2 px-4 rounded
+                                ${
+                                    isLoading || !isValid || selectedPosition === null
+                                        ? 'bg-gray-400 cursor-not-allowed'
+                                        : 'bg-[#826eff] hover:bg-[#8989ff] focus-visible:ring active:bg-[#826eff]'
+                                }`}
+                                    disabled={isLoading || !isValid || selectedPosition === null}
+                                >
+                                    {isLoading ? 'Loading...' : 'Create'}
+                                </button>
+                            </div>
+                        </Form>
+                    )}
                 </Formik>
             </div>
         </div>

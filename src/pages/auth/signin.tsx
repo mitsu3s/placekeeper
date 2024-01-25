@@ -68,11 +68,11 @@ const SignIn: NextPage = () => {
                                 ${
                                     isLoading || !isValid
                                         ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-[#7f7fff] hover:bg-[#9999ff] focus-visible:ring active:bg-[#7f7fff]'
+                                        : 'bg-[#826eff] hover:bg-[#8989ff] focus-visible:ring active:bg-[#826eff]'
                                 }`}
                                         disabled={isLoading || !isValid}
                                     >
-                                        {isLoading ? 'Loading...' : 'Sign in'}
+                                        {isLoading ? 'Loading...' : 'Sign In'}
                                     </button>
                                 </div>
                                 <div className="flex items-center justify-center bg-gray-100 p-4">
