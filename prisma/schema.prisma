@@ -33,18 +33,18 @@ model Share {
 }
 
 model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
+  id           String     @id @default(cuid())
+  sessionToken String     @unique
   userId       String
   expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
 }
 
 model User {
   id            String    @id @default(cuid())
-  email         String   @unique
+  email         String    @unique
   emailVerified DateTime
   sessions      Session[]
   places        Place[]
@@ -53,7 +53,7 @@ model User {
 
 model VerificationToken {
   identifier String
-  token      String   @unique
+  token      String       @unique
   expires    DateTime
 
   @@unique([identifier, token])

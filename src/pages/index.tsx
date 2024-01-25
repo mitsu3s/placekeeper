@@ -30,7 +30,7 @@ const Home: NextPage = () => {
     return (
         <div className="bg-slate-100 h-screen">
             <CommonMeta title="Place Keeper" />
-            <header className="z-30 flex items-center w-full h-24 sm:h-32 bg-indigo-500">
+            <header className="z-30 flex items-center w-full h-24 sm:h-32 bg-[#826eff]">
                 <div className="container flex items-center justify-between px-6 mx-auto">
                     <Link
                         href="/"
@@ -130,7 +130,7 @@ const Home: NextPage = () => {
                         </p>
 
                         <p
-                            className="mx-auto mt-8 text-sm font-semibold text-indigo-500"
+                            className="mx-auto mt-8 text-sm font-semibold text-[#826eff]"
                             title="read more"
                         >
                             {' '}
@@ -149,7 +149,7 @@ const Home: NextPage = () => {
                                 className={`text-white ${
                                     !shareCode
                                         ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-indigo-500 hover:bg-indigo-400 focus-visible:ring active:bg-indigo-500'
+                                        : 'bg-[#826eff] hover:bg-[#8989ff] focus-visible:ring active:bg-[#826eff]'
                                 } ml-4 px-4 py-1 rounded`}
                                 disabled={!shareCode}
                             >
