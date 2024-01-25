@@ -6,6 +6,6 @@ export interface PlaceForm {
     userId?: string
 }
 
-export interface SigninForm {
+export interface SignInForm {
     email: string
 }
