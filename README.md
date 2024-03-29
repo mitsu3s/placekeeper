@@ -76,6 +76,7 @@ $ yarn build && yarn start
 
 Running the application locally requires a description of the mail server in the .env file, which is not included here for security reasons.
 
-Also, the database may go to sleep and not work well.
+Currently, deployed applications are not working properly due to PlanetScale's change to pay-as-you-go.
+We apologize for the inconvenience until the migration to other database services is complete.
 
 Therefore, if you are considering running the application or have any problems, please contact me at the email address listed on my GitHub. (It may take a few days to contact you. Please understand.)
