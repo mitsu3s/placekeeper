@@ -3,10 +3,11 @@ import { PrismaClient } from '@prisma/client'
 import EmailProvider from 'next-auth/providers/email'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { customSendVerificationRequest } from '@/pages/api/auth/email'
+import type { NextAuthOptions } from 'next-auth'
 
 const prisma = new PrismaClient()
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         EmailProvider({
@@ -44,4 +45,6 @@ export default NextAuth({
     theme: {
         colorScheme: 'light',
     },
-})
+}
+
+export default NextAuth(authOptions)
