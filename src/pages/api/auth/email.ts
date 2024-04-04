@@ -1,7 +1,7 @@
-import { createTransport, SendMailOptions } from 'nodemailer'
-import { EmailRequestParams, EmailHtmlParams } from '@/libs/interface/param'
+import { createTransport } from 'nodemailer'
+import { Theme } from 'next-auth'
 
-export async function customSendVerificationRequest(params: EmailRequestParams) {
+export async function customSendVerificationRequest(params: any) {
     const { identifier, url, provider, theme } = params
     const { host } = new URL(url)
     const transport = createTransport(provider.server)
@@ -9,18 +9,17 @@ export async function customSendVerificationRequest(params: EmailRequestParams) 
     const result = await transport.sendMail({
         to: identifier,
         from: provider.from,
-        subject: `Sign in to ${host}`,
+        subject: `Sign In to ${host}`,
         text: text({ url, host }),
         html: html({ url, host, theme }),
-    } as SendMailOptions)
-
+    })
     const failed = result.rejected.concat(result.pending).filter(Boolean)
     if (failed.length) {
         throw new Error(`Email(s) (${failed.join(', ')}) could not be sent`)
     }
 }
 
-const html = (params: EmailHtmlParams) => {
+const html = (params: { url: string; host: string; theme: Theme }) => {
     const { url, host, theme } = params
 
     const escapedHost = host.replace(/\./g, '&#8203;.')
