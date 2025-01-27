@@ -1,8 +1,16 @@
 {
     "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-    "extends": ["config:base"],
-    "labels": ["dependencies"],
+    "extends": [
+        "config:recommended"
+    ],
+    "labels": [
+        "dependencies"
+    ],
     "timezone": "Asia/Tokyo",
-    "automergeSchedule": ["invalid"],
-    "baseBranches": ["develop"]
+    "automergeSchedule": [
+        "invalid"
+    ],
+    "baseBranches": [
+        "develop"
+    ]
 }
