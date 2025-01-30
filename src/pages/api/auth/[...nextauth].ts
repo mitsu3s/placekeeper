@@ -20,11 +20,11 @@ export const authOptions: NextAuthOptions = {
                 },
             },
             from: process.env.EMAIL_FROM,
-            sendVerificationRequest({ identifier: email, url, provider: { server, from } }) {
+            sendVerificationRequest({ identifier: email, url, provider }) {
                 return customSendVerificationRequest({
                     identifier: email,
                     url,
-                    provider: { server, from },
+                    provider,
                     theme: { colorScheme: 'light' },
                 })
             },

@@ -1,19 +1,10 @@
 import { Theme } from 'next-auth'
+import { EmailConfig } from 'next-auth/providers'
 
 export interface EmailRequestParams {
     identifier: string
     url: string
-    provider: {
-        server: {
-            host: string
-            port: number
-            auth: {
-                user: string
-                pass: string
-            }
-        }
-        from: string
-    }
+    provider: EmailConfig
     theme: Theme
 }
 
