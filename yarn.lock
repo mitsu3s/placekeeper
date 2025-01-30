@@ -22,19 +22,19 @@
     regenerator-runtime "^0.14.0"
 
 "@fontsource/kiwi-maru@^5.0.11":
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/kiwi-maru/-/kiwi-maru-5.0.12.tgz#1058c23b12fa47b1ac97812449d8d02e86474aea"
-  integrity sha512-GevfpNP3GpSDSGdwnrpMBi+7ph5JDGKTc7HSqSceVBxb9Cd5p7POOfdkzggqo27yaZ07UVs4C7sUBnKMOr2ZQQ==
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/kiwi-maru/-/kiwi-maru-5.1.1.tgz#f877acd215802d4cbb6a67afe33232a31d1ca921"
+  integrity sha512-ZkmrvPb9qQ57CCdaAi3wPNZge8GJxDelGdoSV8xvVzC7fxck+MNMCmgB/GFOqHluSezWV+FQm95+1I8NdLdFvA==
 
 "@fontsource/ubuntu@^5.0.8":
-  version "5.0.12"
-  resolved "https://registry.yarnpkg.com/@fontsource/ubuntu/-/ubuntu-5.0.12.tgz#9c106150ed2e47e14cf29e14b37bdfdecaa2b1b8"
-  integrity sha512-VWZpU1sU49XrqPBADUQrELaKxh3eW0rOqWeCIo3X9Gc7hzHE25OMFLlJttgCCFIkcn3WbjskIyr/Wm6bs1lASg==
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@fontsource/ubuntu/-/ubuntu-5.1.1.tgz#818d9a722c4b8ebb202bddedc9d1519f15c8f3d6"
+  integrity sha512-ghyIHIsqbBkUMA3zjvCIQENHl4CEhNgKrVxsuuC46XKw5Yfiy4C3W/A0eLGBR4+yre39b/1sVVsjK6VByVMAtg==
 
 "@jridgewell/gen-mapping@^0.3.2":
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.3.5.tgz#dcce6aff74bdf6dad1a95802b69b04a2fcb1fb36"
-  integrity sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==
+  version "0.3.8"
+  resolved "https://registry.yarnpkg.com/@jridgewell/gen-mapping/-/gen-mapping-0.3.8.tgz#4f0e06362e01362f823d348f1872b08f666d8142"
+  integrity sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==
   dependencies:
     "@jridgewell/set-array" "^1.2.1"
     "@jridgewell/sourcemap-codec" "^1.4.10"
