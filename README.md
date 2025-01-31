@@ -2,35 +2,39 @@
 
 Map Sharing Application.
 
-## Description
+## Overview
 
-### As Owner
+Place Keeper is a convenient map-sharing application that allows users to pin locations on a map and share them with others using a unique code.  
+Owners can save and manage locations, while shared users can view them in a read-only format.
 
--   Sign in and login with email address verification.
--   Click on the map, pin it, give it a location name and description, and save it. (Move the map by dragging or address search and pin it.)
--   Issue a sharing code.
+### For Owners
 
-### As Shared User
+-   **Secure Authentication:** Sign up and log in with email verification.
+-   **Pin & Save Locations:** Click on the map to place a pin, assign a location name, add a description, and save it.
+-   **Flexible Map Navigation:** Move the map by dragging or searching for an address before placing a pin.
+-   **Easy Sharing:** Generate a unique sharing code to allow others to view your saved locations.
 
--   By entering the sharing code obtained from the Owner from the top page, a map with pinned locations where the Owner has saved will be displayed.
--   Shared maps do not allow the addition or deletion of storage locations and only have read-only permissions.
+### For Shared Users
 
-### Common Feature
+-   **Access Shared Maps:** Enter the sharing code provided by the Owner to view the pinned locations.
+-   **Read-Only Mode:** Shared users can view locations but cannot add, edit, or delete them.
 
--   Search the list of saved locations.
--   Press a name in the list of saved locations moves the map to the corresponding location.
--   If there are two or more saved locations, the route is displayed by pressing the checkbox in the list.
+### Common Features
+
+-   **Search Functionality:** Quickly find saved locations using a search bar.
+-   **Interactive Map Navigation:** Clicking a location in the list moves the map to the corresponding pin.
+-   **Route Display:** If multiple locations are saved, select them via checkboxes to display a route between them.
 
 ## Requirement
 
-| Language/FrameWork | Version |
-| :----------------- | ------: |
-| TypeScript         |   5.3.3 |
-| Next.js            |  13.5.6 |
-| Node.js            | 20.10.0 |
-| React              |  18.2.0 |
-| MariaDB            | 10.4.28 |
-| yarn               | 1.22.19 |
+| Language/FrameWork |  Version |
+| :----------------- | -------: |
+| TypeScript         |    5.4.3 |
+| Next.js            |   13.5.8 |
+| Node.js            | 20.17.16 |
+| React              |  18.3.18 |
+| MariaDB            |  10.4.28 |
+| yarn               |  1.22.19 |
 
 ## Usage
 
