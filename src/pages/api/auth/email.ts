@@ -14,7 +14,7 @@ export async function customSendVerificationRequest(params: EmailRequestParams) 
         html: html({ url, host, theme }),
     } as SendMailOptions)
 
-    const failed = result.rejected.concat(result.pending).filter(Boolean)
+    const failed = result.rejected.filter(Boolean)
     if (failed.length) {
         throw new Error(`Email(s) (${failed.join(', ')}) could not be sent`)
     }
