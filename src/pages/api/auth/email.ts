@@ -25,7 +25,7 @@ const html = (params: EmailHtmlParams) => {
 
     const escapedHost = host.replace(/\./g, '&#8203;.')
 
-    const brandColor = '#826eff'
+    const brandColor = '#000000'
     const color = {
         background: '#f9f9f9',
         text: '#1F2937',
@@ -49,24 +49,22 @@ const html = (params: EmailHtmlParams) => {
                 align="center"
                 style="padding: 10px 0px; font-size: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};"
             >
-                Please complete the sign in to Place Keeper. <br/>(<strong>${escapedHost}</strong>)
+                Please complete your sign in to Place Keeper. <br/>(<strong>${escapedHost}</strong>)
             </td>
         </tr>
         <tr>
             <td align="center" style="padding: 20px 0">
                 <table border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                        <td
-                            align="center"
-                            style="border-radius: 5px"
-                            bgcolor="${color.buttonBackground}"
-                        >
+                        <td align="center" style="border-radius: 5px; background-color: ${color.buttonBackground};">
                             <a
                                 href="${url}"
                                 target="_blank"
+                                rel="noopener noreferrer"
                                 style="font-size: 18px; font-family: Helvetica, Arial, sans-serif; color: ${color.buttonText}; text-decoration: none; border-radius: 5px; padding: 10px 20px; border: 1px solid ${color.buttonBorder}; display: inline-block; font-weight: bold;"
-                                >Sign In</a
                             >
+                                Sign In
+                            </a>
                         </td>
                     </tr>
                 </table>
@@ -77,11 +75,12 @@ const html = (params: EmailHtmlParams) => {
                 align="center"
                 style="padding: 0px 0px 10px 0px; font-size: 16px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};"
             >
-                If you do not recognize this email, please delete it.
+                If you did not request this email, you can safely ignore it.
             </td>
         </tr>
     </table>
-    </body>`
+    </body>
+    `
 }
 
 const text = ({ url, host }: { url: string; host: string }) => {
