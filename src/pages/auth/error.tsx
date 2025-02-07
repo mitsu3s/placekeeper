@@ -18,7 +18,7 @@ const Error: NextPage = () => {
                     </p>
                     <Link
                         href="/auth/signin"
-                        className="pt-4 text-gray-800 border-b-2 border-indigo-500"
+                        className="pt-4 text-gray-800 border-b-2 border-purple-300"
                     >
                         Sign In
                     </Link>
