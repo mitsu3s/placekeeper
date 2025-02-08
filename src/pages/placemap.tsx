@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { getServerSession } from 'next-auth/next'
 import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
+import { Menu, X } from 'lucide-react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { MapPageProps } from '@/libs/interface/props'
@@ -69,6 +70,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
     const [routigPoints, setRoutingPoints] = useState<PlaceCoordinate[]>([])
     const [isOpen, setIsOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
     const Map = React.useMemo(
         () =>
@@ -147,11 +149,25 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
         setIsOpen(false)
     }
 
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen)
+    }
+
     return (
         <div className="bg-white flex flex-col items-center min-h-screen w-full">
             <CommonMeta title="Owner Map - Place Keeper" />
             <header className="flex items-center w-full h-20 sm:h-16 bg-white shadow-md mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
+                    <button
+                        className="block md:hidden p-2 rounded-md transition-all duration-200 hover:bg-gray-100"
+                        onClick={toggleSidebar}
+                    >
+                        {isSidebarOpen ? (
+                            <X className="w-6 h-6 text-black" />
+                        ) : (
+                            <Menu className="w-6 h-6 text-black" />
+                        )}
+                    </button>
                     <Link href="/" className="text-lg sm:text-xl font-black text-black md:text-2xl">
                         Place Keeper
                     </Link>
@@ -160,6 +176,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                             type="button"
                             className="text-md md:text-base lg:text-lg font-sen text-black py-3 px-4 inline-flex justify-center items-center gap-2 transition-all"
                             onMouseEnter={showDropdown}
+                            onMouseLeave={hideDropdown}
                         >
                             User Info
                             <svg
@@ -181,7 +198,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
 
                         {isOpen && (
                             <div
-                                className="transition-opacity duration-200 opacity-100 absolute right-0 mt-2 min-w-[10rem] bg-white shadow-lg rounded-lg p-2 z-10 border-gray-300 border-2"
+                                className="transition-[opacity,margin] duration opacity-100 absolute right-0 mt-2 min-w-[10rem] bg-white shadow-lg rounded-lg p-2 after:h-4 after:absolute after:-bottom-4 after:left-0 after:w-full before:h-4 before:absolute before:-top-4 before:left-0 before:w-full border-gray-300 border-2 z-10"
                                 onMouseEnter={showDropdown}
                                 onMouseLeave={hideDropdown}
                             >
@@ -214,9 +231,25 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                 </div>
             </header>
 
-            {/* Main Layout */}
             <div className="w-full flex flex-col md:flex-row px-1 gap-4">
-                <div className="w-full md:w-1/4 md:max-h-full overflow-auto transition-all duration-300">
+                <div
+                    className={`fixed inset-y-0 left-0 bg-white z-50 w-3/4 max-w-sm transform transition-transform md:relative md:w-1/4 md:max-h-full overflow-auto 
+                    ${
+                        isSidebarOpen
+                            ? 'translate-x-0 shadow-lg'
+                            : '-translate-x-full md:translate-x-0'
+                    }`}
+                >
+                    {isSidebarOpen && (
+                        <div className="flex justify-end p-3">
+                            <button
+                                className="p-2 rounded-md hover:bg-gray-100 transition-all duration-200"
+                                onClick={toggleSidebar}
+                            >
+                                <X className="w-6 h-6 text-black" />
+                            </button>
+                        </div>
+                    )}
                     <PlaceTable
                         places={places}
                         handlePlaceClick={handlePlaceClick}

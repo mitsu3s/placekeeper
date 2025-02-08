@@ -102,7 +102,7 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
                                     onClick={handleSearchIconClick}
                                 >
                                     <svg
-                                        className="h-3.5 w-3.5 text-black hover:text-indigo-500"
+                                        className="h-3.5 w-3.5 text-black hover:text-gray-500"
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="16"
                                         height="16"
@@ -149,7 +149,7 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
                                                             <input
                                                                 id={`hs-table-search-checkbox-${index}`}
                                                                 type="checkbox"
-                                                                className="border-gray-200 rounded text-gray-600 focus:ring-gray-500"
+                                                                className="border-gray-200 rounded text-gray-600 focus:ring-gray-500 accent-gray-800"
                                                                 checked={selectedPlaces.some(
                                                                     (p: PlaceCoordinate) =>
                                                                         p.latitude ===

@@ -16,8 +16,8 @@ L.Icon.Default.mergeOptions({
     iconUrl: marker.src,
     iconRetinaUrl: marker.src,
     iconAnchor: [9, 52],
-    popupAnchor: [8, -40],
-    iconSize: [35, 60],
+    popupAnchor: [5.5, -41.5],
+    iconSize: [28, 53],
 })
 
 const ShareMap: NextPage<ShareMapProps> = ({ places, center, routingPoints }) => {
