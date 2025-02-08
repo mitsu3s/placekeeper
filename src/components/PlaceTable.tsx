@@ -79,8 +79,8 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
                     shouldReload={false}
                 />
             )}
-            <div className="-m-1.5 overflow-x-auto ml-3 mr-4">
-                <div className="p-1.5 min-w-full inline-block align-middle">
+            <div className="overflow-x-auto ml-3 mr-4">
+                <div className="min-w-full inline-block align-middle">
                     <div className="border rounded-lg divide-y divide-gray-200">
                         <div className="py-3 px-4">
                             <div className="relative max-w-xs">
@@ -91,7 +91,7 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
                                     type="text"
                                     name="search-place"
                                     id="search-place"
-                                    className="p-3 pl-10 block w-full border border-gray-200 text-sm text-gray-800 rounded-md outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
+                                    className="p-3 pl-10 block w-full border border-gray-200 text-sm text-gray-800 rounded-md outline-none ring-gray-300 transition duration-100 focus-visible:ring"
                                     placeholder="Search Place"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -149,7 +149,7 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
                                                             <input
                                                                 id={`hs-table-search-checkbox-${index}`}
                                                                 type="checkbox"
-                                                                className="border-gray-200 rounded text-blue-600 focus:ring-blue-500"
+                                                                className="border-gray-200 rounded text-gray-600 focus:ring-gray-500"
                                                                 checked={selectedPlaces.some(
                                                                     (p: PlaceCoordinate) =>
                                                                         p.latitude ===
@@ -188,7 +188,7 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
                                                 <td className="pr-3 py-3 items-center">
                                                     {canDelete && (
                                                         <a
-                                                            className="text-gray-800 hover:text-indigo-500"
+                                                            className="text-gray-800 hover:text-gray-500"
                                                             onClick={() => handleDelete(place.id)}
                                                         >
                                                             <svg

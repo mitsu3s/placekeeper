@@ -82,33 +82,41 @@ const ShareMapPage: NextPage<ShareMapPageProps> = ({ places }) => {
     }
 
     return (
-        <div className="bg-white flex flex-col items-center h-screen">
+        <div className="bg-white flex flex-col items-center min-h-screen w-full">
             <CommonMeta title="Share Map - Place Keeper" />
-            <header className="z-30 flex items-center w-full h-14 sm:h-20 bg-[#826eff]">
+            <header className="flex items-center w-full h-20 sm:h-20 bg-white shadow-md mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
-                    <Link href="/" className="text-2xl font-black uppercase text-white md:text-3xl">
+                    <Link href="/" className="text-2xl font-black text-black md:text-3xl">
                         Place Keeper
                     </Link>
                     <div className="flex items-center">
-                        <nav className="items-center text-lg uppercase font-sen text-white lg:flex">
+                        <nav className="items-center text-lg font-sen text-black lg:flex">
                             <Link
                                 href="/auth/signin"
-                                className="flex px-6 py-2 hover:text-gray-300"
+                                className="flex px-6 py-2 hover:text-gray-600"
                             >
-                                Create your Map!
+                                Share your map too!
                             </Link>
                         </nav>
                     </div>
                 </div>
             </header>
-            <div className="w-full flex justify-start mt-8">
-                <PlaceTable
-                    places={places}
-                    handlePlaceClick={handlePlaceClick}
-                    updateRoutingPoints={updateRoutingPoints}
-                    canDelete={false}
-                />
-                <ShareMap places={places} center={centerPosition} routingPoints={routingPoints} />
+            <div className="w-full flex flex-col md:flex-row px-1 gap-4">
+                <div className="w-full md:w-1/4 md:max-h-full overflow-auto transition-all duration-300">
+                    <PlaceTable
+                        places={places}
+                        handlePlaceClick={handlePlaceClick}
+                        updateRoutingPoints={updateRoutingPoints}
+                        canDelete={false}
+                    />
+                </div>
+                <div className="w-full md:w-3/4">
+                    <ShareMap
+                        places={places}
+                        center={centerPosition}
+                        routingPoints={routingPoints}
+                    />
+                </div>
             </div>
         </div>
     )

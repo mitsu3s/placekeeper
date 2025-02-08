@@ -135,7 +135,7 @@ const Map: NextPage<MapProps> = ({
             center={centerPosition}
             zoom={14}
             scrollWheelZoom={false}
-            style={{ height: '80vh', width: '80%' }}
+            style={{ height: '90vh', width: '100%' }}
             zoomControl={false}
             className={styles.leafletContainer}
         >
