@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic'
 import { getServerSession } from 'next-auth/next'
 import { useSession, signOut } from 'next-auth/react'
 import axios from 'axios'
+import { Menu, X } from 'lucide-react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import { MapPageProps } from '@/libs/interface/props'
@@ -69,6 +70,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
     const [routigPoints, setRoutingPoints] = useState<PlaceCoordinate[]>([])
     const [isOpen, setIsOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false)
 
     const Map = React.useMemo(
         () =>
@@ -147,27 +149,38 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
         setIsOpen(false)
     }
 
+    const toggleSidebar = () => {
+        setIsSidebarOpen(!isSidebarOpen)
+    }
+
     return (
-        <div className="bg-white flex flex-col items-center h-screen w-screen">
-            <CommonMeta title="User Map - Place Keeper" />
-            <header className="flex items-center w-full h-20 sm:h-16 bg-[#826eff] mb-4">
+        <div className="bg-white flex flex-col items-center min-h-screen w-full">
+            <CommonMeta title="Owner Map - Place Keeper" />
+            <header className="flex items-center w-full h-20 sm:h-16 bg-white shadow-md mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
-                    <Link
-                        href="/"
-                        className="text-lg sm:text-xl font-black uppercase text-white md:text-2xl"
+                    <button
+                        className="block md:hidden p-2 rounded-md transition-all duration-200 hover:bg-gray-100"
+                        onClick={toggleSidebar}
                     >
+                        {isSidebarOpen ? (
+                            <X className="w-6 h-6 text-black" />
+                        ) : (
+                            <Menu className="w-6 h-6 text-black" />
+                        )}
+                    </button>
+                    <Link href="/" className="text-lg sm:text-xl font-black text-black md:text-2xl">
                         Place Keeper
                     </Link>
                     <div className="relative inline-block">
                         <button
                             type="button"
-                            className="uppercase text-md md:text-base lg:text-lg font-sen text-white py-3 px-4 inline-flex justify-center items-center gap-2 transition-all"
+                            className="text-md md:text-base lg:text-lg font-sen text-black py-3 px-4 inline-flex justify-center items-center gap-2 transition-all"
                             onMouseEnter={showDropdown}
                             onMouseLeave={hideDropdown}
                         >
                             User Info
                             <svg
-                                className={`w-2.5 h-2.5 text-white ${isOpen ? 'rotate-180' : ''}`}
+                                className={`w-2.5 h-2.5 text-black ${isOpen ? 'rotate-180' : ''}`}
                                 width="16"
                                 height="16"
                                 viewBox="0 0 16 16"
@@ -185,28 +198,27 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
 
                         {isOpen && (
                             <div
-                                className="transition-[opacity,margin] duration opacity-100 absolute right-0 mt-2 min-w-[10rem] bg-white shadow-lg rounded-lg p-2 after:h-4 after:absolute after:-bottom-4 after:left-0 after:w-full before:h-4 before:absolute before:-top-4 before:left-0 before:w-full border-indigo-100 border-2 z-10"
+                                className="transition-[opacity,margin] duration opacity-100 absolute right-0 mt-2 min-w-[10rem] bg-white shadow-lg rounded-lg p-2 after:h-4 after:absolute after:-bottom-4 after:left-0 after:w-full before:h-4 before:absolute before:-top-4 before:left-0 before:w-full border-gray-300 border-2 z-10"
                                 onMouseEnter={showDropdown}
                                 onMouseLeave={hideDropdown}
                             >
-                                <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500">
+                                <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100">
                                     Email: {session?.user.email}
                                 </div>
-                                {shareCode && (
-                                    <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500">
+                                {shareCode ? (
+                                    <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100">
                                         ShareCode: {shareCode}
                                     </div>
-                                )}
-                                {!shareCode && (
+                                ) : (
                                     <button
                                         onClick={handleGenerateShareCode}
-                                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500 w-full"
+                                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 w-full"
                                     >
                                         Generate Share Code
                                     </button>
                                 )}
                                 <button
-                                    className="uppercase flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-indigo-100 focus:ring-2 focus:ring-blue-500 w-full"
+                                    className="uppercase flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 w-full"
                                     onClick={() =>
                                         signOut({ callbackUrl: process.env.NEXT_PUBLIC_URL })
                                     }
@@ -218,81 +230,122 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                     </div>
                 </div>
             </header>
-            <div className="bg-white w-full flex justify-start px-1">
-                <PlaceTable
-                    places={places}
-                    handlePlaceClick={handlePlaceClick}
-                    updateRoutingPoints={updateRoutingPoints}
-                    canDelete={true}
-                />
-                <Map
-                    places={places}
-                    selectedPosition={selectedPosition}
-                    handleMapClick={handleMapClick}
-                    handleSearchClick={handleSearchClick}
-                    center={centerPosition}
-                    routingPoints={routigPoints}
-                />
-            </div>
-            <div className="bg-white py-4 w-screen flex justify-center">
-                <Formik
-                    initialValues={initialValues}
-                    validationSchema={MapFormSchema}
-                    onSubmit={handleCreate}
+
+            <div className="w-full flex flex-col md:flex-row px-1 gap-4">
+                <div
+                    className={`fixed inset-y-0 left-0 bg-white z-50 w-3/4 max-w-sm transform transition-transform md:relative md:w-1/4 md:max-h-full overflow-auto 
+                    ${
+                        isSidebarOpen
+                            ? 'translate-x-0 shadow-lg'
+                            : '-translate-x-full md:translate-x-0'
+                    }`}
                 >
-                    {({ isValid }) => (
-                        <Form className="flex bg-white">
-                            <div className="text-gray-800 ml-6">
-                                <label htmlFor="placeName" className="text-gray-800">
-                                    Place Name:{' '}
-                                </label>
-                                <Field
-                                    type="text"
-                                    id="placeName"
-                                    name="placeName"
-                                    className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
-                                    autoComplete="off"
-                                />
-                                <ErrorMessage
-                                    name="placeName"
-                                    component="div"
-                                    className="text-red-500"
-                                />
-                            </div>
-                            <div className="text-gray-800 ml-2">
-                                <label htmlFor="description" className="text-gray-800">
-                                    Description:{' '}
-                                </label>
-                                <Field
-                                    type="text"
-                                    id="description"
-                                    name="description"
-                                    className="text-gray-800 w-36 rounded-sm outline-none ring-indigo-300 transition duration-100 focus-visible:ring bg-slate-100"
-                                    autoComplete="off"
-                                />
-                                <ErrorMessage
-                                    name="description"
-                                    component="div"
-                                    className="text-red-500"
-                                />
-                            </div>
-                            <div>
-                                <button
-                                    type="submit"
-                                    className={`text-white ml-2 px-4 rounded
-                                ${
-                                    isLoading || !isValid || selectedPosition === null
-                                        ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-[#826eff] hover:bg-[#8989ff] focus-visible:ring active:bg-[#826eff]'
-                                }`}
-                                    disabled={isLoading || !isValid || selectedPosition === null}
-                                >
-                                    {isLoading ? 'Loading...' : 'Create'}
-                                </button>
-                            </div>
-                        </Form>
+                    {isSidebarOpen && (
+                        <div className="flex justify-end p-3">
+                            <button
+                                className="p-2 rounded-md hover:bg-gray-100 transition-all duration-200"
+                                onClick={toggleSidebar}
+                            >
+                                <X className="w-6 h-6 text-black" />
+                            </button>
+                        </div>
                     )}
-                </Formik>
+                    <PlaceTable
+                        places={places}
+                        handlePlaceClick={handlePlaceClick}
+                        updateRoutingPoints={updateRoutingPoints}
+                        canDelete={true}
+                    />
+
+                    <div className="bg-white py-4 w-full flex justify-center pl-3 pr-4">
+                        <div className="border rounded-lg divide-y divide-gray-200 p-4 w-full max-w-2xl">
+                            <Formik
+                                initialValues={initialValues}
+                                validationSchema={MapFormSchema}
+                                onSubmit={handleCreate}
+                            >
+                                {({ isValid }) => (
+                                    <Form className="flex flex-col gap-4 w-full">
+                                        <div className="px-4">
+                                            <div className="relative max-w-xs">
+                                                <label
+                                                    htmlFor="placeName"
+                                                    className="text-gray-500 text-xs uppercase"
+                                                >
+                                                    Place Name
+                                                </label>
+                                                <Field
+                                                    type="text"
+                                                    id="placeName"
+                                                    name="placeName"
+                                                    className="p-1 block w-full border border-gray-200 text-sm text-gray-800 rounded-md outline-none ring-gray-300 transition duration-100 focus-visible:ring"
+                                                    autoComplete="off"
+                                                />
+                                                <ErrorMessage
+                                                    name="placeName"
+                                                    component="div"
+                                                    className="text-red-500 text-xs mt-1"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="px-4">
+                                            <div className="relative max-w-xs">
+                                                <label
+                                                    htmlFor="description"
+                                                    className="text-gray-500 text-xs uppercase"
+                                                >
+                                                    Description
+                                                </label>
+                                                <Field
+                                                    type="text"
+                                                    id="description"
+                                                    name="description"
+                                                    className="p-1 block w-full border border-gray-200 text-sm text-gray-800 rounded-md outline-none ring-gray-300 transition duration-100 focus-visible:ring"
+                                                    autoComplete="off"
+                                                />
+                                                <ErrorMessage
+                                                    name="description"
+                                                    component="div"
+                                                    className="text-red-500 text-xs mt-1"
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="w-full flex justify-end px-4">
+                                            <button
+                                                type="submit"
+                                                className={`px-4 py-2 rounded text-sm font-medium 
+                                                ${
+                                                    isLoading ||
+                                                    !isValid ||
+                                                    selectedPosition === null
+                                                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                                        : 'bg-black text-white hover:bg-gray-800'
+                                                }`}
+                                                disabled={
+                                                    isLoading ||
+                                                    !isValid ||
+                                                    selectedPosition === null
+                                                }
+                                            >
+                                                {isLoading ? 'Loading...' : 'Create'}
+                                            </button>
+                                        </div>
+                                    </Form>
+                                )}
+                            </Formik>
+                        </div>
+                    </div>
+                </div>
+                <div className="w-full md:w-3/4">
+                    <Map
+                        places={places}
+                        selectedPosition={selectedPosition}
+                        handleMapClick={handleMapClick}
+                        handleSearchClick={handleSearchClick}
+                        center={centerPosition}
+                        routingPoints={routigPoints}
+                    />
+                </div>
             </div>
         </div>
     )

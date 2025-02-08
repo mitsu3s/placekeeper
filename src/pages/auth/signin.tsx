@@ -67,8 +67,8 @@ const SignIn: NextPage = () => {
                                         className={`block rounded-lg px-8 py-3 text-center text-sm font-semibold text-white outline-none ring-gray-300 transition duration-100 md:text-base
                                 ${
                                     isLoading || !isValid
-                                        ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-[#826eff] hover:bg-[#8989ff] focus-visible:ring active:bg-[#826eff]'
+                                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                        : 'bg-black text-white hover:bg-gray-800'
                                 }`}
                                         disabled={isLoading || !isValid}
                                     >
