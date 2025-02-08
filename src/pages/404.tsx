@@ -16,7 +16,7 @@ const Error: NextPage = () => {
                         <br />
                         Please click the link below to return to the top page.
                     </p>
-                    <Link href="/" className="pt-4 text-gray-800 border-b-2 border-indigo-500">
+                    <Link href="/" className="pt-4 text-gray-800 border-b-2 border-purple-300">
                         Back to Home
                     </Link>
                 </div>

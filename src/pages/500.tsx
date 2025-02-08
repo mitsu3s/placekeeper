@@ -16,7 +16,7 @@ const Error: NextPage = () => {
                         <br />
                         Sorry for the inconvenience.
                     </p>
-                    <Link href="/" className="pt-4 text-gray-800 border-b-2 border-indigo-500">
+                    <Link href="/" className="pt-4 text-gray-800 border-b-2 border-purple-300">
                         Back to Home
                     </Link>
                 </div>

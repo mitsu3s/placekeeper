@@ -45,7 +45,7 @@ export const Search: NextPage<SearchProps> = ({ handleSearch }) => {
                 type="text"
                 name="search-address"
                 id="search-address"
-                className="p-3 pl-10 block w-full border border-gray-200 text-sm text-gray-800 rounded-md outline-none ring-indigo-300 transition duration-100 focus-visible:ring"
+                className="p-3 pl-10 block w-full border border-gray-200 text-sm text-gray-800 rounded-md outline-none ring-gray-300 transition duration-100 focus-visible:ring"
                 placeholder="Search Address"
                 value={address}
                 onChange={(e) => setAddress(e.target.value)}
@@ -56,7 +56,7 @@ export const Search: NextPage<SearchProps> = ({ handleSearch }) => {
                 onClick={handleSearchAddress}
             >
                 <svg
-                    className="h-3.5 w-3.5 text-black hover:text-indigo-500"
+                    className="h-3.5 w-3.5 text-black hover:text-gray-500"
                     xmlns="http://www.w3.org/2000/svg"
                     width="16"
                     height="16"

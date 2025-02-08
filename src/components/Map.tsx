@@ -32,8 +32,8 @@ L.Icon.Default.mergeOptions({
     iconUrl: marker.src,
     iconRetinaUrl: marker.src,
     iconAnchor: [9, 52],
-    popupAnchor: [8, -40],
-    iconSize: [35, 60],
+    popupAnchor: [5.5, -41.5],
+    iconSize: [28, 53],
 })
 
 const Map: NextPage<MapProps> = ({
@@ -135,7 +135,7 @@ const Map: NextPage<MapProps> = ({
             center={centerPosition}
             zoom={14}
             scrollWheelZoom={false}
-            style={{ height: '80vh', width: '80%' }}
+            style={{ height: '90vh', width: '100%' }}
             zoomControl={false}
             className={styles.leafletContainer}
         >
