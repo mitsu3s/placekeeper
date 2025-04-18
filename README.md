@@ -1,11 +1,11 @@
 # Place Keeper
 
-Map Sharing Application.
+Map Sharing Application with Just a Link.
 
 ## Overview
 
-Place Keeper is a convenient map-sharing application that allows users to pin locations on a map and share them with others using a unique code.  
-Owners can save and manage locations, while shared users can view them in a read-only format.
+Place Keeper is a web application that allows owners to create maps with pinned locations and share them via a unique URL.  
+No app installation or login is required for viewers—anyone with the link can access the shared map instantly.
 
 ### For Owners
 
@@ -16,13 +16,13 @@ Owners can save and manage locations, while shared users can view them in a read
 
 ### For Shared Users
 
--   **Access Shared Maps:** Enter the sharing code provided by the Owner to view the pinned locations.
+-   **No Login Required:** Just open the URL provided by the Owner to view the pinned locations.
 -   **Read-Only Mode:** Shared users can view locations but cannot add, edit, or delete them.
 
 ### Common Features
 
+-   **Pin List & Quick Jump:** Clicking a location in the list moves the map to the corresponding pin.
 -   **Search Functionality:** Quickly find saved locations using a search bar.
--   **Interactive Map Navigation:** Clicking a location in the list moves the map to the corresponding pin.
 -   **Route Display:** If multiple locations are saved, select them via checkboxes to display a route between them.
 
 ## Requirement
@@ -36,7 +36,7 @@ Owners can save and manage locations, while shared users can view them in a read
 | MariaDB            |  10.4.28 |
 | yarn               |  1.22.19 |
 
-## Usage
+## Local Usage
 
 ### Install Dependencies
 

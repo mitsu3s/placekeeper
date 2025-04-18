@@ -20,6 +20,7 @@ import { generateShareCode } from '@/utils/shareCodeGenerator'
 import { replaceSpace } from '@/utils/replaceSpace'
 import { CommonMeta } from '@/components/CommonMeta'
 import { PlaceTable } from '@/components/PlaceTable'
+import { ToastMessage } from '@/components/Toast'
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const session = await getServerSession(context.req, context.res, authOptions)
@@ -71,6 +72,8 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
     const [isOpen, setIsOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const [isSidebarOpen, setIsSidebarOpen] = useState(false)
+    const [showToastMessage, setShowToastMessage] = useState(false)
+    const [toastMessage, setToastMessage] = useState('')
 
     const Map = React.useMemo(
         () =>
@@ -120,6 +123,19 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
         }
     }
 
+    const handleCopyShareUrl = async () => {
+        try {
+            await navigator.clipboard.writeText(
+                `${process.env.NEXT_PUBLIC_URL}/sharemap?sharecode=${shareCode}`
+            )
+            setToastMessage('URL copied to clipboard!')
+            setShowToastMessage(true)
+        } catch (err) {
+            setToastMessage('Failed to copy URL.')
+            setShowToastMessage(true)
+        }
+    }
+
     const handleGenerateShareCode = async () => {
         if (session) {
             try {
@@ -158,6 +174,14 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
             <CommonMeta title="Owner Map - Place Keeper" />
             <header className="flex items-center w-full h-20 sm:h-16 bg-white shadow-md mb-4">
                 <div className="container flex items-center justify-between px-6 mx-auto">
+                    {showToastMessage && (
+                        <ToastMessage
+                            setshowToastMessage={setShowToastMessage}
+                            message={toastMessage}
+                            shouldReload={false}
+                            type="success"
+                        />
+                    )}
                     <button
                         className="block md:hidden p-2 rounded-md transition-all duration-200 hover:bg-gray-100"
                         onClick={toggleSidebar}
@@ -206,9 +230,12 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                                     Email: {session?.user.email}
                                 </div>
                                 {shareCode ? (
-                                    <div className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100">
-                                        ShareCode: {shareCode}
-                                    </div>
+                                    <button
+                                        onClick={handleCopyShareUrl}
+                                        className="flex items-center gap-x-3.5 py-2 px-3 rounded-md text-sm text-gray-800 hover:bg-gray-100 w-full text-left"
+                                    >
+                                        Copy Share URL
+                                    </button>
                                 ) : (
                                     <button
                                         onClick={handleGenerateShareCode}
