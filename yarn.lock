@@ -22,14 +22,14 @@
     regenerator-runtime "^0.14.0"
 
 "@fontsource/kiwi-maru@^5.0.11":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@fontsource/kiwi-maru/-/kiwi-maru-5.1.1.tgz#f877acd215802d4cbb6a67afe33232a31d1ca921"
-  integrity sha512-ZkmrvPb9qQ57CCdaAi3wPNZge8GJxDelGdoSV8xvVzC7fxck+MNMCmgB/GFOqHluSezWV+FQm95+1I8NdLdFvA==
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/kiwi-maru/-/kiwi-maru-5.2.5.tgz#aeb3c1db038f0a66485338b2aa5ceb8fd4401aad"
+  integrity sha512-ZosG5JFSSdF6kVAj0YcGy9CKGSomHVsaSCJnMvt6tdfIbrg43rp6bAzM45r33KzfJIdRndhz6uMo5yI5ZxHB0g==
 
 "@fontsource/ubuntu@^5.0.8":
-  version "5.1.1"
-  resolved "https://registry.yarnpkg.com/@fontsource/ubuntu/-/ubuntu-5.1.1.tgz#818d9a722c4b8ebb202bddedc9d1519f15c8f3d6"
-  integrity sha512-ghyIHIsqbBkUMA3zjvCIQENHl4CEhNgKrVxsuuC46XKw5Yfiy4C3W/A0eLGBR4+yre39b/1sVVsjK6VByVMAtg==
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@fontsource/ubuntu/-/ubuntu-5.2.5.tgz#cd3745524134505608be8779477319bcf6a73db9"
+  integrity sha512-VKVFVqmJ9MGnOJW2dsQ982qHN8Zr+tNeEwEHnzt5VdGi9ZWL37wYFD32YsqukWlI/+I7v5ZkgHTEAvsZxU6aDA==
 
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
