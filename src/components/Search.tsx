@@ -35,6 +35,7 @@ export const Search: NextPage<SearchProps> = ({ handleSearch }) => {
                         setshowToastMessage={setShowToastMessage}
                         message={'Invalid address.'}
                         shouldReload={false}
+                        type="error"
                     />
                 </div>
             )}

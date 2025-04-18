@@ -35,6 +35,7 @@ export interface ShareMapProps {
 export interface ToastMessageProps {
     setshowToastMessage: React.Dispatch<React.SetStateAction<boolean>>
     message: string
+    type: 'success' | 'error' | 'info' | 'warning'
     shouldReload: boolean
 }
 

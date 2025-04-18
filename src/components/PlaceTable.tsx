@@ -77,6 +77,7 @@ export const PlaceTable: NextPage<PlaceTableProps> = ({
                     setshowToastMessage={setShowToastMessage}
                     message={'Not Found Address'}
                     shouldReload={false}
+                    type="error"
                 />
             )}
             <div className="overflow-x-auto ml-3 mr-4">
