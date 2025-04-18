@@ -29,10 +29,10 @@ No app installation or login is required for viewers—anyone with the link can 
 
 | Language/FrameWork |  Version |
 | :----------------- | -------: |
-| TypeScript         |    5.4.3 |
-| Next.js            |   13.5.8 |
-| Node.js            | 20.17.16 |
-| React              |  18.3.18 |
+| TypeScript         |    5.8.3 |
+| Next.js            |  13.5.11 |
+| Node.js            | 20.17.30 |
+| React              |   18.3.1 |
 | MariaDB            |  10.4.28 |
 | yarn               |  1.22.19 |
 
