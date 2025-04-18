@@ -88,12 +88,15 @@ const Home: NextPage = () => {
 
             <section className="flex flex-col items-center justify-center h-screen text-center px-6">
                 <h1 className="text-5xl md:text-6xl font-bold leading-tight tracking-tight">
-                    Manage & Share Locations <br className="hidden md:block" /> with Intuitive
-                    Control
+                    Share Maps Instantly <br className="hidden md:block" />
+                    No Sign-ups for Viewers
                 </h1>
                 <p className="mt-6 text-lg text-gray-700 max-w-xl">
-                    Store and share your locations easily. <br className="hidden md:block" />
-                    Secure authentication with email. No passwords required.
+                    Just pin locations and share with a URL or short code.{' '}
+                    <br className="hidden md:block" />
+                    Anyone can view your map — no login or app needed.{' '}
+                    <br className="hidden md:block" />
+                    You create and manage maps with simple email sign-in.
                 </p>
 
                 <div className="mt-10 flex flex-col items-center">
