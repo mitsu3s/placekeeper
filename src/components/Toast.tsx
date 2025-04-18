@@ -3,9 +3,25 @@ import { useRouter } from 'next/router'
 import { ToastMessageProps } from '@/libs/interface/props'
 import styles from '@/styles/toast.module.css'
 
+const typeClassMap: Record<ToastMessageProps['type'], string> = {
+    success: 'bg-green-100 border-green-200 text-green-500',
+    error: 'bg-red-100 border-red-200 text-red-500',
+    info: 'bg-blue-100 border-blue-200 text-blue-500',
+    warning: 'bg-yellow-100 border-yellow-200 text-yellow-500',
+}
+
+const buttonColorMap: Record<ToastMessageProps['type'], string> = {
+    success: 'text-green-400 hover:text-green-600 focus:ring-green-400 focus:ring-offset-green-100',
+    error: 'text-red-400 hover:text-red-600 focus:ring-red-400 focus:ring-offset-red-100',
+    info: 'text-blue-400 hover:text-blue-600 focus:ring-blue-400 focus:ring-offset-blue-100',
+    warning:
+        'text-yellow-400 hover:text-yellow-600 focus:ring-yellow-400 focus:ring-offset-yellow-100',
+}
+
 export const ToastMessage: NextPage<ToastMessageProps> = ({
     setshowToastMessage,
     message,
+    type,
     shouldReload,
 }) => {
     const router = useRouter()
@@ -18,7 +34,7 @@ export const ToastMessage: NextPage<ToastMessageProps> = ({
     return (
         <div className={styles.toastContainer}>
             <div
-                className="max-w-xs bg-red-100 border border-red-200 text-sm text-red-500 rounded-md shadow-md"
+                className={`max-w-xs text-sm rounded-md shadow-md border ${typeClassMap[type]}`}
                 role="alert"
             >
                 <div className="flex p-4">
@@ -27,7 +43,7 @@ export const ToastMessage: NextPage<ToastMessageProps> = ({
                         <button
                             type="button"
                             onClick={handleClick}
-                            className="inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md text-red-400 hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-red-100 focus:ring-red-400 transition-all text-sm"
+                            className={`inline-flex flex-shrink-0 justify-center items-center h-4 w-4 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 transition-all text-sm ${buttonColorMap[type]}`}
                         >
                             <span className="sr-only">Close</span>
                             <svg

@@ -179,6 +179,7 @@ const MapPage: NextPage<MapPageProps> = ({ places, shareId }) => {
                             setshowToastMessage={setShowToastMessage}
                             message={toastMessage}
                             shouldReload={false}
+                            type="success"
                         />
                     )}
                     <button

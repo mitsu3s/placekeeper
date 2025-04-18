@@ -49,6 +49,7 @@ const Home: NextPage = () => {
                             setshowToastMessage={setShowToastMessage}
                             message="You are not signed in."
                             shouldReload={false}
+                            type="error"
                         />
                     )}
                     {router.query.invalidShareCode && (
@@ -56,6 +57,7 @@ const Home: NextPage = () => {
                             setshowToastMessage={setInvalidShareCode}
                             message="Invalid Share Code."
                             shouldReload={true}
+                            type="error"
                         />
                     )}
                     <nav className="flex space-x-6 text-lg text-gray-700">
