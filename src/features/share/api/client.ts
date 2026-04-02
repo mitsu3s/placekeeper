@@ -5,9 +5,8 @@ interface SaveShareCodeResponse {
 }
 
 export async function saveShareCodeRequest(shareCode: string) {
-    return fetchJson<SaveShareCodeResponse>('/api/share/create', {
+    return fetchJson<SaveShareCodeResponse>('/api/shares', {
         method: 'POST',
         body: JSON.stringify({ shareCode }),
     })
 }
-

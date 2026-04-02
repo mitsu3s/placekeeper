@@ -1,3 +1,5 @@
+'use client'
+
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import type { CreatePlaceFormValues } from '@/features/places/types'
 import { createPlaceValidationSchema } from '@/features/places/validation'
@@ -109,4 +111,3 @@ export function PlaceFormPanel({
         </div>
     )
 }
-

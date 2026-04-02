@@ -1,10 +1,11 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { signOut, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
+import { signOut } from 'next-auth/react'
 import { BrandLink } from '@/components/branding/BrandLink'
 import { Toast } from '@/components/feedback/Toast'
-import { PageMeta } from '@/components/seo/PageMeta'
 import { HOME_ROUTE, OWNER_MAP_ROUTE, SHARE_MAP_ROUTE, SIGN_IN_ROUTE } from '@/config/app'
 
 type ToastState = {
@@ -12,28 +13,36 @@ type ToastState = {
     type: 'error' | 'success' | 'info' | 'warning'
 } | null
 
-export default function HomePage() {
-    const router = useRouter()
-    const { data: session } = useSession()
+interface HomePageProps {
+    isAuthenticated: boolean
+    showInvalidShareCodeToast: boolean
+}
 
-    const [toast, setToast] = useState<ToastState>(null)
+export default function HomePage({
+    isAuthenticated,
+    showInvalidShareCodeToast,
+}: HomePageProps) {
+    const router = useRouter()
+    const [toast, setToast] = useState<ToastState>(() =>
+        showInvalidShareCodeToast
+            ? {
+                  message: 'Invalid Share Code.',
+                  type: 'error',
+              }
+            : null
+    )
     const [shareCode, setShareCode] = useState('')
 
     useEffect(() => {
-        if (!router.isReady || router.query.invalidShareCode !== 'true') {
+        if (!showInvalidShareCodeToast) {
             return
         }
 
-        setToast({
-            message: 'Invalid Share Code.',
-            type: 'error',
-        })
-
-        void router.replace(HOME_ROUTE, undefined, { shallow: true })
-    }, [router, router.isReady, router.query.invalidShareCode])
+        router.replace(HOME_ROUTE)
+    }, [router, showInvalidShareCodeToast])
 
     function handleOwnerMapClick() {
-        if (!session) {
+        if (!isAuthenticated) {
             setToast({
                 message: 'You are not signed in.',
                 type: 'error',
@@ -67,7 +76,6 @@ export default function HomePage() {
                 `,
             }}
         >
-            <PageMeta title="Place Keeper" />
             <header className="fixed top-0 left-0 w-full bg-white shadow-md backdrop-blur-md z-50">
                 <div className="container mx-auto flex items-center justify-between px-6 py-6">
                     <BrandLink className="text-3xl tracking-wide font-extrabold" />
@@ -86,7 +94,7 @@ export default function HomePage() {
                         >
                             Owner Map
                         </button>
-                        {!session ? (
+                        {!isAuthenticated ? (
                             <Link href={SIGN_IN_ROUTE} className="hover:text-black transition">
                                 Sign In
                             </Link>
@@ -144,4 +152,3 @@ export default function HomePage() {
         </div>
     )
 }
-

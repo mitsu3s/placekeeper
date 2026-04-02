@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, type FormEvent, type SyntheticEvent } from 'react'
 import { Toast } from '@/components/feedback/Toast'
 import type { Coordinate } from '@/lib/geo'

@@ -1,10 +1,14 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { getServerSession } from 'next-auth/next'
+import 'server-only'
+import { getServerSession } from 'next-auth'
 import { ApiError } from '@/server/api/http'
 import { authOptions } from '@/server/auth/options'
 
-export async function requireApiSession(req: NextApiRequest, res: NextApiResponse) {
-    const session = await getServerSession(req, res, authOptions)
+export function auth() {
+    return getServerSession(authOptions)
+}
+
+export async function requireAuthenticatedSession() {
+    const session = await auth()
 
     if (!session?.user?.id) {
         throw new ApiError(401, 'Authentication required')
@@ -12,4 +16,3 @@ export async function requireApiSession(req: NextApiRequest, res: NextApiRespons
 
     return session
 }
-
