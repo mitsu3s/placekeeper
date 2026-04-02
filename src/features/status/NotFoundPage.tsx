@@ -3,7 +3,6 @@ import { CenteredMessagePage } from '@/components/layout/CenteredMessagePage'
 export default function NotFoundPage() {
     return (
         <CenteredMessagePage
-            metaTitle="404 - Place Keeper"
             title="Page Not Found"
             description={
                 <>
@@ -17,4 +16,3 @@ export default function NotFoundPage() {
         />
     )
 }
-

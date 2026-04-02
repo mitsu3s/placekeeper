@@ -4,7 +4,6 @@ import { SIGN_IN_ROUTE } from '@/config/app'
 export default function AuthErrorPage() {
     return (
         <CenteredMessagePage
-            metaTitle="Auth Error - Place Keeper"
             title="Unable to sign in"
             description={
                 <>
@@ -18,4 +17,3 @@ export default function AuthErrorPage() {
         />
     )
 }
-

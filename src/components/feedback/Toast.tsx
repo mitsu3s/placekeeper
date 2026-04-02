@@ -1,3 +1,5 @@
+'use client'
+
 import type { ReactNode } from 'react'
 import styles from '@/components/feedback/Toast.module.css'
 
@@ -60,4 +62,3 @@ export function Toast({ message, onClose, type }: ToastProps) {
         </div>
     )
 }
-

@@ -1,11 +1,15 @@
+import 'server-only'
 import type { NextAuthOptions } from 'next-auth'
 import EmailProvider from 'next-auth/providers/email'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import { prisma } from '@/server/db/client'
 import { customSendVerificationRequest } from '@/server/auth/email'
 
+type NextAuthPrismaClient = Parameters<typeof PrismaAdapter>[0]
+
 export const authOptions: NextAuthOptions = {
-    adapter: PrismaAdapter(prisma),
+    // Auth.js has not updated its Prisma adapter types for Prisma 7's new client yet.
+    adapter: PrismaAdapter(prisma as unknown as NextAuthPrismaClient),
     providers: [
         EmailProvider({
             server: {
@@ -27,7 +31,7 @@ export const authOptions: NextAuthOptions = {
             },
         }),
     ],
-    secret: process.env.SECRET,
+    secret: process.env.NEXTAUTH_SECRET ?? process.env.AUTH_SECRET ?? process.env.SECRET,
     pages: {
         signIn: '/auth/signin',
         error: '/auth/error',
@@ -43,4 +47,3 @@ export const authOptions: NextAuthOptions = {
         colorScheme: 'light',
     },
 }
-

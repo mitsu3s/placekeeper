@@ -1,4 +1,5 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
+import 'server-only'
+import { NextResponse } from 'next/server'
 
 export class ApiError extends Error {
     constructor(
@@ -8,20 +9,6 @@ export class ApiError extends Error {
         super(message)
         this.name = 'ApiError'
     }
-}
-
-export function assertMethod(
-    req: NextApiRequest,
-    res: NextApiResponse,
-    expectedMethod: 'GET' | 'POST'
-) {
-    if (req.method === expectedMethod) {
-        return true
-    }
-
-    res.setHeader('Allow', expectedMethod)
-    res.status(405).json({ error: `Method ${req.method ?? 'UNKNOWN'} not allowed` })
-    return false
 }
 
 export function requireNonEmptyString(value: unknown, fieldName: string) {
@@ -42,12 +29,19 @@ export function requireNumber(value: unknown, fieldName: string) {
     return parsedValue
 }
 
-export function handleApiError(res: NextApiResponse, error: unknown) {
+export async function parseJsonBody<T>(request: Request): Promise<T> {
+    try {
+        return (await request.json()) as T
+    } catch {
+        throw new ApiError(400, 'Invalid request body')
+    }
+}
+
+export function handleRouteError(error: unknown) {
     if (error instanceof ApiError) {
-        return res.status(error.statusCode).json({ error: error.message })
+        return NextResponse.json({ error: error.message }, { status: error.statusCode })
     }
 
     console.error(error)
-    return res.status(500).json({ error: 'Internal server error' })
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
 }
-

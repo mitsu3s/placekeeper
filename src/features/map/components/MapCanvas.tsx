@@ -1,5 +1,6 @@
+'use client'
+
 import { useEffect } from 'react'
-import type { Place } from '@prisma/client'
 import {
     MapContainer,
     Marker,
@@ -13,6 +14,7 @@ import 'leaflet/dist/leaflet.css'
 import L from 'leaflet'
 import { AddressSearchControl } from '@/features/map/components/AddressSearchControl'
 import { RoutingMachine } from '@/features/map/components/RoutingMachine'
+import type { PlaceItem } from '@/features/places/types'
 import styles from '@/features/map/components/MapCanvas.module.css'
 import type { Coordinate, LatLngTuple } from '@/lib/geo'
 import { toCoordinateKey } from '@/lib/geo'
@@ -43,7 +45,7 @@ interface AddressSelection extends Coordinate {
 }
 
 interface MapCanvasProps {
-    places: Place[]
+    places: PlaceItem[]
     center: LatLngTuple
     routingPoints: Coordinate[]
     selectedPosition?: LatLngTuple | null
@@ -119,4 +121,3 @@ export default function MapCanvas({
         </MapContainer>
     )
 }
-

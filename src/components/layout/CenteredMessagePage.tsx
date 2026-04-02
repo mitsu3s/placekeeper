@@ -1,25 +1,21 @@
-import type { ReactNode } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 import Link from 'next/link'
-import { PageMeta } from '@/components/seo/PageMeta'
 
 interface CenteredMessagePageProps {
     title: string
     description: ReactNode
-    metaTitle: string
-    actionHref?: string
+    actionHref?: ComponentProps<typeof Link>['href']
     actionLabel?: string
 }
 
 export function CenteredMessagePage({
     title,
     description,
-    metaTitle,
     actionHref,
     actionLabel,
 }: CenteredMessagePageProps) {
     return (
-        <div className="bg-white bg-opacity-95 flex min-h-screen items-center justify-center">
-            <PageMeta title={metaTitle} />
+        <div className="bg-white/95 flex min-h-screen items-center justify-center">
             <div className="mx-auto max-w-md rounded-xl border bg-white">
                 <div className="flex flex-col items-center px-12 py-10 text-center">
                     <h1 className="mb-8 text-2xl font-medium text-gray-900">{title}</h1>
@@ -37,4 +33,3 @@ export function CenteredMessagePage({
         </div>
     )
 }
-

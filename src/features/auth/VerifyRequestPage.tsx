@@ -3,7 +3,6 @@ import { CenteredMessagePage } from '@/components/layout/CenteredMessagePage'
 export default function VerifyRequestPage() {
     return (
         <CenteredMessagePage
-            metaTitle="Auth Verify - Place Keeper"
             title="Check your email"
             description={
                 <>
@@ -15,4 +14,3 @@ export default function VerifyRequestPage() {
         />
     )
 }
-
