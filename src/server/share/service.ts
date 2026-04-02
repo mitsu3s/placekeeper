@@ -1,3 +1,4 @@
+import 'server-only'
 import { prisma } from '@/server/db/client'
 
 export async function findShareByCode(shareId: string) {

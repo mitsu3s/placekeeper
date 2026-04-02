@@ -1,11 +1,12 @@
+'use client'
+
 import { useState } from 'react'
-import type { Place } from '@prisma/client'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 import { BrandLink } from '@/components/branding/BrandLink'
-import { PageMeta } from '@/components/seo/PageMeta'
 import { SIGN_IN_ROUTE } from '@/config/app'
 import { PlaceTable } from '@/features/places/components/PlaceTable'
+import type { PlaceItem } from '@/features/places/types'
 import { useUrlHash } from '@/hooks/useUrlHash'
 import type { Coordinate, LatLngTuple } from '@/lib/geo'
 import { DEFAULT_MAP_CENTER, toLatLngTuple } from '@/lib/geo'
@@ -17,7 +18,7 @@ const MapCanvas = dynamic(() => import('@/features/map/components/MapCanvas'), {
 })
 
 export interface SharedMapPageProps {
-    places: Place[]
+    places: PlaceItem[]
 }
 
 export default function SharedMapPage({
@@ -36,7 +37,6 @@ export default function SharedMapPage({
 
     return (
         <div className="bg-white flex min-h-screen w-full flex-col items-center">
-            <PageMeta title="Share Map - Place Keeper" />
             <header className="mb-4 flex h-20 w-full items-center bg-white shadow-md">
                 <div className="container mx-auto flex items-center justify-between px-6">
                     <BrandLink className="text-2xl md:text-3xl" />

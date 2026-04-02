@@ -1,10 +1,11 @@
+import type { ComponentProps } from 'react'
 import Link from 'next/link'
 import { APP_NAME, HOME_ROUTE } from '@/config/app'
 import { cn } from '@/lib/cn'
 
 interface BrandLinkProps {
     className?: string
-    href?: string
+    href?: ComponentProps<typeof Link>['href']
 }
 
 export function BrandLink({ className, href = HOME_ROUTE }: BrandLinkProps) {
@@ -14,4 +15,3 @@ export function BrandLink({ className, href = HOME_ROUTE }: BrandLinkProps) {
         </Link>
     )
 }
-

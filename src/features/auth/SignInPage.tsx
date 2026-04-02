@@ -1,9 +1,10 @@
+'use client'
+
 import { useState } from 'react'
 import Link from 'next/link'
 import { signIn } from 'next-auth/react'
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { BrandLink } from '@/components/branding/BrandLink'
-import { PageMeta } from '@/components/seo/PageMeta'
 import { OWNER_MAP_ROUTE } from '@/config/app'
 import type { SignInFormValues } from '@/features/auth/types'
 import { signInValidationSchema } from '@/features/auth/validation'
@@ -32,7 +33,6 @@ export default function SignInPage() {
 
     return (
         <div className="bg-white flex min-h-screen items-center justify-center">
-            <PageMeta title="Sign In - Place Keeper" />
             <div className="w-full max-w-lg py-6 sm:py-8 lg:py-12">
                 <div className="mx-auto max-w-screen-2xl px-4 md:px-8">
                     <h1 className="mb-4 text-center text-2xl font-bold text-gray-800 md:mb-8 md:text-3xl">
@@ -96,4 +96,3 @@ export default function SignInPage() {
         </div>
     )
 }
-

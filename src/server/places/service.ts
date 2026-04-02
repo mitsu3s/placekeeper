@@ -1,5 +1,14 @@
-import type { Place } from '@prisma/client'
+import 'server-only'
+import type { PlaceItem } from '@/features/places/types'
 import { prisma } from '@/server/db/client'
+
+const placeSelect = {
+    id: true,
+    name: true,
+    description: true,
+    latitude: true,
+    longitude: true,
+} as const
 
 interface CreatePlaceInput {
     userId: string
@@ -9,17 +18,19 @@ interface CreatePlaceInput {
     longitude: number
 }
 
-export async function listPlacesForUser(userId: string): Promise<Place[]> {
+export async function listPlacesForUser(userId: string): Promise<PlaceItem[]> {
     return prisma.place.findMany({
         where: {
             userId,
         },
+        select: placeSelect,
     })
 }
 
 export async function createPlace(input: CreatePlaceInput) {
     return prisma.place.create({
         data: input,
+        select: placeSelect,
     })
 }
 
@@ -33,4 +44,3 @@ export async function deletePlaceForUser(placeId: string, userId: string) {
 
     return result.count > 0
 }
-

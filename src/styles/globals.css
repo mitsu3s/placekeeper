@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
 @import '@fontsource/ubuntu/700.css';
 @import '@fontsource/kiwi-maru/500.css';

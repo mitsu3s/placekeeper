@@ -1,22 +1,21 @@
-import { useCallback } from 'react'
-import { useRouter } from 'next/router'
+'use client'
+
+import { useCallback, useState } from 'react'
 import { extractHash } from '@/lib/hash'
 
 export function useUrlHash(): readonly [string, (newHash: string) => void] {
-    const router = useRouter()
-    const hash = extractHash(router.asPath)
-
-    const setHash = useCallback(
-        (newHash: string) => {
-            const [pathWithoutHash] = router.asPath.split('#')
-            void router.replace(`${pathWithoutHash}#${newHash}`, undefined, {
-                shallow: true,
-                scroll: false,
-            })
-        },
-        [router]
+    const [hash, setHash] = useState(() =>
+        typeof window === 'undefined' ? '' : extractHash(window.location.href)
     )
 
-    return [hash, setHash] as const
-}
+    const replaceHash = useCallback(
+        (newHash: string) => {
+            const nextUrl = `${window.location.pathname}${window.location.search}#${newHash}`
+            window.history.replaceState(null, '', nextUrl)
+            setHash(newHash)
+        },
+        []
+    )
 
+    return [hash, replaceHash] as const
+}

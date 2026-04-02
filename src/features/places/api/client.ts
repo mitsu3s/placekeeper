@@ -1,5 +1,5 @@
-import type { Place } from '@prisma/client'
 import { fetchJson } from '@/lib/fetch-json'
+import type { PlaceItem } from '@/features/places/types'
 
 interface CreatePlaceRequest {
     name: string
@@ -9,16 +9,14 @@ interface CreatePlaceRequest {
 }
 
 export async function createPlaceRequest(payload: CreatePlaceRequest) {
-    return fetchJson<Place>('/api/place/create', {
+    return fetchJson<PlaceItem>('/api/places', {
         method: 'POST',
         body: JSON.stringify(payload),
     })
 }
 
 export async function deletePlaceRequest(placeId: string) {
-    return fetchJson<{ deleted: true }>('/api/place/delete', {
-        method: 'POST',
-        body: JSON.stringify({ placeId }),
+    return fetchJson<{ deleted: true }>(`/api/places/${placeId}`, {
+        method: 'DELETE',
     })
 }
-

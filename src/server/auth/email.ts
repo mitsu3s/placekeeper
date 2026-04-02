@@ -1,6 +1,7 @@
+import 'server-only'
 import { createTransport, type SendMailOptions } from 'nodemailer'
 import type { Theme } from 'next-auth'
-import type { EmailConfig } from 'next-auth/providers'
+import type { EmailConfig } from 'next-auth/providers/email'
 
 interface EmailRequestParams {
     identifier: string
@@ -99,4 +100,3 @@ function createHtmlEmail({ url, host }: EmailHtmlParams) {
 function createTextEmail({ url, host }: { url: string; host: string }) {
     return `Sign in to ${host}\n${url}\n\n`
 }
-

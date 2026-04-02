@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef } from 'react'
 
 interface UserMenuProps {
@@ -96,4 +98,3 @@ export function UserMenu({
         </div>
     )
 }
-

@@ -1,11 +1,13 @@
+'use client'
+
 import { useEffect, useMemo, useState } from 'react'
-import type { Place } from '@prisma/client'
+import type { PlaceItem } from '@/features/places/types'
 import { createPlaceHash } from '@/lib/hash'
 import type { Coordinate } from '@/lib/geo'
 
 interface PlaceTableProps {
-    places: Place[]
-    onPlaceSelect: (place: Place) => void
+    places: PlaceItem[]
+    onPlaceSelect: (place: PlaceItem) => void
     onRouteSelectionChange: (selectedPlaces: Coordinate[]) => void
     onDeletePlace?: (placeId: string) => Promise<void> | void
     deletingPlaceId?: string | null
@@ -21,11 +23,11 @@ export function PlaceTable({
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedPlaceIds, setSelectedPlaceIds] = useState<string[]>([])
 
-    useEffect(() => {
-        setSelectedPlaceIds((currentSelectedIds) =>
-            currentSelectedIds.filter((placeId) => places.some((place) => place.id === placeId))
-        )
-    }, [places])
+    const activeSelectedPlaceIds = useMemo(
+        () =>
+            selectedPlaceIds.filter((placeId) => places.some((place) => place.id === placeId)),
+        [places, selectedPlaceIds]
+    )
 
     const filteredPlaces = useMemo(() => {
         const normalizedSearchTerm = searchTerm.trim().toLowerCase()
@@ -40,27 +42,30 @@ export function PlaceTable({
     useEffect(() => {
         onRouteSelectionChange(
             places
-                .filter((place) => selectedPlaceIds.includes(place.id))
+                .filter((place) => activeSelectedPlaceIds.includes(place.id))
                 .map((place) => ({
                     latitude: place.latitude,
                     longitude: place.longitude,
                 }))
         )
-    }, [onRouteSelectionChange, places, selectedPlaceIds])
+    }, [activeSelectedPlaceIds, onRouteSelectionChange, places])
 
-    function toggleRouteSelection(place: Place) {
+    function toggleRouteSelection(place: PlaceItem) {
         setSelectedPlaceIds((currentSelectedIds) => {
-            const isAlreadySelected = currentSelectedIds.includes(place.id)
+            const nextSelectedIds = currentSelectedIds.filter((placeId) =>
+                places.some((currentPlace) => currentPlace.id === placeId)
+            )
+            const isAlreadySelected = nextSelectedIds.includes(place.id)
 
             if (isAlreadySelected) {
-                return currentSelectedIds.filter((placeId) => placeId !== place.id)
+                return nextSelectedIds.filter((placeId) => placeId !== place.id)
             }
 
-            if (currentSelectedIds.length >= 2) {
-                return currentSelectedIds
+            if (nextSelectedIds.length >= 2) {
+                return nextSelectedIds
             }
 
-            return [...currentSelectedIds, place.id]
+            return [...nextSelectedIds, place.id]
         })
     }
 
@@ -136,9 +141,12 @@ export function PlaceTable({
                                         </tr>
                                     ) : (
                                         filteredPlaces.map((place, index) => {
-                                            const isSelected = selectedPlaceIds.includes(place.id)
+                                            const isSelected = activeSelectedPlaceIds.includes(
+                                                place.id
+                                            )
                                             const disableUncheckedRouting =
-                                                !isSelected && selectedPlaceIds.length >= 2
+                                                !isSelected &&
+                                                activeSelectedPlaceIds.length >= 2
 
                                             return (
                                                 <tr key={place.id}>
@@ -226,4 +234,3 @@ export function PlaceTable({
         </div>
     )
 }
-

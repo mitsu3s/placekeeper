@@ -1,12 +1,12 @@
+'use client'
+
 import { useState } from 'react'
-import type { Place } from '@prisma/client'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut } from 'next-auth/react'
 import { Menu } from 'lucide-react'
 import { BrandLink } from '@/components/branding/BrandLink'
 import { Toast } from '@/components/feedback/Toast'
-import { PageMeta } from '@/components/seo/PageMeta'
 import { HOME_ROUTE } from '@/config/app'
 import { PlaceFormPanel } from '@/features/places/components/PlaceFormPanel'
 import { PlaceTable } from '@/features/places/components/PlaceTable'
@@ -16,7 +16,7 @@ import { buildShareMapUrl } from '@/features/share/utils/buildShareMapUrl'
 import { generateShareCode } from '@/features/share/utils/generateShareCode'
 import { MobileSidebar } from '@/features/map/components/MobileSidebar'
 import { UserMenu } from '@/features/map/components/UserMenu'
-import type { CreatePlaceFormValues } from '@/features/places/types'
+import type { CreatePlaceFormValues, PlaceItem } from '@/features/places/types'
 import { useUrlHash } from '@/hooks/useUrlHash'
 import type { Coordinate, LatLngTuple } from '@/lib/geo'
 import { DEFAULT_MAP_CENTER, toLatLngTuple } from '@/lib/geo'
@@ -34,15 +34,16 @@ type ToastState = {
 } | null
 
 export interface OwnerMapPageProps {
-    initialPlaces: Place[]
+    initialPlaces: PlaceItem[]
     initialShareCode: string
+    userEmail: string | null
 }
 
 export default function OwnerMapPage({
     initialPlaces,
     initialShareCode,
+    userEmail,
 }: OwnerMapPageProps) {
-    const { data: session } = useSession()
     const [, setHash] = useUrlHash()
 
     const [places, setPlaces] = useState(initialPlaces)
@@ -182,7 +183,6 @@ export default function OwnerMapPage({
 
     return (
         <div className="bg-white flex min-h-screen w-full flex-col items-center">
-            <PageMeta title="Owner Map - Place Keeper" />
             {toast ? (
                 <Toast
                     message={toast.message}
@@ -201,7 +201,7 @@ export default function OwnerMapPage({
                     </button>
                     <BrandLink className="text-lg sm:text-xl md:text-2xl" />
                     <UserMenu
-                        email={session?.user.email}
+                        email={userEmail}
                         isOpen={isUserMenuOpen}
                         isGeneratingShareCode={isGeneratingShareCode}
                         onOpenChange={setIsUserMenuOpen}
