@@ -10,6 +10,9 @@ type NextAuthPrismaClient = Parameters<typeof PrismaAdapter>[0]
 export const authOptions: NextAuthOptions = {
     // Auth.js has not updated its Prisma adapter types for Prisma 7's new client yet.
     adapter: PrismaAdapter(prisma as unknown as NextAuthPrismaClient),
+    session: {
+        strategy: 'jwt',
+    },
     providers: [
         EmailProvider({
             server: {
@@ -38,8 +41,18 @@ export const authOptions: NextAuthOptions = {
         verifyRequest: '/auth/verify',
     },
     callbacks: {
-        async session({ session, user }) {
-            session.user.id = user.id
+        async jwt({ token, user }) {
+            if (user?.id) {
+                token.id = user.id
+            }
+
+            return token
+        },
+        async session({ session, token }) {
+            if (typeof token.id === 'string') {
+                session.user.id = token.id
+            }
+
             return session
         },
     },
